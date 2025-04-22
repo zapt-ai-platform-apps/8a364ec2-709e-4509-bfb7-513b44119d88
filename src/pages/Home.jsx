@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
+import MarketplaceHighlights from '@/components/home/MarketplaceHighlights';
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -97,56 +98,128 @@ export default function Home() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              <div className="bg-white rounded-xl shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 animate-on-scroll">
-                <div className="w-16 h-16 bg-accent-100 rounded-lg mb-6 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+              <div className="relative group overflow-hidden rounded-xl shadow-md transform transition-all duration-500 hover:-translate-y-2 animate-on-scroll">
+                <div className="absolute inset-0 bg-gradient-to-br from-accent-500/20 to-accent-700/20 group-hover:opacity-100 opacity-0 transition-opacity duration-500"></div>
+                <div className="bg-white p-8 relative z-10">
+                  <div className="w-20 h-20 rounded-2xl bg-accent-100 mb-6 relative overflow-hidden group-hover:scale-110 transition-transform duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-br from-accent-200 to-accent-100"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-accent-700 transition-colors duration-300">
+                    Lifetime Commissions
+                  </h3>
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <p className="text-gray-600">Minimum 30% commission rate</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <p className="text-gray-600">Recurring revenue month after month</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <p className="text-gray-600">Stable income that grows over time</p>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  Lifetime Commissions (Minimum 30%)
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Earn recurring revenue month after month from a single referral - with commissions starting at 30% and potentially higher. No more one-time payments that disappear.
-                </p>
               </div>
               
-              <div className="bg-white rounded-xl shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 animate-on-scroll delay-150">
-                <div className="w-16 h-16 bg-primary-100 rounded-lg mb-6 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
+              <div className="relative group overflow-hidden rounded-xl shadow-md transform transition-all duration-500 hover:-translate-y-2 animate-on-scroll delay-150">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-primary-700/20 group-hover:opacity-100 opacity-0 transition-opacity duration-500"></div>
+                <div className="bg-white p-8 relative z-10">
+                  <div className="w-20 h-20 rounded-2xl bg-primary-100 mb-6 relative overflow-hidden group-hover:scale-110 transition-transform duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary-200 to-primary-100"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary-700 transition-colors duration-300">
+                    Verified Quality Apps
+                  </h3>
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <p className="text-gray-600">Personally tested by our team</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <p className="text-gray-600">Solutions with real user value</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <p className="text-gray-600">Products you can confidently recommend</p>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  Verified Quality Apps
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Every app in our marketplace is personally tested by our team. We ensure each solution delivers real value that you can confidently recommend to your audience.
-                </p>
               </div>
               
-              <div className="bg-white rounded-xl shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 animate-on-scroll delay-300">
-                <div className="w-16 h-16 bg-purple-100 rounded-lg mb-6 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
+              <div className="relative group overflow-hidden rounded-xl shadow-md transform transition-all duration-500 hover:-translate-y-2 animate-on-scroll delay-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-purple-700/20 group-hover:opacity-100 opacity-0 transition-opacity duration-500"></div>
+                <div className="bg-white p-8 relative z-10">
+                  <div className="w-20 h-20 rounded-2xl bg-purple-100 mb-6 relative overflow-hidden group-hover:scale-110 transition-transform duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-200 to-purple-100"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-purple-700 transition-colors duration-300">
+                    Secure Payment System
+                  </h3>
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <p className="text-gray-600">On-time, guaranteed payments</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <p className="text-gray-600">Direct payment account control</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <p className="text-gray-600">Transparent commission tracking</p>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  Secure, Direct Payment System
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Get paid on time, every time. Our platform manages app creators' payment accounts directly, ensuring they can't withhold your commissions. Our transparent system shows exactly what you've earned and when it's coming.
-                </p>
               </div>
             </div>
             
             <div className="text-center mt-16 animate-on-scroll delay-200">
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                Already Creating Content? You've built an audience. You make videos, post on social media, or run communities. Now monetize that investment with partnerships that generate predictable monthly income.
-              </p>
-              <Link to="/marketplace" className="inline-block bg-gradient-to-r from-accent-600 to-primary-600 text-white px-8 py-4 rounded-lg text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
-                Find Affiliate Programs
-              </Link>
+              <div className="bg-white rounded-2xl p-8 shadow-md">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Already Creating Content?</h3>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                  You've built an audience. You make videos, post on social media, or run communities. Now monetize that investment with partnerships that generate predictable monthly income.
+                </p>
+                <Link to="/marketplace" className="inline-block bg-gradient-to-r from-accent-600 to-primary-600 text-white px-8 py-4 rounded-lg text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+                  Find Affiliate Programs
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -163,28 +236,92 @@ export default function Home() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              <div className="bg-white rounded-xl shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 animate-on-scroll">
-                <div className="mb-6">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-primary-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                  </svg>
+              <div className="bg-white rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:-translate-y-2 animate-on-scroll border-l-4 border-primary-500">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-200 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-2xl font-bold text-primary-600">P</span>
+                  </div>
+                  <div>
+                    <div className="font-bold text-gray-800 text-lg">Priya M.</div>
+                    <div className="text-primary-600">Tech YouTuber</div>
+                  </div>
                 </div>
-                <p className="text-gray-600 mb-6 text-lg">
-                  "I promote 3 apps from this marketplace to my YouTube subscribers. After 6 months, I'm earning ₹41,500 monthly in reliable commissions from users who continue to subscribe."
+                <div className="flex mb-6">
+                  <div className="flex text-yellow-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  </div>
+                </div>
+                <p className="text-gray-600 mb-6 text-lg relative">
+                  <span className="absolute -top-4 -left-2 text-5xl text-primary-200 opacity-50">"</span>
+                  I promote 3 apps from this marketplace to my YouTube subscribers. After 6 months, I'm earning ₹41,500 monthly in reliable commissions from users who continue to subscribe.
+                  <span className="absolute -bottom-6 -right-2 text-5xl text-primary-200 opacity-50">"</span>
                 </p>
-                <div className="font-bold text-gray-800">— Priya M., Tech YouTuber</div>
+                <div className="mt-6 pt-4 border-t border-gray-100">
+                  <div className="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                    <span className="text-primary-700 font-medium">6-month income growth: 250%</span>
+                  </div>
+                </div>
               </div>
               
-              <div className="bg-white rounded-xl shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 animate-on-scroll delay-150">
-                <div className="mb-6">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-primary-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                  </svg>
+              <div className="bg-white rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:-translate-y-2 animate-on-scroll delay-150 border-l-4 border-accent-500">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-accent-100 to-accent-200 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-2xl font-bold text-accent-600">C</span>
+                  </div>
+                  <div>
+                    <div className="font-bold text-gray-800 text-lg">Carlos S.</div>
+                    <div className="text-accent-600">Productivity Blogger</div>
+                  </div>
                 </div>
-                <p className="text-gray-600 mb-6 text-lg">
-                  "The lifetime commission model means my income grows each month instead of constantly chasing new leads. Last month I earned $389 from referrals I made over a year ago."
+                <div className="flex mb-6">
+                  <div className="flex text-yellow-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  </div>
+                </div>
+                <p className="text-gray-600 mb-6 text-lg relative">
+                  <span className="absolute -top-4 -left-2 text-5xl text-accent-200 opacity-50">"</span>
+                  The lifetime commission model means my income grows each month instead of constantly chasing new leads. Last month I earned $389 from referrals I made over a year ago.
+                  <span className="absolute -bottom-6 -right-2 text-5xl text-accent-200 opacity-50">"</span>
                 </p>
-                <div className="font-bold text-gray-800">— Carlos S., Productivity Blogger</div>
+                <div className="mt-6 pt-4 border-t border-gray-100">
+                  <div className="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                    <span className="text-accent-700 font-medium">Passive income ratio: 75%</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -272,38 +409,7 @@ export default function Home() {
               <div className="w-24 h-1 bg-gradient-to-r from-accent-600 to-primary-500 rounded-full mb-8"></div>
             </div>
             
-            <div className="overflow-x-auto animate-on-scroll">
-              <table className="w-full bg-white rounded-xl shadow-lg">
-                <thead>
-                  <tr className="bg-gray-100">
-                    <th className="px-6 py-4 text-left text-lg font-bold text-gray-800">Traditional Affiliate Programs</th>
-                    <th className="px-6 py-4 text-left text-lg font-bold text-gray-800">Our Marketplace</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-t border-gray-200">
-                    <td className="px-6 py-4 text-gray-600">One-time commissions</td>
-                    <td className="px-6 py-4 text-gray-600 font-medium">Lifetime recurring revenue (minimum 30%)</td>
-                  </tr>
-                  <tr className="border-t border-gray-200 bg-gray-50">
-                    <td className="px-6 py-4 text-gray-600">Uncertain payment schedules</td>
-                    <td className="px-6 py-4 text-gray-600 font-medium">Reliable, transparent payments</td>
-                  </tr>
-                  <tr className="border-t border-gray-200">
-                    <td className="px-6 py-4 text-gray-600">Many low-quality or scam products</td>
-                    <td className="px-6 py-4 text-gray-600 font-medium">Strictly vetted quality apps</td>
-                  </tr>
-                  <tr className="border-t border-gray-200 bg-gray-50">
-                    <td className="px-6 py-4 text-gray-600">Generic promotion materials</td>
-                    <td className="px-6 py-4 text-gray-600 font-medium">Customizable, effective resources</td>
-                  </tr>
-                  <tr className="border-t border-gray-200">
-                    <td className="px-6 py-4 text-gray-600">Minimal support</td>
-                    <td className="px-6 py-4 text-gray-600 font-medium">Dedicated affiliate success team</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <MarketplaceHighlights />
           </div>
         </div>
       </section>
