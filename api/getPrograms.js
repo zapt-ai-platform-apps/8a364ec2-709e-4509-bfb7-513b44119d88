@@ -1,7 +1,4 @@
-import { affiliatePrograms } from '../drizzle/schema.js';
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
-import { eq } from 'drizzle-orm';
+import { api } from '../src/modules/affiliatePrograms/api.js';
 import Sentry from "./_sentry.js";
 
 export default async function handler(req, res) {
@@ -12,18 +9,10 @@ export default async function handler(req, res) {
   }
   
   try {
-    const client = postgres(process.env.COCKROACH_DB_URL);
-    const db = drizzle(client);
+    const result = await api.getApprovedPrograms();
+    console.log(`Retrieved ${result.programs.length} approved programs`);
     
-    // Get approved programs for the marketplace
-    const result = await db.select()
-      .from(affiliatePrograms)
-      .where(eq(affiliatePrograms.status, 'approved'))
-      .orderBy(affiliatePrograms.createdAt);
-    
-    console.log(`Retrieved ${result.length} approved programs`);
-    
-    return res.status(200).json({ programs: result });
+    return res.status(200).json(result);
     
   } catch (error) {
     console.error('Error fetching programs:', error);

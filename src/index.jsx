@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import * as Sentry from '@sentry/browser';
+import { initializeModules } from './modules';
 
+// Initialize Sentry error tracking
 Sentry.init({
   dsn: import.meta.env.VITE_PUBLIC_SENTRY_DSN,
   environment: import.meta.env.VITE_PUBLIC_APP_ENV,
@@ -13,6 +15,14 @@ Sentry.init({
       projectId: import.meta.env.VITE_PUBLIC_APP_ID,
     },
   },
+});
+
+// Initialize app modules
+initializeModules().then(result => {
+  console.log('Modules initialized:', result);
+}).catch(error => {
+  console.error('Failed to initialize modules:', error);
+  Sentry.captureException(error);
 });
 
 // Add PWA support
