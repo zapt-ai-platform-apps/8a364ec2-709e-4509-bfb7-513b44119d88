@@ -5,8 +5,6 @@ import Layout from '@/components/layout/Layout';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/supabaseClient';
 
-// NOTE: This is a simplified admin page. In a real application, you would
-// implement proper admin authentication and permissions.
 export default function AdminReview() {
   const { user, loading } = useAuth();
   const [programs, setPrograms] = useState([]);
@@ -14,8 +12,8 @@ export default function AdminReview() {
   const [error, setError] = useState(null);
   const [actionInProgress, setActionInProgress] = useState(null);
 
-  // In a real application, you would verify if the user is an admin
-  const isAdmin = user?.email === 'admin@zapt.ai'; // Replace with actual admin check
+  // Check if the user has a zapt.ai email
+  const isAdmin = user?.email?.endsWith('@zapt.ai') || false;
 
   useEffect(() => {
     const fetchPendingPrograms = async () => {
@@ -25,7 +23,6 @@ export default function AdminReview() {
         setLoadingPrograms(true);
         const { data: { session } } = await supabase.auth.getSession();
         
-        // This endpoint would be secured properly in a real application
         const response = await fetch('/api/getPendingPrograms', {
           headers: {
             Authorization: `Bearer ${session?.access_token}`,

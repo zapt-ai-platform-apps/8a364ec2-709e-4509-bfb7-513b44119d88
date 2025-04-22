@@ -16,8 +16,8 @@ export default async function handler(req, res) {
     const user = await authenticateUser(req);
     console.log('User authenticated:', user.id);
     
-    // In a real app, you'd check if this user is an admin
-    if (user.email !== 'admin@zapt.ai') {
+    // Check if this user is an admin (has zapt.ai email domain)
+    if (!user.email?.endsWith('@zapt.ai')) {
       return res.status(403).json({ error: 'Not authorized to review programs' });
     }
     
