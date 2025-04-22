@@ -61,7 +61,7 @@ export default function Home() {
           </p>
           
           <p className="hero-animate text-lg text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-            We connect content creators with quality apps offering verified <span className="font-semibold">lifetime commissions</span>. No scams. No false promises. Just real income opportunities.
+            We connect content creators and traditional marketers with quality apps offering verified <span className="font-semibold">lifetime commissions</span>. No scams. No false promises. Just real income opportunities.
           </p>
           
           <div className="hero-animate flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
