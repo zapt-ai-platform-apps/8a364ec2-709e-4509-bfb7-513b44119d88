@@ -53,7 +53,7 @@ export default function Header() {
             </Link>
           )}
           {user && (
-            <Link to="/submit-program" className="text-secondary-700 hover:text-primary-600 font-medium">
+            <Link to="/submit-app" className="text-secondary-700 hover:text-primary-600 font-medium">
               Submit Program
             </Link>
           )}
