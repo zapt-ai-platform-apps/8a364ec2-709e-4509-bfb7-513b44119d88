@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
+import MarketplaceHighlights from '@/components/home/MarketplaceHighlights';
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -82,6 +83,9 @@ export default function Home() {
           </svg>
         </div>
       </section>
+      
+      {/* Marketplace Highlights Section */}
+      <MarketplaceHighlights />
       
       {/* Features Section */}
       <section className="py-24 relative">
