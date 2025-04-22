@@ -107,13 +107,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        
-        {/* Discreet admin portal link */}
-        <div className="mt-16 text-center">
-          <div className="text-xs text-gray-400">
-            <Link to="/admin" className="hover:underline">Admin</Link>
-          </div>
-        </div>
       </div>
     </Layout>
   );

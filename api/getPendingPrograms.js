@@ -16,8 +16,8 @@ export default async function handler(req, res) {
     const user = await authenticateUser(req);
     console.log('User authenticated:', user.id);
     
-    // Check if this user is an admin (has zapt.ai email domain)
-    if (!user.email?.endsWith('@zapt.ai')) {
+    // Check if this user is an admin (has zapt.ai or mapt.events email domain)
+    if (!user.email?.endsWith('@zapt.ai') && !user.email?.endsWith('@mapt.events')) {
       return res.status(403).json({ error: 'Not authorized to access pending programs' });
     }
     

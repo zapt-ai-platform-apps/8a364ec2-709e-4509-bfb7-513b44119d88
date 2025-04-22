@@ -1,6 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function Footer() {
+  const { user } = useAuth();
+  
+  // Check if user is an admin (has zapt.ai or mapt.events email)
+  const isAdmin = user?.email && (user.email.endsWith('@zapt.ai') || user.email.endsWith('@mapt.events')) || false;
+
   return (
     <footer className="bg-gray-800 text-white py-8">
       <div className="container mx-auto px-4">
@@ -18,6 +25,15 @@ export default function Footer() {
               <li><a href="/" className="text-gray-300 hover:text-white">Home</a></li>
               <li><a href="/marketplace" className="text-gray-300 hover:text-white">Marketplace</a></li>
               <li><a href="/login" className="text-gray-300 hover:text-white">Sign In</a></li>
+              {isAdmin && (
+                <li><Link to="/admin" className="text-gray-300 hover:text-white">Admin Portal</Link></li>
+              )}
+              {!isAdmin && user && (
+                <li><a href="/login?return_to=%2Fadmin" className="text-gray-300 hover:text-white">Admin Portal</a></li>
+              )}
+              {!user && (
+                <li><a href="/login?return_to=%2Fadmin" className="text-gray-300 hover:text-white">Admin Portal</a></li>
+              )}
             </ul>
           </div>
           

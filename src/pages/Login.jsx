@@ -1,12 +1,26 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { supabase } from '@/supabaseClient';
 import Layout from '@/components/layout/Layout';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { user, loading } = useAuth();
+  
+  // Extract return_to parameter from URL if present
+  const searchParams = new URLSearchParams(location.search);
+  const returnTo = searchParams.get('return_to') || '/dashboard';
+  
+  // Redirect already logged in users
+  useEffect(() => {
+    if (!loading && user) {
+      navigate(returnTo, { replace: true });
+    }
+  }, [user, loading, navigate, returnTo]);
 
   return (
     <Layout>
@@ -40,7 +54,7 @@ export default function Login() {
             providers={['google', 'facebook', 'apple']}
             magicLink={true}
             view="magic_link"
-            redirectTo={window.location.origin + '/dashboard'}
+            redirectTo={window.location.origin + returnTo}
           />
         </div>
       </div>

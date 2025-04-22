@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import * as Sentry from "@sentry/browser";
 import Layout from '@/components/layout/Layout';
 import { useAuth } from '@/hooks/useAuth';
@@ -11,9 +11,10 @@ export default function AdminReview() {
   const [loadingPrograms, setLoadingPrograms] = useState(true);
   const [error, setError] = useState(null);
   const [actionInProgress, setActionInProgress] = useState(null);
+  const location = useLocation();
 
-  // Check if the user has a zapt.ai email
-  const isAdmin = user?.email?.endsWith('@zapt.ai') || false;
+  // Check if the user has a zapt.ai or mapt.events email
+  const isAdmin = user?.email && (user.email.endsWith('@zapt.ai') || user.email.endsWith('@mapt.events')) || false;
 
   useEffect(() => {
     const fetchPendingPrograms = async () => {
@@ -90,7 +91,13 @@ export default function AdminReview() {
     );
   }
 
-  if (!loading && (!user || !isAdmin)) {
+  // If user is not logged in, redirect to login page with return_to parameter
+  if (!loading && !user) {
+    return <Navigate to={`/login?return_to=${encodeURIComponent(location.pathname)}`} replace />;
+  }
+
+  // If user is logged in but not an admin, redirect to home
+  if (!loading && user && !isAdmin) {
     return <Navigate to="/" />;
   }
 
