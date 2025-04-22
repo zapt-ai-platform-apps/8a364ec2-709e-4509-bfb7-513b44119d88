@@ -181,7 +181,7 @@ export default function Home() {
         </div>
       </section>
       
-      {/* How It Works Section */}
+      {/* How It Works Section - FIXED ALIGNMENT */}
       <section className="py-24 relative">
         <div className="absolute left-0 right-0 h-full bg-gradient-to-b from-white via-primary-50 to-white -z-10"></div>
         
@@ -197,19 +197,17 @@ export default function Home() {
           </div>
           
           <div className="relative max-w-6xl mx-auto">
-            {/* Connecting Line - Fixed positioning */}
-            <div className="absolute hidden md:block left-1/2 top-12 bottom-12 w-1 bg-gradient-to-b from-primary-500 to-accent-500 transform -translate-x-1/2 z-0 rounded-full"></div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-              <div className="md:col-start-2 animate-on-scroll">
-                <div className="relative">
-                  <div className="hidden md:block absolute -left-12 top-10 w-12 h-12 rounded-full bg-white border-4 border-primary-500 z-10"></div>
-                  <div className="bg-white p-8 rounded-2xl shadow-xl">
-                    <div className="flex md:hidden items-center mb-4">
-                      <div className="w-10 h-10 rounded-full bg-primary-500 text-white flex items-center justify-center font-bold text-xl mr-4">1</div>
-                      <h3 className="text-2xl font-bold text-primary-700">Submit Your App</h3>
-                    </div>
-                    <h3 className="hidden md:block text-2xl font-bold text-primary-700 mb-4">Submit Your App</h3>
+            {/* Desktop Timeline View */}
+            <div className="hidden md:block">
+              {/* Connecting Line */}
+              <div className="absolute left-1/2 top-12 bottom-12 w-1 bg-gradient-to-b from-primary-500 to-accent-500 transform -translate-x-1/2 z-0 rounded-full"></div>
+              
+              {/* Step 1: Submit Your App */}
+              <div className="flex justify-end mb-20">
+                <div className="w-1/2 pr-12 relative">
+                  <div className="absolute right-0 top-10 w-12 h-12 rounded-full bg-white border-4 border-primary-500 z-10 transform translate-x-6"></div>
+                  <div className="bg-white p-8 rounded-2xl shadow-xl animate-on-scroll">
+                    <h3 className="text-2xl font-bold text-primary-700 mb-4">Submit Your App</h3>
                     <p className="text-gray-600 text-lg">
                       App creators register and submit their affiliate program details for our review process. We look for quality apps with fair commission structures.
                     </p>
@@ -217,15 +215,12 @@ export default function Home() {
                 </div>
               </div>
               
-              <div className="md:col-start-1 animate-on-scroll delay-150">
-                <div className="relative">
-                  <div className="hidden md:block absolute -right-12 top-10 w-12 h-12 rounded-full bg-white border-4 border-primary-600 z-10"></div>
-                  <div className="bg-white p-8 rounded-2xl shadow-xl">
-                    <div className="flex md:hidden items-center mb-4">
-                      <div className="w-10 h-10 rounded-full bg-primary-600 text-white flex items-center justify-center font-bold text-xl mr-4">2</div>
-                      <h3 className="text-2xl font-bold text-primary-700">We Review</h3>
-                    </div>
-                    <h3 className="hidden md:block text-2xl font-bold text-primary-700 mb-4">We Review</h3>
+              {/* Step 2: We Review */}
+              <div className="flex justify-start mb-20">
+                <div className="w-1/2 pl-12 relative">
+                  <div className="absolute left-0 top-10 w-12 h-12 rounded-full bg-white border-4 border-primary-600 z-10 transform -translate-x-6"></div>
+                  <div className="bg-white p-8 rounded-2xl shadow-xl animate-on-scroll delay-150">
+                    <h3 className="text-2xl font-bold text-primary-700 mb-4">We Review</h3>
                     <p className="text-gray-600 text-lg">
                       Our team carefully verifies each program's quality and legitimacy, ensuring that only the best opportunities make it to our marketplace.
                     </p>
@@ -233,20 +228,50 @@ export default function Home() {
                 </div>
               </div>
               
-              <div className="md:col-start-2 animate-on-scroll delay-300">
-                <div className="relative mt-16 md:mt-8">
-                  <div className="hidden md:block absolute -left-12 top-10 w-12 h-12 rounded-full bg-white border-4 border-accent-500 z-10"></div>
-                  <div className="bg-white p-8 rounded-2xl shadow-xl">
-                    <div className="flex md:hidden items-center mb-4">
-                      <div className="w-10 h-10 rounded-full bg-accent-500 text-white flex items-center justify-center font-bold text-xl mr-4">3</div>
-                      <h3 className="text-2xl font-bold text-primary-700">Connect</h3>
-                    </div>
-                    <h3 className="hidden md:block text-2xl font-bold text-primary-700 mb-4">Connect</h3>
+              {/* Step 3: Connect */}
+              <div className="flex justify-end">
+                <div className="w-1/2 pr-12 relative">
+                  <div className="absolute right-0 top-10 w-12 h-12 rounded-full bg-white border-4 border-accent-500 z-10 transform translate-x-6"></div>
+                  <div className="bg-white p-8 rounded-2xl shadow-xl animate-on-scroll delay-300">
+                    <h3 className="text-2xl font-bold text-primary-700 mb-4">Connect</h3>
                     <p className="text-gray-600 text-lg">
                       Approved programs appear in our marketplace, connecting app creators with content creators who can promote their products.
                     </p>
                   </div>
                 </div>
+              </div>
+            </div>
+            
+            {/* Mobile Timeline View */}
+            <div className="md:hidden space-y-8">
+              <div className="bg-white p-8 rounded-2xl shadow-xl animate-on-scroll">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 rounded-full bg-primary-500 text-white flex items-center justify-center font-bold text-xl mr-4">1</div>
+                  <h3 className="text-2xl font-bold text-primary-700">Submit Your App</h3>
+                </div>
+                <p className="text-gray-600 text-lg">
+                  App creators register and submit their affiliate program details for our review process. We look for quality apps with fair commission structures.
+                </p>
+              </div>
+              
+              <div className="bg-white p-8 rounded-2xl shadow-xl animate-on-scroll delay-150">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 rounded-full bg-primary-600 text-white flex items-center justify-center font-bold text-xl mr-4">2</div>
+                  <h3 className="text-2xl font-bold text-primary-700">We Review</h3>
+                </div>
+                <p className="text-gray-600 text-lg">
+                  Our team carefully verifies each program's quality and legitimacy, ensuring that only the best opportunities make it to our marketplace.
+                </p>
+              </div>
+              
+              <div className="bg-white p-8 rounded-2xl shadow-xl animate-on-scroll delay-300">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 rounded-full bg-accent-500 text-white flex items-center justify-center font-bold text-xl mr-4">3</div>
+                  <h3 className="text-2xl font-bold text-primary-700">Connect</h3>
+                </div>
+                <p className="text-gray-600 text-lg">
+                  Approved programs appear in our marketplace, connecting app creators with content creators who can promote their products.
+                </p>
               </div>
             </div>
           </div>
@@ -282,7 +307,7 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Add CSS for animations */}
+      {/* CSS for animations */}
       <style jsx>{`
         .animate-fade-in-down {
           animation: fadeInDown 1s ease forwards;
