@@ -6,6 +6,7 @@ import Dashboard from '@/app/pages/Dashboard';
 import SubmitApp from '@/app/pages/SubmitApp';
 import Marketplace from '@/app/pages/Marketplace';
 import AdminReview from '@/app/pages/AdminReview';
+import { ChatWidget } from '@/modules/customerSupport';
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/admin" element={<AdminReview />} />
       </Routes>
+      <ChatWidget />
     </Router>
   );
 }
