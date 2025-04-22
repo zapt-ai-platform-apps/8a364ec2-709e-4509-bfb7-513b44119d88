@@ -57,7 +57,7 @@ export default function Home() {
           </h1>
           
           <p className="hero-animate text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Build Stable Income By Promoting Apps That Actually Work
+            Build Recurring Income With Every Referral
           </p>
           
           <p className="hero-animate text-lg text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
@@ -81,13 +81,13 @@ export default function Home() {
         </div>
       </section>
       
-      {/* For Content Creators Section */}
+      {/* For Content Creators & Traditional Marketers Section */}
       <section className="py-24 relative">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16 animate-on-scroll">
               <span className="bg-accent-100 text-accent-800 text-sm font-semibold px-4 py-2 rounded-full inline-block mb-4">
-                For Content Creators
+                For Content Creators & Traditional Marketers
               </span>
               <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-accent-700 to-primary-600">
                 Why Our Marketplace Matters
