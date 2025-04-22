@@ -1,3 +1,78 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans text-gray-800;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+/* Animation classes */
+.animate-fade-in-down {
+  animation: fadeInDown 1s ease forwards;
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-on-scroll.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-100 {
+  transition-delay: 0.1s;
+}
+
+.delay-150 {
+  transition-delay: 0.15s;
+}
+
+.delay-200 {
+  transition-delay: 0.2s;
+}
+
+.delay-300 {
+  transition-delay: 0.3s;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Gradient text utility */
+.text-gradient {
+  @apply bg-clip-text text-transparent;
+}
+
+/* Custom button styles */
+.btn-gradient-primary {
+  @apply bg-gradient-to-r from-primary-600 to-primary-800 text-white px-8 py-4 rounded-xl font-bold shadow-xl hover:shadow-2xl cursor-pointer transition-all duration-300 hover:scale-105;
+}
+
+.btn-gradient-accent {
+  @apply bg-gradient-to-r from-accent-500 to-red-500 text-white px-8 py-4 rounded-xl font-bold shadow-xl hover:shadow-2xl cursor-pointer transition-all duration-300 hover:scale-105;
+}
+
+.btn-outline {
+  @apply bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-bold shadow-xl hover:shadow-2xl cursor-pointer transition-all duration-300 hover:scale-105;
+}
