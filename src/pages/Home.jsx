@@ -193,8 +193,8 @@ export default function Home() {
           </div>
           
           <div className="relative max-w-6xl mx-auto">
-            {/* Connecting Line */}
-            <div className="absolute hidden md:block left-1/2 top-24 bottom-12 w-1 bg-gradient-to-b from-primary-500 to-accent-500 transform -translate-x-1/2 z-0 rounded-full"></div>
+            {/* Connecting Line - Fixed positioning */}
+            <div className="absolute hidden md:block left-1/2 top-12 bottom-12 w-1 bg-gradient-to-b from-primary-500 to-accent-500 transform -translate-x-1/2 z-0 rounded-full"></div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
               <div className="md:col-start-2 animate-on-scroll">
@@ -214,7 +214,7 @@ export default function Home() {
               </div>
               
               <div className="md:col-start-1 animate-on-scroll delay-150">
-                <div className="relative mt-8">
+                <div className="relative">
                   <div className="hidden md:block absolute -right-12 top-10 w-12 h-12 rounded-full bg-white border-4 border-primary-600 z-10"></div>
                   <div className="bg-white p-8 rounded-2xl shadow-xl">
                     <div className="flex md:hidden items-center mb-4">
@@ -230,7 +230,7 @@ export default function Home() {
               </div>
               
               <div className="md:col-start-2 animate-on-scroll delay-300">
-                <div className="relative mt-16">
+                <div className="relative mt-16 md:mt-8">
                   <div className="hidden md:block absolute -left-12 top-10 w-12 h-12 rounded-full bg-white border-4 border-accent-500 z-10"></div>
                   <div className="bg-white p-8 rounded-2xl shadow-xl">
                     <div className="flex md:hidden items-center mb-4">
