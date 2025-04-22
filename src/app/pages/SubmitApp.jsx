@@ -5,7 +5,7 @@ import Layout from '@/app/components/layout/Layout';
 import { useAuth } from '@/shared/hooks/useAuth';
 import { supabase } from '@/shared/services/supabase';
 
-export default function SubmitProgram() {
+export default function SubmitApp() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   
@@ -36,7 +36,7 @@ export default function SubmitProgram() {
       
       const { data: { session } } = await supabase.auth.getSession();
       
-      const response = await fetch('/api/submitProgram', {
+      const response = await fetch('/api/submitApp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,15 +48,15 @@ export default function SubmitProgram() {
       const data = await response.json();
       
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to submit program');
+        throw new Error(data.error || 'Failed to submit app');
       }
       
       navigate('/dashboard', { 
-        state: { notification: 'Program submitted successfully! It will be reviewed soon.' } 
+        state: { notification: 'App submitted successfully! It will be reviewed soon.' } 
       });
       
     } catch (error) {
-      console.error('Error submitting program:', error);
+      console.error('Error submitting app:', error);
       Sentry.captureException(error);
       setError(error.message);
     } finally {
@@ -83,8 +83,8 @@ export default function SubmitProgram() {
       <div className="bg-secondary-50 py-8">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
-            <h1 className="text-3xl font-bold text-secondary-900 mb-2">Submit Affiliate Program</h1>
-            <p className="text-secondary-600 mb-8">Complete the form below to have your affiliate program reviewed for our marketplace.</p>
+            <h1 className="text-3xl font-bold text-secondary-900 mb-2">Submit Affiliate App</h1>
+            <p className="text-secondary-600 mb-8">Complete the form below to have your affiliate app reviewed for our marketplace.</p>
           </div>
         </div>
       </div>
@@ -233,7 +233,7 @@ export default function SubmitProgram() {
                           </svg>
                           Submitting...
                         </span>
-                      ) : 'Submit Program'}
+                      ) : 'Submit App'}
                     </button>
                   </div>
                 </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function MarketplaceHero({ searchTerm, onSearch, programCount }) {
+export default function MarketplaceHero({ searchTerm, onSearch, appCount }) {
   const [localSearchTerm, setLocalSearchTerm] = useState(searchTerm);
 
   const handleSubmit = (e) => {
@@ -16,21 +16,21 @@ export default function MarketplaceHero({ searchTerm, onSearch, programCount }) 
             Affiliate Marketplace
           </h1>
           <p className="text-xl text-secondary-700 mb-4">
-            Browse our curated collection of quality affiliate programs with favorable commission structures.
+            Browse our curated collection of quality affiliate apps with favorable commission structures.
           </p>
           
           <div className="flex justify-center mb-6">
             <div className="bg-primary-100 text-primary-800 text-sm font-semibold px-4 py-2 rounded-full inline-block">
-              {programCount} Vetted Opportunities Available
+              {appCount} Vetted Opportunities Available
             </div>
           </div>
 
-          {programCount > 0 && (
+          {appCount > 0 && (
             <div className="mt-8 max-w-md mx-auto">
               <form onSubmit={handleSubmit} className="relative">
                 <input
                   type="text"
-                  placeholder="Search programs..."
+                  placeholder="Search apps..."
                   value={localSearchTerm}
                   onChange={(e) => setLocalSearchTerm(e.target.value)}
                   className="w-full p-4 pl-12 border border-secondary-300 rounded-lg shadow-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all box-border"

@@ -13,25 +13,25 @@ export const getDbClient = () => {
 };
 
 /**
- * Get all affiliate programs
+ * Get all affiliate apps
  */
-export const getAllPrograms = async () => {
+export const getAllApps = async () => {
   try {
     const db = getDbClient();
     return db.select()
       .from(affiliatePrograms)
       .orderBy(affiliatePrograms.createdAt);
   } catch (error) {
-    console.error('Database error in getAllPrograms:', error);
+    console.error('Database error in getAllApps:', error);
     Sentry.captureException(error);
     throw error;
   }
 };
 
 /**
- * Get programs by status
+ * Get apps by status
  */
-export const getProgramsByStatus = async (status) => {
+export const getAppsByStatus = async (status) => {
   try {
     const db = getDbClient();
     return db.select()
@@ -39,16 +39,16 @@ export const getProgramsByStatus = async (status) => {
       .where(eq(affiliatePrograms.status, status))
       .orderBy(affiliatePrograms.createdAt);
   } catch (error) {
-    console.error(`Database error in getProgramsByStatus(${status}):`, error);
+    console.error(`Database error in getAppsByStatus(${status}):`, error);
     Sentry.captureException(error);
     throw error;
   }
 };
 
 /**
- * Get programs by user ID
+ * Get apps by user ID
  */
-export const getProgramsByUser = async (userId) => {
+export const getAppsByUser = async (userId) => {
   try {
     const db = getDbClient();
     return db.select()
@@ -56,34 +56,34 @@ export const getProgramsByUser = async (userId) => {
       .where(eq(affiliatePrograms.userId, userId))
       .orderBy(affiliatePrograms.createdAt);
   } catch (error) {
-    console.error(`Database error in getProgramsByUser(${userId}):`, error);
+    console.error(`Database error in getAppsByUser(${userId}):`, error);
     Sentry.captureException(error);
     throw error;
   }
 };
 
 /**
- * Create a new program
+ * Create a new app
  */
-export const createProgram = async (programData) => {
+export const createApp = async (appData) => {
   try {
     const db = getDbClient();
     return db.insert(affiliatePrograms).values({
-      ...programData,
+      ...appData,
       createdAt: new Date(),
       updatedAt: new Date()
     }).returning();
   } catch (error) {
-    console.error('Database error in createProgram:', error);
+    console.error('Database error in createApp:', error);
     Sentry.captureException(error);
     throw error;
   }
 };
 
 /**
- * Update a program's status
+ * Update an app's status
  */
-export const updateProgramStatus = async (programId, status) => {
+export const updateAppStatus = async (appId, status) => {
   try {
     const db = getDbClient();
     return db.update(affiliatePrograms)
@@ -91,10 +91,10 @@ export const updateProgramStatus = async (programId, status) => {
         status: status,
         updatedAt: new Date()
       })
-      .where(eq(affiliatePrograms.id, programId))
+      .where(eq(affiliatePrograms.id, appId))
       .returning();
   } catch (error) {
-    console.error(`Database error in updateProgramStatus(${programId}, ${status}):`, error);
+    console.error(`Database error in updateAppStatus(${appId}, ${status}):`, error);
     Sentry.captureException(error);
     throw error;
   }

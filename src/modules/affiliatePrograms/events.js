@@ -2,7 +2,7 @@
  * Events published by the Affiliate Programs module
  */
 export const events = {
-  PROGRAM_SUBMITTED: 'affiliatePrograms/programSubmitted',
-  PROGRAM_UPDATED: 'affiliatePrograms/programUpdated',
-  PROGRAM_STATUS_CHANGED: 'affiliatePrograms/programStatusChanged',
+  APP_SUBMITTED: 'affiliateApps/appSubmitted',
+  APP_UPDATED: 'affiliateApps/appUpdated',
+  APP_STATUS_CHANGED: 'affiliateApps/appStatusChanged',
 };

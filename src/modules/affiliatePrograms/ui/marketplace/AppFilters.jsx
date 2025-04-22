@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ProgramFilters({ 
+export default function AppFilters({ 
   filters, 
   onFilterChange, 
   sortOption, 
@@ -20,7 +20,7 @@ export default function ProgramFilters({
       <div className="p-4 border-b border-secondary-100">
         <h2 className="text-lg font-semibold text-secondary-900">Filters</h2>
         <p className="text-secondary-500 text-sm">
-          Showing {filteredCount} of {totalCount} programs
+          Showing {filteredCount} of {totalCount} apps
         </p>
       </div>
       

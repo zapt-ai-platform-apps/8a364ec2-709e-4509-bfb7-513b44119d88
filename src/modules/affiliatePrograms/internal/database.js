@@ -12,9 +12,9 @@ export const getDbClient = () => {
 };
 
 /**
- * Get all affiliate programs
+ * Get all affiliate apps
  */
-export const getAllPrograms = async () => {
+export const getAllApps = async () => {
   const db = getDbClient();
   return db.select()
     .from(affiliatePrograms)
@@ -22,9 +22,9 @@ export const getAllPrograms = async () => {
 };
 
 /**
- * Get programs by status
+ * Get apps by status
  */
-export const getProgramsByStatus = async (status) => {
+export const getAppsByStatus = async (status) => {
   const db = getDbClient();
   return db.select()
     .from(affiliatePrograms)
@@ -33,9 +33,9 @@ export const getProgramsByStatus = async (status) => {
 };
 
 /**
- * Get programs by user ID
+ * Get apps by user ID
  */
-export const getProgramsByUser = async (userId) => {
+export const getAppsByUser = async (userId) => {
   const db = getDbClient();
   return db.select()
     .from(affiliatePrograms)
@@ -44,27 +44,27 @@ export const getProgramsByUser = async (userId) => {
 };
 
 /**
- * Create a new program
+ * Create a new app
  */
-export const createProgram = async (programData) => {
+export const createApp = async (appData) => {
   const db = getDbClient();
   return db.insert(affiliatePrograms).values({
-    ...programData,
+    ...appData,
     createdAt: new Date(),
     updatedAt: new Date()
   }).returning();
 };
 
 /**
- * Update a program's status
+ * Update an app's status
  */
-export const updateProgramStatus = async (programId, status) => {
+export const updateAppStatus = async (appId, status) => {
   const db = getDbClient();
   return db.update(affiliatePrograms)
     .set({ 
       status: status,
       updatedAt: new Date()
     })
-    .where(eq(affiliatePrograms.id, programId))
+    .where(eq(affiliatePrograms.id, appId))
     .returning();
 };

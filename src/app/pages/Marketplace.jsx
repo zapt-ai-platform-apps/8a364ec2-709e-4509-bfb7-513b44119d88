@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import * as Sentry from "@sentry/browser";
 import Layout from '@/app/components/layout/Layout';
-import { MarketplaceHero, NoPrograms, ProgramCard, ProgramFilters } from '@/modules/affiliatePrograms/ui';
+import { MarketplaceHero, NoApps, AppCard, AppFilters } from '@/modules/affiliatePrograms/ui';
 import { LoadingSpinner, ErrorAlert } from '@/shared/components/ui';
 
 export default function Marketplace() {
-  const [programs, setPrograms] = useState([]);
+  const [apps, setApps] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -16,21 +16,21 @@ export default function Marketplace() {
   });
   
   useEffect(() => {
-    const fetchPrograms = async () => {
+    const fetchApps = async () => {
       try {
         setLoading(true);
         
-        const response = await fetch('/api/getPrograms');
+        const response = await fetch('/api/getApps');
         const data = await response.json();
         
         if (!response.ok) {
-          throw new Error(data.error || 'Failed to fetch programs');
+          throw new Error(data.error || 'Failed to fetch apps');
         }
         
-        setPrograms(data.programs);
-        console.log('Fetched programs:', data.programs.length);
+        setApps(data.apps);
+        console.log('Fetched apps:', data.apps.length);
       } catch (error) {
-        console.error('Error fetching programs:', error);
+        console.error('Error fetching apps:', error);
         Sentry.captureException(error);
         setError(error.message);
       } finally {
@@ -38,7 +38,7 @@ export default function Marketplace() {
       }
     };
     
-    fetchPrograms();
+    fetchApps();
   }, []);
 
   const handleSearch = (term) => {
@@ -53,24 +53,24 @@ export default function Marketplace() {
     setSortOption(option);
   };
   
-  const filteredAndSortedPrograms = useMemo(() => {
-    // First, filter the programs
-    let result = programs.filter(program => {
+  const filteredAndSortedApps = useMemo(() => {
+    // First, filter the apps
+    let result = apps.filter(app => {
       // Apply text search
-      const matchesSearch = program.appName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        program.appDescription.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        program.commissionStructure.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch = app.appName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        app.appDescription.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        app.commissionStructure.toLowerCase().includes(searchTerm.toLowerCase());
       
       if (!matchesSearch) return false;
       
       // Apply other filters
-      if (filters.recurring && !program.commissionStructure.toLowerCase().includes('recurring') && 
-          !program.commissionStructure.toLowerCase().includes('lifetime')) {
+      if (filters.recurring && !app.commissionStructure.toLowerCase().includes('recurring') && 
+          !app.commissionStructure.toLowerCase().includes('lifetime')) {
         return false;
       }
       
       if (filters.highCommission && 
-          !program.commissionStructure.match(/\b([3-9][0-9]|100)%\b/)) {
+          !app.commissionStructure.match(/\b([3-9][0-9]|100)%\b/)) {
         return false;
       }
       
@@ -90,14 +90,14 @@ export default function Marketplace() {
           return 0;
       }
     });
-  }, [programs, searchTerm, filters, sortOption]);
+  }, [apps, searchTerm, filters, sortOption]);
   
   return (
     <Layout>
       <MarketplaceHero 
         searchTerm={searchTerm} 
         onSearch={handleSearch}
-        programCount={programs.length}
+        appCount={apps.length}
       />
       
       <section className="py-12">
@@ -106,24 +106,24 @@ export default function Marketplace() {
           
           {loading ? (
             <LoadingSpinner />
-          ) : programs.length === 0 ? (
-            <NoPrograms type="empty" onClearSearch={() => setSearchTerm('')} />
+          ) : apps.length === 0 ? (
+            <NoApps type="empty" onClearSearch={() => setSearchTerm('')} />
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
               <div className="lg:col-span-1">
-                <ProgramFilters 
+                <AppFilters 
                   filters={filters} 
                   onFilterChange={handleFilterChange}
                   sortOption={sortOption}
                   onSortChange={handleSortChange}
-                  totalCount={programs.length}
-                  filteredCount={filteredAndSortedPrograms.length}
+                  totalCount={apps.length}
+                  filteredCount={filteredAndSortedApps.length}
                 />
               </div>
               
               <div className="lg:col-span-3">
-                {filteredAndSortedPrograms.length === 0 ? (
-                  <NoPrograms 
+                {filteredAndSortedApps.length === 0 ? (
+                  <NoApps 
                     type="noMatches" 
                     onClearSearch={() => {
                       setSearchTerm('');
@@ -135,8 +135,8 @@ export default function Marketplace() {
                   />
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                    {filteredAndSortedPrograms.map((program) => (
-                      <ProgramCard key={program.id} program={program} />
+                    {filteredAndSortedApps.map((app) => (
+                      <AppCard key={app.id} app={app} />
                     ))}
                   </div>
                 )}

@@ -7,8 +7,8 @@ import { supabase } from '@/shared/services/supabase';
 
 export default function AdminReview() {
   const { user, loading } = useAuth();
-  const [programs, setPrograms] = useState([]);
-  const [loadingPrograms, setLoadingPrograms] = useState(true);
+  const [apps, setApps] = useState([]);
+  const [loadingApps, setLoadingApps] = useState(true);
   const [error, setError] = useState(null);
   const [actionInProgress, setActionInProgress] = useState(null);
   const location = useLocation();
@@ -17,14 +17,14 @@ export default function AdminReview() {
   const isAdmin = user?.email && (user.email.endsWith('@zapt.ai') || user.email.endsWith('@mapt.events')) || false;
 
   useEffect(() => {
-    const fetchPendingPrograms = async () => {
+    const fetchPendingApps = async () => {
       if (!user || !isAdmin) return;
       
       try {
-        setLoadingPrograms(true);
+        setLoadingApps(true);
         const { data: { session } } = await supabase.auth.getSession();
         
-        const response = await fetch('/api/getPendingPrograms', {
+        const response = await fetch('/api/getPendingApps', {
           headers: {
             Authorization: `Bearer ${session?.access_token}`,
           },
@@ -33,47 +33,47 @@ export default function AdminReview() {
         const data = await response.json();
         
         if (!response.ok) {
-          throw new Error(data.error || 'Failed to fetch programs');
+          throw new Error(data.error || 'Failed to fetch apps');
         }
         
-        setPrograms(data.programs);
+        setApps(data.apps);
       } catch (error) {
-        console.error('Error fetching pending programs:', error);
+        console.error('Error fetching pending apps:', error);
         Sentry.captureException(error);
         setError(error.message);
       } finally {
-        setLoadingPrograms(false);
+        setLoadingApps(false);
       }
     };
     
-    fetchPendingPrograms();
+    fetchPendingApps();
   }, [user, isAdmin]);
 
-  const handleReviewAction = async (programId, status) => {
+  const handleReviewAction = async (appId, status) => {
     try {
-      setActionInProgress(programId);
+      setActionInProgress(appId);
       const { data: { session } } = await supabase.auth.getSession();
       
-      const response = await fetch('/api/reviewProgram', {
+      const response = await fetch('/api/reviewApp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session?.access_token}`,
         },
-        body: JSON.stringify({ programId, status }),
+        body: JSON.stringify({ appId, status }),
       });
       
       const data = await response.json();
       
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to review program');
+        throw new Error(data.error || 'Failed to review app');
       }
       
-      // Update the programs list
-      setPrograms(programs.filter(program => program.id !== programId));
+      // Update the apps list
+      setApps(apps.filter(app => app.id !== appId));
       
     } catch (error) {
-      console.error('Error reviewing program:', error);
+      console.error('Error reviewing app:', error);
       Sentry.captureException(error);
       setError(error.message);
     } finally {
@@ -107,7 +107,7 @@ export default function AdminReview() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h1 className="text-3xl font-bold text-secondary-900 mb-2">Admin Review</h1>
-            <p className="text-secondary-600 mb-8">Review pending affiliate program submissions for approval.</p>
+            <p className="text-secondary-600 mb-8">Review pending affiliate app submissions for approval.</p>
             
             {error && (
               <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-md">
@@ -126,51 +126,51 @@ export default function AdminReview() {
       <div className="py-8">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            {loadingPrograms ? (
+            {loadingApps ? (
               <div className="flex justify-center items-center py-16">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-primary-600"></div>
               </div>
-            ) : programs.length === 0 ? (
+            ) : apps.length === 0 ? (
               <div className="bg-white rounded-xl shadow-soft p-8 text-center">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-secondary-400 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <h2 className="text-2xl font-semibold text-secondary-800 mb-4">No pending programs</h2>
+                <h2 className="text-2xl font-semibold text-secondary-800 mb-4">No pending apps</h2>
                 <p className="text-secondary-600">
-                  There are no programs waiting for review at this time.
+                  There are no apps waiting for review at this time.
                 </p>
               </div>
             ) : (
               <div className="space-y-6">
-                {programs.map((program) => (
-                  <div key={program.id} className="bg-white rounded-xl shadow-soft overflow-hidden">
+                {apps.map((app) => (
+                  <div key={app.id} className="bg-white rounded-xl shadow-soft overflow-hidden">
                     <div className="p-6">
-                      <h2 className="text-2xl font-semibold text-secondary-900 mb-3">{program.appName}</h2>
+                      <h2 className="text-2xl font-semibold text-secondary-900 mb-3">{app.appName}</h2>
                       <div className="bg-secondary-50 p-4 rounded-lg mb-6">
-                        <p className="text-secondary-700">{program.appDescription}</p>
+                        <p className="text-secondary-700">{app.appDescription}</p>
                       </div>
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
                           <h3 className="font-medium text-secondary-800 mb-2">Commission Structure</h3>
                           <div className="bg-secondary-50 p-3 rounded-lg">
-                            <p className="text-secondary-700">{program.commissionStructure}</p>
+                            <p className="text-secondary-700">{app.commissionStructure}</p>
                           </div>
                         </div>
                         <div>
                           <h3 className="font-medium text-secondary-800 mb-2">Payment Terms</h3>
                           <div className="bg-secondary-50 p-3 rounded-lg">
-                            <p className="text-secondary-700">{program.paymentTerms}</p>
+                            <p className="text-secondary-700">{app.paymentTerms}</p>
                           </div>
                         </div>
                       </div>
                       
                       <div className="flex flex-wrap gap-4 mb-6">
                         <a 
-                          href={program.appUrl} 
+                          href={app.appUrl} 
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
+                          className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium cursor-pointer"
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -178,10 +178,10 @@ export default function AdminReview() {
                           Visit App
                         </a>
                         <a 
-                          href={program.affiliateSignupUrl} 
+                          href={app.affiliateSignupUrl} 
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
+                          className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium cursor-pointer"
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101" />
@@ -193,13 +193,13 @@ export default function AdminReview() {
                       
                       <div className="flex flex-wrap gap-4 border-t border-secondary-100 pt-6">
                         <button
-                          onClick={() => handleReviewAction(program.id, 'approved')}
-                          disabled={actionInProgress === program.id}
+                          onClick={() => handleReviewAction(app.id, 'approved')}
+                          disabled={actionInProgress === app.id}
                           className={`bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-md shadow-sm font-medium transition-colors cursor-pointer flex items-center gap-1 ${
-                            actionInProgress === program.id ? 'opacity-75 cursor-not-allowed' : ''
+                            actionInProgress === app.id ? 'opacity-75 cursor-not-allowed' : ''
                           }`}
                         >
-                          {actionInProgress === program.id ? (
+                          {actionInProgress === app.id ? (
                             <>
                               <svg className="animate-spin h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -217,13 +217,13 @@ export default function AdminReview() {
                           )}
                         </button>
                         <button
-                          onClick={() => handleReviewAction(program.id, 'rejected')}
-                          disabled={actionInProgress === program.id}
+                          onClick={() => handleReviewAction(app.id, 'rejected')}
+                          disabled={actionInProgress === app.id}
                           className={`bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-md shadow-sm font-medium transition-colors cursor-pointer flex items-center gap-1 ${
-                            actionInProgress === program.id ? 'opacity-75 cursor-not-allowed' : ''
+                            actionInProgress === app.id ? 'opacity-75 cursor-not-allowed' : ''
                           }`}
                         >
-                          {actionInProgress === program.id ? (
+                          {actionInProgress === app.id ? (
                             <>
                               <svg className="animate-spin h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

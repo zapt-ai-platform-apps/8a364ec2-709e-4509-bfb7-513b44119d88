@@ -36,8 +36,8 @@ export const createValidator = (schema, contextName) => {
   };
 };
 
-// Define schemas for affiliate programs
-export const affiliateProgramSchema = z.object({
+// Define schemas for affiliate apps
+export const affiliateAppSchema = z.object({
   id: z.number().optional(),
   userId: z.string(),
   appName: z.string().min(1, 'App name is required'),
@@ -52,23 +52,23 @@ export const affiliateProgramSchema = z.object({
   updatedAt: z.date().optional(),
 });
 
-export const createProgramSchema = affiliateProgramSchema.omit({
+export const createAppSchema = affiliateAppSchema.omit({
   id: true, 
   createdAt: true,
   updatedAt: true,
 });
 
-export const updateProgramSchema = affiliateProgramSchema.partial().extend({
+export const updateAppSchema = affiliateAppSchema.partial().extend({
   id: z.number(),
 });
 
-export const updateProgramStatusSchema = z.object({
-  programId: z.number(),
+export const updateAppStatusSchema = z.object({
+  appId: z.number(),
   status: z.enum(['approved', 'rejected']),
 });
 
 // Create validators
-export const validateProgram = createValidator(affiliateProgramSchema, 'AffiliateProgram');
-export const validateCreateProgram = createValidator(createProgramSchema, 'CreateAffiliateProgram');
-export const validateUpdateProgram = createValidator(updateProgramSchema, 'UpdateAffiliateProgram');
-export const validateUpdateProgramStatus = createValidator(updateProgramStatusSchema, 'UpdateProgramStatus');
+export const validateApp = createValidator(affiliateAppSchema, 'AffiliateApp');
+export const validateCreateApp = createValidator(createAppSchema, 'CreateAffiliateApp');
+export const validateUpdateApp = createValidator(updateAppSchema, 'UpdateAffiliateApp');
+export const validateUpdateAppStatus = createValidator(updateAppStatusSchema, 'UpdateAppStatus');

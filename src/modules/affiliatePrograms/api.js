@@ -1,5 +1,5 @@
 import * as services from './internal/services.js';
-import { validateProgram } from './validators.js';
+import { validateApp } from './validators.js';
 import * as ui from './ui/index.js';
 
 /**
@@ -10,55 +10,55 @@ export const api = {
   ui,
   
   /**
-   * Get all approved programs for the marketplace
+   * Get all approved apps for the marketplace
    */
-  getApprovedPrograms: async () => {
-    const programs = await services.getApprovedPrograms();
-    return { programs };
+  getApprovedApps: async () => {
+    const apps = await services.getApprovedApps();
+    return { apps };
   },
 
   /**
-   * Get all pending programs for admin review
+   * Get all pending apps for admin review
    */
-  getPendingPrograms: async (user) => {
+  getPendingApps: async (user) => {
     if (!user) {
       throw new Error('User is required');
     }
     
     // Check admin privileges
     if (!user.email?.endsWith('@zapt.ai') && !user.email?.endsWith('@mapt.events')) {
-      throw new Error('Not authorized to access pending programs');
+      throw new Error('Not authorized to access pending apps');
     }
     
-    const programs = await services.getPendingPrograms();
-    return { programs };
+    const apps = await services.getPendingApps();
+    return { apps };
   },
 
   /**
-   * Get all programs submitted by a specific user
+   * Get all apps submitted by a specific user
    */
-  getUserPrograms: async (user) => {
+  getUserApps: async (user) => {
     if (!user) {
       throw new Error('User is required');
     }
     
-    const programs = await services.getUserPrograms(user.id);
-    return { programs };
+    const apps = await services.getUserApps(user.id);
+    return { apps };
   },
 
   /**
-   * Submit a new affiliate program
+   * Submit a new affiliate app
    */
-  submitProgram: async (user, programData) => {
+  submitApp: async (user, appData) => {
     if (!user) {
       throw new Error('User is required');
     }
     
-    const program = await services.submitProgram(user, programData);
+    const app = await services.submitApp(user, appData);
     return { 
-      message: 'Program submitted successfully',
-      program: validateProgram(program, {
-        actionName: 'submitProgram',
+      message: 'App submitted successfully',
+      app: validateApp(app, {
+        actionName: 'submitApp',
         location: 'affiliatePrograms/api.js',
         direction: 'outgoing',
         moduleFrom: 'affiliatePrograms',
@@ -68,18 +68,18 @@ export const api = {
   },
 
   /**
-   * Review (approve or reject) a program
+   * Review (approve or reject) an app
    */
-  reviewProgram: async (user, programId, status) => {
+  reviewApp: async (user, appId, status) => {
     if (!user) {
       throw new Error('User is required');
     }
     
-    const program = await services.reviewProgram(user, programId, status);
+    const app = await services.reviewApp(user, appId, status);
     return { 
-      message: `Program ${status} successfully`,
-      program: validateProgram(program, {
-        actionName: 'reviewProgram',
+      message: `App ${status} successfully`,
+      app: validateApp(app, {
+        actionName: 'reviewApp',
         location: 'affiliatePrograms/api.js',
         direction: 'outgoing',
         moduleFrom: 'affiliatePrograms',

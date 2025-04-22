@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { createValidator } from '../core/validators';
 
-// Define schema for an affiliate program
-export const affiliateProgramSchema = z.object({
+// Define schema for an affiliate app
+export const affiliateAppSchema = z.object({
   id: z.number().optional(),
   userId: z.string(),
   appName: z.string().min(1, 'App name is required'),
@@ -17,26 +17,26 @@ export const affiliateProgramSchema = z.object({
   updatedAt: z.date().optional(),
 });
 
-// Schema for creating a program (without id and timestamps)
-export const createProgramSchema = affiliateProgramSchema.omit({
+// Schema for creating an app (without id and timestamps)
+export const createAppSchema = affiliateAppSchema.omit({
   id: true, 
   createdAt: true,
   updatedAt: true,
 });
 
-// Schema for updating a program
-export const updateProgramSchema = affiliateProgramSchema.partial().extend({
+// Schema for updating an app
+export const updateAppSchema = affiliateAppSchema.partial().extend({
   id: z.number(),
 });
 
-// Schema for program status update
-export const updateProgramStatusSchema = z.object({
-  programId: z.number(),
+// Schema for app status update
+export const updateAppStatusSchema = z.object({
+  appId: z.number(),
   status: z.enum(['approved', 'rejected']),
 });
 
 // Create validators
-export const validateProgram = createValidator(affiliateProgramSchema, 'AffiliateProgram');
-export const validateCreateProgram = createValidator(createProgramSchema, 'CreateAffiliateProgram');
-export const validateUpdateProgram = createValidator(updateProgramSchema, 'UpdateAffiliateProgram');
-export const validateUpdateProgramStatus = createValidator(updateProgramStatusSchema, 'UpdateProgramStatus');
+export const validateApp = createValidator(affiliateAppSchema, 'AffiliateApp');
+export const validateCreateApp = createValidator(createAppSchema, 'CreateAffiliateApp');
+export const validateUpdateApp = createValidator(updateAppSchema, 'UpdateAffiliateApp');
+export const validateUpdateAppStatus = createValidator(updateAppStatusSchema, 'UpdateAppStatus');

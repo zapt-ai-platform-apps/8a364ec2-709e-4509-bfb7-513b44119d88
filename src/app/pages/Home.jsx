@@ -66,7 +66,7 @@ export default function Home() {
           
           <div className="hero-animate flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
             <Link to="/marketplace" className="transform transition-all duration-300 hover:scale-105 bg-gradient-to-r from-primary-600 to-primary-800 text-white px-8 py-4 rounded-xl text-lg md:text-xl font-bold shadow-xl hover:shadow-2xl cursor-pointer w-64 text-center">
-              Browse Programs
+              Browse Apps
             </Link>
             <Link to="/login" className="transform transition-all duration-300 hover:scale-105 bg-white text-primary-700 border-2 border-primary-600 px-8 py-4 rounded-xl text-lg md:text-xl font-bold shadow hover:shadow-xl cursor-pointer w-64 text-center">
               Join Now
@@ -217,7 +217,7 @@ export default function Home() {
                   You've built an audience. You make videos, post on social media, or run communities. Now monetize that investment with partnerships that generate predictable monthly income.
                 </p>
                 <Link to="/marketplace" className="inline-block bg-gradient-to-r from-accent-600 to-primary-600 text-white px-8 py-4 rounded-lg text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
-                  Find Affiliate Programs
+                  Find Affiliate Apps
                 </Link>
               </div>
             </div>
@@ -441,7 +441,7 @@ export default function Home() {
                   Instant Access to Affiliates
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  Reach content creators actively seeking quality programs
+                  Reach content creators actively seeking quality apps
                 </p>
               </div>
               
@@ -509,7 +509,7 @@ export default function Home() {
             </h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-on-scroll delay-200">
               <Link to="/marketplace" className="transform transition-all duration-300 hover:scale-105 bg-white text-primary-700 px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl cursor-pointer">
-                Browse Affiliate Programs
+                Browse Affiliate Apps
               </Link>
               <Link to="/login" className="transform transition-all duration-300 hover:scale-105 bg-transparent text-white border-2 border-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl cursor-pointer">
                 Join Now
