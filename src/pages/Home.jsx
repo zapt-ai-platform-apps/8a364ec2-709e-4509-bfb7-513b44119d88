@@ -54,7 +54,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto mb-16 relative z-10">
           <div className="mb-4 inline-block">
             <div className="bg-gradient-to-r from-primary-600 to-accent-500 text-white py-2 px-6 rounded-full inline-block shadow-lg mb-8 animate-fade-in-down">
-              <span className="text-sm md:text-base font-semibold">The Affiliate Marketplace of the Future</span>
+              <span className="text-sm md:text-base font-semibold">The Premier Affiliate Platform for ZAPT-built Apps</span>
             </div>
           </div>
           
@@ -63,8 +63,8 @@ export default function Home() {
           </h1>
           
           <p className="hero-animate text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Where innovative app creators and savvy content creators forge 
-            powerful partnerships that drive <span className="text-primary-700 font-semibold">mutual growth</span>.
+            We connect affiliates with high-quality ZAPT-built apps offering <span className="text-primary-700 font-semibold">verified recurring commissions</span>. 
+            No middlemen. No barriers. Just real income opportunities.
           </p>
           
           <div className="hero-animate flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
@@ -84,97 +84,203 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Marketplace Highlights Section */}
-      <MarketplaceHighlights />
-      
-      {/* Features Section */}
+      {/* Affiliate Benefits Section - NEW */}
       <section className="py-24 relative">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col items-center mb-16 animate-on-scroll">
-            <h2 className="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-accent-600 to-primary-700">
-              Your Affiliate Journey Starts Here
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-accent-500 to-primary-600 rounded-full mb-8"></div>
-            <p className="text-xl text-gray-600 max-w-3xl text-center">
-              Our platform bridges the gap between quality apps and content creators seeking genuine affiliate opportunities.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-7xl mx-auto">
-            <div className="relative group animate-on-scroll">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl transform rotate-2 scale-105 opacity-20 group-hover:opacity-30 transition-all duration-300"></div>
-              <div className="bg-white backdrop-blur-sm bg-opacity-90 p-10 rounded-2xl shadow-xl border border-gray-100 transform transition-transform duration-300 group-hover:-translate-y-2 relative z-10">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mb-8 shadow-lg">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16 animate-on-scroll">
+              <span className="bg-accent-100 text-accent-800 text-sm font-semibold px-4 py-2 rounded-full inline-block mb-4">
+                For Affiliates
+              </span>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-accent-700 to-primary-600">
+                Why Choose ZAPT Affiliate Marketplace?
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                We've built the marketplace affiliates deserve - with vetted, quality programs and real advocacy for your success.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+              <div className="bg-white rounded-xl shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 animate-on-scroll">
+                <div className="w-16 h-16 bg-accent-100 rounded-lg mb-6 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">App Creators</h3>
-                <p className="text-gray-600 mb-8 text-lg">
-                  Showcase your app's affiliate program in front of motivated content creators who are
-                  ready to promote quality products to their audience.
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  Vetted ZAPT Apps Only
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  We only list quality apps built on the ZAPT platform that have passed our strict review process. No scams, no false promises.
                 </p>
-                <div className="space-y-4 mb-10">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                      <span className="text-blue-600">✓</span>
-                    </div>
-                    <span className="text-gray-700">Curated marketplace presence</span>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                      <span className="text-blue-600">✓</span>
-                    </div>
-                    <span className="text-gray-700">Verified partnerships</span>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-                      <span className="text-blue-600">✓</span>
-                    </div>
-                    <span className="text-gray-700">Transparent commission structure</span>
-                  </div>
+                <div className="border-t border-gray-100 pt-4">
+                  <Link to="/marketplace" className="text-accent-600 hover:text-accent-800 font-medium flex items-center">
+                    <span>See verified programs</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </Link>
                 </div>
-                <Link to="/login" className="inline-block w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-4 px-6 rounded-xl text-center font-semibold shadow-lg transition-all duration-300 hover:shadow-xl cursor-pointer">
-                  Register Your App
-                </Link>
+              </div>
+              
+              <div className="bg-white rounded-xl shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 animate-on-scroll delay-150">
+                <div className="w-16 h-16 bg-primary-100 rounded-lg mb-6 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  Recurring Commission Focus
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  We prioritize apps with recurring commission models to help you build stable, predictable monthly income instead of one-time payouts.
+                </p>
+                <div className="border-t border-gray-100 pt-4">
+                  <Link to="/marketplace" className="text-primary-600 hover:text-primary-800 font-medium flex items-center">
+                    <span>Explore recurring programs</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-xl shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 animate-on-scroll delay-300">
+                <div className="w-16 h-16 bg-purple-100 rounded-lg mb-6 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  Direct Advocacy Support
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  We actively advocate for affiliates by negotiating better terms, providing promotional materials, and ensuring fair treatment.
+                </p>
+                <div className="border-t border-gray-100 pt-4">
+                  <Link to="/marketplace" className="text-purple-600 hover:text-purple-800 font-medium flex items-center">
+                    <span>See how we help</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             </div>
             
-            <div className="relative group animate-on-scroll delay-150">
-              <div className="absolute inset-0 bg-gradient-to-r from-accent-500 to-red-500 rounded-2xl transform -rotate-2 scale-105 opacity-20 group-hover:opacity-30 transition-all duration-300"></div>
-              <div className="bg-white backdrop-blur-sm bg-opacity-90 p-10 rounded-2xl shadow-xl border border-gray-100 transform transition-transform duration-300 group-hover:-translate-y-2 relative z-10">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent-500 to-red-500 flex items-center justify-center mb-8 shadow-lg">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+            <div className="text-center mt-16 animate-on-scroll delay-200">
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                As a content creator, you already invest time building your audience. 
+                We help you monetize that investment with quality affiliate partnerships that generate sustainable income.
+              </p>
+              <Link to="/marketplace" className="inline-block bg-gradient-to-r from-accent-600 to-primary-600 text-white px-8 py-4 rounded-lg text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+                Find Affiliate Programs
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* App Creator Section */}
+      <section className="py-24 relative">
+        <div className="absolute left-0 right-0 h-full bg-gradient-to-b from-white via-primary-50 to-white -z-10"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex flex-col items-center mb-16 animate-on-scroll">
+            <span className="bg-primary-100 text-primary-800 text-sm font-semibold px-4 py-2 rounded-full inline-block mb-4">
+              For App Creators
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary-700 to-primary-500">
+              Get Your ZAPT App Promoted
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl text-center">
+              List your ZAPT-built app's affiliate program and connect with motivated content creators ready to promote your solution.
+            </p>
+          </div>
+          
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div className="bg-white rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:-translate-y-2 animate-on-scroll">
+                <div className="flex gap-5 mb-6">
+                  <div className="w-16 h-16 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">Instant Access to Affiliates</h3>
+                    <p className="text-gray-600">
+                      Get your app in front of motivated content creators actively seeking quality programs to promote to their audiences.
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Content Creators</h3>
-                <p className="text-gray-600 mb-8 text-lg">
-                  Access our curated selection of legitimate affiliate programs with fair commission structures and recurring income potential.
-                </p>
-                <div className="space-y-4 mb-10">
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-accent-100 flex items-center justify-center mr-3">
-                      <span className="text-accent-600">✓</span>
-                    </div>
-                    <span className="text-gray-700">No registration required</span>
+                
+                <div className="flex gap-5 mb-6">
+                  <div className="w-16 h-16 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
                   </div>
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-accent-100 flex items-center justify-center mr-3">
-                      <span className="text-accent-600">✓</span>
-                    </div>
-                    <span className="text-gray-700">Quality, vetted opportunities</span>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-accent-100 flex items-center justify-center mr-3">
-                      <span className="text-accent-600">✓</span>
-                    </div>
-                    <span className="text-gray-700">Focus on recurring revenue</span>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">Quality Over Quantity</h3>
+                    <p className="text-gray-600">
+                      Our marketplace focuses on quality partnerships that drive sustainable growth, not one-time promotions.
+                    </p>
                   </div>
                 </div>
-                <Link to="/marketplace" className="inline-block w-full bg-gradient-to-r from-accent-500 to-red-500 text-white py-4 px-6 rounded-xl text-center font-semibold shadow-lg transition-all duration-300 hover:shadow-xl cursor-pointer">
-                  Browse Marketplace
-                </Link>
+                
+                <div className="mt-8">
+                  <Link to="/login" className="inline-block w-full bg-gradient-to-r from-primary-600 to-primary-800 text-white py-4 px-6 rounded-xl text-center font-semibold shadow-lg transition-all duration-300 hover:shadow-xl cursor-pointer">
+                    List Your Affiliate Program
+                  </Link>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:-translate-y-2 animate-on-scroll delay-150">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">What Makes Our Marketplace Different</h3>
+                
+                <div className="space-y-6">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-4 mt-1">
+                      <span className="text-green-600">✓</span>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-800 mb-1">ZAPT-Focused</h4>
+                      <p className="text-gray-600">We exclusively feature apps built on the ZAPT platform, ensuring quality and reliability.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-4 mt-1">
+                      <span className="text-green-600">✓</span>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-800 mb-1">Direct Connections</h4>
+                      <p className="text-gray-600">We connect you directly with affiliates - no middlemen taking additional cuts of your revenue.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-4 mt-1">
+                      <span className="text-green-600">✓</span>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-800 mb-1">Simple Process</h4>
+                      <p className="text-gray-600">Our straightforward approval process gets quality programs listed quickly without unnecessary hurdles.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-4 mt-1">
+                      <span className="text-green-600">✓</span>
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-800 mb-1">Transparent Terms</h4>
+                      <p className="text-gray-600">We ensure every program has clear, fair terms that benefit both you and your affiliates.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -183,8 +289,6 @@ export default function Home() {
       
       {/* How It Works Section - REDESIGNED */}
       <section className="py-24 relative">
-        <div className="absolute left-0 right-0 h-full bg-gradient-to-b from-white via-primary-50 to-white -z-10"></div>
-        
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col items-center mb-16 animate-on-scroll">
             <h2 className="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary-700 to-accent-600">
@@ -192,11 +296,11 @@ export default function Home() {
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-accent-500 rounded-full mb-8"></div>
             <p className="text-xl text-gray-600 max-w-3xl text-center">
-              A simple, transparent process that brings together app creators and content creators.
+              A simple, direct process that connects ZAPT app creators with motivated affiliates.
             </p>
           </div>
           
-          {/* New Card-Based Design */}
+          {/* Card-Based Design */}
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-10">
               {/* Step 1 */}
@@ -208,14 +312,11 @@ export default function Home() {
                   </div>
                   
                   <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                    <span>Submit Your App</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-500 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />
-                    </svg>
+                    <span>App Submission</span>
                   </h3>
                   
                   <p className="text-gray-600 mb-6">
-                    App creators register and submit their affiliate program details for our review process.
+                    ZAPT app creators submit their affiliate program for our review. We verify quality, terms, and commission structure.
                   </p>
                   
                   <div className="space-y-3 text-sm text-gray-500">
@@ -223,33 +324,19 @@ export default function Home() {
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
-                      <span>Create your account</span>
+                      <span>Easy online submission</span>
                     </div>
                     <div className="flex items-start">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
-                      <span>Provide program details</span>
+                      <span>Clear commission details</span>
                     </div>
                     <div className="flex items-start">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
-                      <span>Set commission structure</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-primary-50 p-5 border-t border-primary-100">
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md mr-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-600" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="text-sm font-medium text-gray-800">For App Creators</div>
-                      <div className="text-xs text-gray-500">Showcase your affiliate program</div>
+                      <span>ZAPT app verification</span>
                     </div>
                   </div>
                 </div>
@@ -264,14 +351,11 @@ export default function Home() {
                   </div>
                   
                   <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                    <span>We Review</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                    </svg>
+                    <span>Affiliate Matching</span>
                   </h3>
                   
                   <p className="text-gray-600 mb-6">
-                    Our team carefully verifies each program's quality and legitimacy before approval.
+                    We showcase approved programs to our network of affiliates, highlighting their unique benefits and commission structure.
                   </p>
                   
                   <div className="space-y-3 text-sm text-gray-500">
@@ -279,33 +363,19 @@ export default function Home() {
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
-                      <span>Verify program authenticity</span>
+                      <span>Featured marketplace listing</span>
                     </div>
                     <div className="flex items-start">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
-                      <span>Evaluate commission fairness</span>
+                      <span>Direct affiliate discovery</span>
                     </div>
                     <div className="flex items-start">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
-                      <span>Check promotional materials</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-blue-50 p-5 border-t border-blue-100">
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md mr-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="text-sm font-medium text-gray-800">Quality Assurance</div>
-                      <div className="text-xs text-gray-500">Only the best make it through</div>
+                      <span>No additional platform fees</span>
                     </div>
                   </div>
                 </div>
@@ -320,14 +390,11 @@ export default function Home() {
                   </div>
                   
                   <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                    <span>Connect</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-600 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
+                    <span>Ongoing Support</span>
                   </h3>
                   
                   <p className="text-gray-600 mb-6">
-                    Approved programs appear in our marketplace, connecting app and content creators.
+                    We provide continuous support to both app creators and affiliates, ensuring successful long-term partnerships.
                   </p>
                   
                   <div className="space-y-3 text-sm text-gray-500">
@@ -335,52 +402,144 @@ export default function Home() {
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-600 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
-                      <span>Featured in marketplace</span>
+                      <span>Affiliate advocacy</span>
                     </div>
                     <div className="flex items-start">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-600 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
-                      <span>Direct access for affiliates</span>
+                      <span>Program promotion guidance</span>
                     </div>
                     <div className="flex items-start">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-600 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
-                      <span>Start earning commissions</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-accent-50 p-5 border-t border-accent-100">
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md mr-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-600" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M8 5a1 1 0 100 2h5.586l-1.293 1.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L13.586 5H8zM12 15a1 1 0 100-2H6.414l1.293-1.293a1 1 0 10-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L6.414 15H12z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="text-sm font-medium text-gray-800">Win-Win Partnerships</div>
-                      <div className="text-xs text-gray-500">Mutual success for everyone</div>
+                      <span>Commission dispute resolution</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* What Makes Us Different - NEW */}
+      <section className="py-24 relative bg-gradient-to-b from-white via-accent-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col items-center mb-16 animate-on-scroll">
+              <h2 className="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-accent-700 to-primary-600">
+                What Makes ZAPT Affiliate Marketplace Different
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-accent-600 to-primary-500 rounded-full mb-8"></div>
+              <p className="text-xl text-gray-600 max-w-3xl text-center">
+                We're not just another affiliate platform. We've reimagined the entire relationship between apps and affiliates.
+              </p>
+            </div>
             
-            {/* Growth Indicator */}
-            <div className="flex justify-center mt-16 animate-on-scroll delay-200">
-              <div className="bg-white rounded-xl shadow-lg px-8 py-6 flex flex-col sm:flex-row items-center gap-6 max-w-2xl transform transition-all duration-300 hover:-translate-y-1">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary-500 to-accent-500 flex items-center justify-center flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                  </svg>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 animate-on-scroll">
+              <div className="bg-white rounded-xl shadow-lg p-8 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-2 h-full bg-red-500"></div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Traditional Affiliate Networks</h3>
+                
+                <div className="space-y-4">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-red-100 flex items-center justify-center mr-4 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-600">Multiple layers of middlemen taking cuts of commissions</p>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-red-100 flex items-center justify-center mr-4 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-600">Minimal quality control - anyone can list anything</p>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-red-100 flex items-center justify-center mr-4 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-600">Platforms prioritize one-time sales over sustainable recurring revenue</p>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-red-100 flex items-center justify-center mr-4 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-600">No advocacy for affiliates when issues arise</p>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-red-100 flex items-center justify-center mr-4 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-600">Generic, scattered programs with no clear focus</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-1">Growing Together</h4>
-                  <p className="text-gray-600">
-                    Our platform continuously evolves to deliver better opportunities for both app creators and content creators.
-                  </p>
+              </div>
+              
+              <div className="bg-white rounded-xl shadow-lg p-8 relative overflow-hidden animate-on-scroll delay-150">
+                <div className="absolute top-0 left-0 w-2 h-full bg-green-500"></div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">ZAPT Affiliate Marketplace</h3>
+                
+                <div className="space-y-4">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-4 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-600">Direct access - no intermediaries taking extra cuts</p>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-4 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-600">Strict quality vetting - only ZAPT apps that meet our standards</p>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-4 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-600">Focus on recurring revenue models for sustainable affiliate income</p>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-4 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-600">Active affiliate advocacy with dispute resolution support</p>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-4 mt-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-600">Specialized focus on high-quality ZAPT apps with proven track records</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -399,18 +558,18 @@ export default function Home() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 animate-on-scroll">
-              Ready to Join the Future of Affiliate Marketing?
+              Join the ZAPT Affiliate Ecosystem
             </h2>
             <p className="text-xl text-white text-opacity-90 mb-12 animate-on-scroll delay-100">
-              Whether you're an app creator looking to grow or a content creator seeking quality opportunities, 
-              ZAPT Affiliate Marketplace is the platform you've been waiting for.
+              Whether you're an affiliate seeking quality programs or a ZAPT app creator looking to expand your reach, 
+              our marketplace connects you directly with the right partners.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-on-scroll delay-200">
-              <Link to="/login" className="transform transition-all duration-300 hover:scale-105 bg-white text-primary-700 px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl cursor-pointer">
-                Join as App Creator
+              <Link to="/marketplace" className="transform transition-all duration-300 hover:scale-105 bg-white text-primary-700 px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl cursor-pointer">
+                Browse Affiliate Programs
               </Link>
-              <Link to="/marketplace" className="transform transition-all duration-300 hover:scale-105 bg-transparent text-white border-2 border-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl cursor-pointer">
-                Browse Opportunities
+              <Link to="/login" className="transform transition-all duration-300 hover:scale-105 bg-transparent text-white border-2 border-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl cursor-pointer">
+                List Your App
               </Link>
             </div>
           </div>
