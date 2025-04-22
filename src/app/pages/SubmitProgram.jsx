@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import * as Sentry from "@sentry/browser";
-import Layout from '@/components/layout/Layout';
-import { useAuth } from '@/hooks/useAuth';
-import { supabase } from '@/supabaseClient';
+import Layout from '@/app/components/layout/Layout';
+import { useAuth } from '@/shared/hooks/useAuth';
+import { supabase } from '@/shared/services/supabase';
 
 export default function SubmitProgram() {
   const { user, loading } = useAuth();

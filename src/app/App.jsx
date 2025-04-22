@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from '@/pages/Home';
-import Login from '@/pages/Login';
-import Dashboard from '@/pages/Dashboard';
-import SubmitProgram from '@/pages/SubmitProgram';
-import Marketplace from '@/pages/Marketplace';
-import AdminReview from '@/pages/AdminReview';
+import Home from '@/app/pages/Home';
+import Login from '@/app/pages/Login';
+import Dashboard from '@/app/pages/Dashboard';
+import SubmitProgram from '@/app/pages/SubmitProgram';
+import Marketplace from '@/app/pages/Marketplace';
+import AdminReview from '@/app/pages/AdminReview';
 
 export default function App() {
   return (

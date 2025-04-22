@@ -1,10 +1,14 @@
 import * as services from './internal/services.js';
 import { validateProgram } from './validators.js';
+import * as ui from './ui/index.js';
 
 /**
  * Public API for the affiliatePrograms module
  */
 export const api = {
+  // UI Components
+  ui,
+  
   /**
    * Get all approved programs for the marketplace
    */

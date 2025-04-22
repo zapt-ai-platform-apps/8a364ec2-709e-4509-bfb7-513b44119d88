@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
-import { supabase } from '@/supabaseClient';
-import Layout from '@/components/layout/Layout';
-import { useAuth } from '@/hooks/useAuth';
+import { supabase } from '@/shared/services/supabase';
+import Layout from '@/app/components/layout/Layout';
+import { useAuth } from '@/shared/hooks/useAuth';
 
 export default function Login() {
   const navigate = useNavigate();

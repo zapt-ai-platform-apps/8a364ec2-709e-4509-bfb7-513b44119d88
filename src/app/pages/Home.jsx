@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import Layout from '@/components/layout/Layout';
-import MarketplaceHighlights from '@/components/home/MarketplaceHighlights';
+import Layout from '@/app/components/layout/Layout';
+import { MarketplaceHighlights } from '@/modules/affiliatePrograms/ui';
 
 export default function Home() {
   const heroRef = useRef(null);

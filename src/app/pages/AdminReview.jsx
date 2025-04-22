@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import * as Sentry from "@sentry/browser";
-import Layout from '@/components/layout/Layout';
-import { useAuth } from '@/hooks/useAuth';
-import { supabase } from '@/supabaseClient';
+import Layout from '@/app/components/layout/Layout';
+import { useAuth } from '@/shared/hooks/useAuth';
+import { supabase } from '@/shared/services/supabase';
 
 export default function AdminReview() {
   const { user, loading } = useAuth();

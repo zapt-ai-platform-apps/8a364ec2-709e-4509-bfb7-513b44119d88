@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CommissionBadge from './CommissionBadge';
-import { formatDate } from '@/utils/dateUtils';
+import { formatDate } from '@/shared/utils/dateUtils';
 
 export default function ProgramCard({ program }) {
   const [isExpanded, setIsExpanded] = useState(false);

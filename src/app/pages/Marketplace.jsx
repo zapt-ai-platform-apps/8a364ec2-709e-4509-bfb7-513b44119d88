@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import * as Sentry from "@sentry/browser";
-import Layout from '@/components/layout/Layout';
-import MarketplaceHero from '@/components/marketplace/MarketplaceHero';
-import ProgramCard from '@/components/marketplace/ProgramCard';
-import ProgramFilters from '@/components/marketplace/ProgramFilters';
-import NoPrograms from '@/components/marketplace/NoPrograms';
-import LoadingSpinner from '@/components/ui/LoadingSpinner';
-import ErrorAlert from '@/components/ui/ErrorAlert';
+import Layout from '@/app/components/layout/Layout';
+import { MarketplaceHero, NoPrograms, ProgramCard, ProgramFilters } from '@/modules/affiliatePrograms/ui';
+import { LoadingSpinner, ErrorAlert } from '@/shared/components/ui';
 
 export default function Marketplace() {
   const [programs, setPrograms] = useState([]);

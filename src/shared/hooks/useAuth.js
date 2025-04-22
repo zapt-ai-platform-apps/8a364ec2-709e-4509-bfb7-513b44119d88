@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { supabase, recordLogin } from '@/supabaseClient';
+import { supabase, recordLogin } from '@/shared/services/supabase';
 import { eventBus } from '@/modules/core/events';
-import { events } from './events';
+import { events } from '@/shared/hooks/events';
 
 export function useAuth() {
   const [session, setSession] = useState(null);
