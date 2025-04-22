@@ -3,18 +3,25 @@ import * as Sentry from "@sentry/browser";
 import Layout from '@/app/components/layout/Layout';
 import { MarketplaceHero, NoApps, AppCard, AppFilters } from '@/modules/affiliatePrograms/ui';
 import { LoadingSpinner, ErrorAlert } from '@/shared/components/ui';
+import { useAuth } from '@/shared/hooks/useAuth';
+import { supabase } from '@/shared/services/supabase';
 
 export default function Marketplace() {
+  const { user, loading: authLoading } = useAuth();
   const [apps, setApps] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingFavorites, setLoadingFavorites] = useState(false);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('newest');
+  const [favorites, setFavorites] = useState([]);
   const [filters, setFilters] = useState({
     recurring: false,
     highCommission: false,
+    onlyFavorites: false,
   });
   
+  // Fetch apps
   useEffect(() => {
     const fetchApps = async () => {
       try {
@@ -41,6 +48,43 @@ export default function Marketplace() {
     fetchApps();
   }, []);
 
+  // Fetch user favorites
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      if (!user) {
+        setFavorites([]);
+        return;
+      }
+      
+      try {
+        setLoadingFavorites(true);
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        const response = await fetch('/api/getFavorites', {
+          headers: {
+            Authorization: `Bearer ${session?.access_token}`,
+          },
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to fetch favorites');
+        }
+        
+        setFavorites(data.favorites);
+        console.log('Fetched favorites:', data.favorites);
+      } catch (error) {
+        console.error('Error fetching favorites:', error);
+        Sentry.captureException(error);
+      } finally {
+        setLoadingFavorites(false);
+      }
+    };
+    
+    fetchFavorites();
+  }, [user]);
+
   const handleSearch = (term) => {
     setSearchTerm(term);
   };
@@ -51,6 +95,14 @@ export default function Marketplace() {
 
   const handleSortChange = (option) => {
     setSortOption(option);
+  };
+  
+  const handleToggleFavorite = (appId, isFavorite) => {
+    setFavorites(prev => 
+      isFavorite 
+        ? [...prev, appId] 
+        : prev.filter(id => id !== appId)
+    );
   };
   
   const filteredAndSortedApps = useMemo(() => {
@@ -74,6 +126,11 @@ export default function Marketplace() {
         return false;
       }
       
+      // Only show favorites if the filter is active
+      if (filters.onlyFavorites && user && !favorites.includes(app.id)) {
+        return false;
+      }
+      
       return true;
     });
     
@@ -90,7 +147,7 @@ export default function Marketplace() {
           return 0;
       }
     });
-  }, [apps, searchTerm, filters, sortOption]);
+  }, [apps, searchTerm, filters, sortOption, favorites, user]);
   
   return (
     <Layout>
@@ -118,6 +175,8 @@ export default function Marketplace() {
                   onSortChange={handleSortChange}
                   totalCount={apps.length}
                   filteredCount={filteredAndSortedApps.length}
+                  showFavoritesFilter={!!user}
+                  isLoadingUser={authLoading}
                 />
               </div>
               
@@ -130,14 +189,27 @@ export default function Marketplace() {
                       setFilters({
                         recurring: false,
                         highCommission: false,
+                        onlyFavorites: false,
                       });
                     }} 
                   />
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                    {filteredAndSortedApps.map((app) => (
-                      <AppCard key={app.id} app={app} />
-                    ))}
+                    {loadingFavorites && user ? (
+                      <div className="col-span-full flex justify-center py-8">
+                        <LoadingSpinner size="small" />
+                      </div>
+                    ) : (
+                      filteredAndSortedApps.map((app) => (
+                        <AppCard 
+                          key={app.id} 
+                          app={app} 
+                          user={user}
+                          favorites={favorites}
+                          onToggleFavorite={handleToggleFavorite}
+                        />
+                      ))
+                    )}
                   </div>
                 )}
               </div>

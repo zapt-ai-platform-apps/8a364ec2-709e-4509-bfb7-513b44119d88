@@ -1,4 +1,4 @@
-import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, timestamp, integer, unique } from 'drizzle-orm/pg-core';
 
 export const affiliatePrograms = pgTable('affiliate_programs', {
   id: serial('id').primaryKey(),
@@ -13,4 +13,15 @@ export const affiliatePrograms = pgTable('affiliate_programs', {
   status: text('status').notNull().default('pending'),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow()
+});
+
+export const appFavorites = pgTable('app_favorites', {
+  id: serial('id').primaryKey(),
+  userId: text('user_id').notNull(),
+  appId: integer('app_id').notNull(),
+  createdAt: timestamp('created_at').defaultNow(),
+}, (table) => {
+  return {
+    uniqueUserApp: unique().on(table.userId, table.appId),
+  };
 });
