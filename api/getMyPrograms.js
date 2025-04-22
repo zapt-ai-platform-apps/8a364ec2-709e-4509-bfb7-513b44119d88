@@ -1,4 +1,4 @@
-import { api } from '../src/modules/affiliatePrograms/api.js';
+import { api } from './_affiliatePrograms.js';
 import { authenticateUser } from "./_apiUtils.js";
 import Sentry from "./_sentry.js";
 
