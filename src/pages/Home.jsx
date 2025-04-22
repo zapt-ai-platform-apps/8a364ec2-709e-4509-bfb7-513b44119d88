@@ -181,12 +181,12 @@ export default function Home() {
         </div>
       </section>
       
-      {/* How It Works Section - FIXED ALIGNMENT */}
+      {/* How It Works Section - REDESIGNED */}
       <section className="py-24 relative">
         <div className="absolute left-0 right-0 h-full bg-gradient-to-b from-white via-primary-50 to-white -z-10"></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col items-center mb-20 animate-on-scroll">
+          <div className="flex flex-col items-center mb-16 animate-on-scroll">
             <h2 className="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary-700 to-accent-600">
               How It Works
             </h2>
@@ -196,82 +196,192 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="relative max-w-6xl mx-auto">
-            {/* Desktop Timeline View */}
-            <div className="hidden md:block">
-              {/* Connecting Line */}
-              <div className="absolute left-1/2 top-12 bottom-12 w-1 bg-gradient-to-b from-primary-500 to-accent-500 transform -translate-x-1/2 z-0 rounded-full"></div>
-              
-              {/* Step 1: Submit Your App */}
-              <div className="flex justify-end mb-20">
-                <div className="w-1/2 pr-12 relative">
-                  <div className="absolute right-0 top-10 w-12 h-12 rounded-full bg-white border-4 border-primary-500 z-10 transform translate-x-6"></div>
-                  <div className="bg-white p-8 rounded-2xl shadow-xl animate-on-scroll">
-                    <h3 className="text-2xl font-bold text-primary-700 mb-4">Submit Your App</h3>
-                    <p className="text-gray-600 text-lg">
-                      App creators register and submit their affiliate program details for our review process. We look for quality apps with fair commission structures.
-                    </p>
+          {/* New Card-Based Design */}
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-10">
+              {/* Step 1 */}
+              <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-2 group animate-on-scroll">
+                <div className="h-3 bg-gradient-to-r from-primary-500 to-primary-700"></div>
+                <div className="p-8">
+                  <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-all duration-300">
+                    <div className="text-2xl font-bold text-primary-700 flex items-center justify-center w-10 h-10 rounded-full bg-white shadow">1</div>
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <span>Submit Your App</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-500 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </h3>
+                  
+                  <p className="text-gray-600 mb-6">
+                    App creators register and submit their affiliate program details for our review process.
+                  </p>
+                  
+                  <div className="space-y-3 text-sm text-gray-500">
+                    <div className="flex items-start">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span>Create your account</span>
+                    </div>
+                    <div className="flex items-start">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span>Provide program details</span>
+                    </div>
+                    <div className="flex items-start">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span>Set commission structure</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-primary-50 p-5 border-t border-primary-100">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md mr-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="text-sm font-medium text-gray-800">For App Creators</div>
+                      <div className="text-xs text-gray-500">Showcase your affiliate program</div>
+                    </div>
                   </div>
                 </div>
               </div>
               
-              {/* Step 2: We Review */}
-              <div className="flex justify-start mb-20">
-                <div className="w-1/2 pl-12 relative">
-                  <div className="absolute left-0 top-10 w-12 h-12 rounded-full bg-white border-4 border-primary-600 z-10 transform -translate-x-6"></div>
-                  <div className="bg-white p-8 rounded-2xl shadow-xl animate-on-scroll delay-150">
-                    <h3 className="text-2xl font-bold text-primary-700 mb-4">We Review</h3>
-                    <p className="text-gray-600 text-lg">
-                      Our team carefully verifies each program's quality and legitimacy, ensuring that only the best opportunities make it to our marketplace.
-                    </p>
+              {/* Step 2 */}
+              <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-2 group animate-on-scroll delay-150">
+                <div className="h-3 bg-gradient-to-r from-blue-500 to-purple-600"></div>
+                <div className="p-8">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-blue-200 transition-all duration-300">
+                    <div className="text-2xl font-bold text-blue-700 flex items-center justify-center w-10 h-10 rounded-full bg-white shadow">2</div>
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <span>We Review</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                    </svg>
+                  </h3>
+                  
+                  <p className="text-gray-600 mb-6">
+                    Our team carefully verifies each program's quality and legitimacy before approval.
+                  </p>
+                  
+                  <div className="space-y-3 text-sm text-gray-500">
+                    <div className="flex items-start">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span>Verify program authenticity</span>
+                    </div>
+                    <div className="flex items-start">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span>Evaluate commission fairness</span>
+                    </div>
+                    <div className="flex items-start">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span>Check promotional materials</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-blue-50 p-5 border-t border-blue-100">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md mr-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="text-sm font-medium text-gray-800">Quality Assurance</div>
+                      <div className="text-xs text-gray-500">Only the best make it through</div>
+                    </div>
                   </div>
                 </div>
               </div>
               
-              {/* Step 3: Connect */}
-              <div className="flex justify-end">
-                <div className="w-1/2 pr-12 relative">
-                  <div className="absolute right-0 top-10 w-12 h-12 rounded-full bg-white border-4 border-accent-500 z-10 transform translate-x-6"></div>
-                  <div className="bg-white p-8 rounded-2xl shadow-xl animate-on-scroll delay-300">
-                    <h3 className="text-2xl font-bold text-primary-700 mb-4">Connect</h3>
-                    <p className="text-gray-600 text-lg">
-                      Approved programs appear in our marketplace, connecting app creators with content creators who can promote their products.
-                    </p>
+              {/* Step 3 */}
+              <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-2 group animate-on-scroll delay-300">
+                <div className="h-3 bg-gradient-to-r from-accent-500 to-red-500"></div>
+                <div className="p-8">
+                  <div className="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-accent-200 transition-all duration-300">
+                    <div className="text-2xl font-bold text-accent-700 flex items-center justify-center w-10 h-10 rounded-full bg-white shadow">3</div>
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <span>Connect</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-600 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                  </h3>
+                  
+                  <p className="text-gray-600 mb-6">
+                    Approved programs appear in our marketplace, connecting app and content creators.
+                  </p>
+                  
+                  <div className="space-y-3 text-sm text-gray-500">
+                    <div className="flex items-start">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-600 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span>Featured in marketplace</span>
+                    </div>
+                    <div className="flex items-start">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-600 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span>Direct access for affiliates</span>
+                    </div>
+                    <div className="flex items-start">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-600 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span>Start earning commissions</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-accent-50 p-5 border-t border-accent-100">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md mr-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M8 5a1 1 0 100 2h5.586l-1.293 1.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L13.586 5H8zM12 15a1 1 0 100-2H6.414l1.293-1.293a1 1 0 10-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L6.414 15H12z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="text-sm font-medium text-gray-800">Win-Win Partnerships</div>
+                      <div className="text-xs text-gray-500">Mutual success for everyone</div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             
-            {/* Mobile Timeline View */}
-            <div className="md:hidden space-y-8">
-              <div className="bg-white p-8 rounded-2xl shadow-xl animate-on-scroll">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-full bg-primary-500 text-white flex items-center justify-center font-bold text-xl mr-4">1</div>
-                  <h3 className="text-2xl font-bold text-primary-700">Submit Your App</h3>
+            {/* Growth Indicator */}
+            <div className="flex justify-center mt-16 animate-on-scroll delay-200">
+              <div className="bg-white rounded-xl shadow-lg px-8 py-6 flex flex-col sm:flex-row items-center gap-6 max-w-2xl transform transition-all duration-300 hover:-translate-y-1">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary-500 to-accent-500 flex items-center justify-center flex-shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>
                 </div>
-                <p className="text-gray-600 text-lg">
-                  App creators register and submit their affiliate program details for our review process. We look for quality apps with fair commission structures.
-                </p>
-              </div>
-              
-              <div className="bg-white p-8 rounded-2xl shadow-xl animate-on-scroll delay-150">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-full bg-primary-600 text-white flex items-center justify-center font-bold text-xl mr-4">2</div>
-                  <h3 className="text-2xl font-bold text-primary-700">We Review</h3>
+                <div>
+                  <h4 className="text-xl font-bold text-gray-900 mb-1">Growing Together</h4>
+                  <p className="text-gray-600">
+                    Our platform continuously evolves to deliver better opportunities for both app creators and content creators.
+                  </p>
                 </div>
-                <p className="text-gray-600 text-lg">
-                  Our team carefully verifies each program's quality and legitimacy, ensuring that only the best opportunities make it to our marketplace.
-                </p>
-              </div>
-              
-              <div className="bg-white p-8 rounded-2xl shadow-xl animate-on-scroll delay-300">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-full bg-accent-500 text-white flex items-center justify-center font-bold text-xl mr-4">3</div>
-                  <h3 className="text-2xl font-bold text-primary-700">Connect</h3>
-                </div>
-                <p className="text-gray-600 text-lg">
-                  Approved programs appear in our marketplace, connecting app creators with content creators who can promote their products.
-                </p>
               </div>
             </div>
           </div>
