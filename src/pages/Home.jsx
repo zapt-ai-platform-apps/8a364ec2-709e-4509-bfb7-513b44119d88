@@ -214,7 +214,7 @@ export default function Home() {
               </div>
               
               <div className="md:col-start-1 animate-on-scroll delay-150">
-                <div className="relative mt-16">
+                <div className="relative mt-8">
                   <div className="hidden md:block absolute -right-12 top-10 w-12 h-12 rounded-full bg-white border-4 border-primary-600 z-10"></div>
                   <div className="bg-white p-8 rounded-2xl shadow-xl">
                     <div className="flex md:hidden items-center mb-4">
