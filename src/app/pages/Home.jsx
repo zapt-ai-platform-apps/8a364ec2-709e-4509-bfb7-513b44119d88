@@ -371,7 +371,7 @@ export default function Home() {
                   </h3>
                   
                   <p className="text-gray-600 mb-6">
-                    Promote apps that align with your content using our ready-made marketing materials.
+                    Promote apps that align with your content using your own authentic voice.
                   </p>
                 </div>
               </div>

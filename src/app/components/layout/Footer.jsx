@@ -16,6 +16,8 @@ export default function Footer() {
             <h3 className="text-xl font-semibold mb-4">ZAPT Affiliate Marketplace</h3>
             <p className="text-gray-300">
               Connecting app creators with content creators for mutually beneficial affiliate partnerships.
+              <br />
+              <span className="mt-2 block">(We help Content Creators and Traditional Marketers)</span>
             </p>
           </div>
           
