@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import * as Sentry from "@sentry/browser";
+import { Navigate } from 'react-router-dom';
 import Layout from '@/app/components/layout/Layout';
 import { MarketplaceHero, NoApps, AppCard, AppFilters } from '@/modules/affiliatePrograms/ui';
 import { LoadingSpinner, ErrorAlert } from '@/shared/components/ui';
