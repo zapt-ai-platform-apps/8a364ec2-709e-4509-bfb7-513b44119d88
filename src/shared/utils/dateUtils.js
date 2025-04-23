@@ -1,17 +1,23 @@
 /**
- * Format a date string into a more readable format
- * @param {string} dateString - The date string to format
+ * Format a date string or object into a human-readable format
+ * @param {string|Date} dateInput - The date to format
  * @returns {string} Formatted date string
  */
-export function formatDate(dateString) {
-  if (!dateString) return 'Unknown date';
+export function formatDate(dateInput) {
+  if (!dateInput) return 'N/A';
   
-  const date = new Date(dateString);
-  if (isNaN(date.getTime())) return 'Invalid date';
+  const date = typeof dateInput === 'string' ? new Date(dateInput) : dateInput;
   
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  }).format(date);
+  // Check if date is valid
+  if (isNaN(date.getTime())) return 'Invalid Date';
+  
+  const options = { 
+    year: 'numeric', 
+    month: 'short', 
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  };
+  
+  return date.toLocaleDateString('en-US', options);
 }

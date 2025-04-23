@@ -124,24 +124,17 @@ export default function Header() {
                       <p className="text-sm font-medium text-gray-900 truncate">{user.email}</p>
                       <p className="text-xs text-gray-500 mt-1">Signed in</p>
                     </div>
+                    
                     {userRole === ROLES.CREATOR && (
                       <Link
-                        to="/submit-app"
+                        to="/my-apps"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors duration-200"
                         onClick={() => setShowDropdown(false)}
                       >
-                        Submit App
+                        My Apps
                       </Link>
                     )}
-                    {userRole === ROLES.AFFILIATE && (
-                      <Link
-                        to="/marketplace"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors duration-200"
-                        onClick={() => setShowDropdown(false)}
-                      >
-                        Browse Marketplace
-                      </Link>
-                    )}
+                    
                     <button
                       onClick={handleSignOut}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors duration-200 cursor-pointer"
@@ -208,15 +201,26 @@ export default function Header() {
             )}
             
             {user && userRole === ROLES.CREATOR && (
-              <Link
-                to="/submit-app"
-                className={`text-secondary-700 hover:text-primary-600 font-medium px-2 py-1 ${
-                  isActive('/submit-app') ? 'text-primary-700 bg-primary-50 rounded-md' : ''
-                }`}
-                onClick={() => setShowMobileMenu(false)}
-              >
-                Submit App
-              </Link>
+              <>
+                <Link
+                  to="/submit-app"
+                  className={`text-secondary-700 hover:text-primary-600 font-medium px-2 py-1 ${
+                    isActive('/submit-app') ? 'text-primary-700 bg-primary-50 rounded-md' : ''
+                  }`}
+                  onClick={() => setShowMobileMenu(false)}
+                >
+                  Submit App
+                </Link>
+                <Link
+                  to="/my-apps"
+                  className={`text-secondary-700 hover:text-primary-600 font-medium px-2 py-1 ${
+                    isActive('/my-apps') ? 'text-primary-700 bg-primary-50 rounded-md' : ''
+                  }`}
+                  onClick={() => setShowMobileMenu(false)}
+                >
+                  My Apps
+                </Link>
+              </>
             )}
           </nav>
         </div>
