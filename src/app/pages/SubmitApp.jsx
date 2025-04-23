@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import * as Sentry from "@sentry/browser";
 import Layout from '@/app/components/layout/Layout';
 import { useAuth } from '@/shared/hooks/useAuth';
 import { supabase } from '@/shared/services/supabase';
+import { useUserRole, ROLES } from '@/modules/userRole';
 
 export default function SubmitApp() {
   const { user, loading } = useAuth();
+  const { userRole } = useUserRole();
   const navigate = useNavigate();
   
   const [formData, setFormData] = useState({
@@ -21,6 +23,13 @@ export default function SubmitApp() {
   
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
+
+  // Redirect to marketplace if in affiliate mode
+  useEffect(() => {
+    if (user && userRole === ROLES.AFFILIATE && window.location.pathname === '/submit-app') {
+      navigate('/marketplace');
+    }
+  }, [user, userRole, navigate]);
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -76,6 +85,11 @@ export default function SubmitApp() {
 
   if (!loading && !user) {
     return <Navigate to="/login" />;
+  }
+  
+  // If user is in affiliate mode, redirect to marketplace
+  if (userRole === ROLES.AFFILIATE) {
+    return <Navigate to="/marketplace" />;
   }
   
   return (

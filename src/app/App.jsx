@@ -7,19 +7,22 @@ import SubmitApp from '@/app/pages/SubmitApp';
 import Marketplace from '@/app/pages/Marketplace';
 import AdminReview from '@/app/pages/AdminReview';
 import { ChatWidget } from '@/modules/customerSupport';
+import { UserRoleProvider } from '@/modules/userRole';
 
 export default function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/submit-app" element={<SubmitApp />} />
-        <Route path="/marketplace" element={<Marketplace />} />
-        <Route path="/admin" element={<AdminReview />} />
-      </Routes>
-      <ChatWidget />
+      <UserRoleProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/submit-app" element={<SubmitApp />} />
+          <Route path="/marketplace" element={<Marketplace />} />
+          <Route path="/admin" element={<AdminReview />} />
+        </Routes>
+        <ChatWidget />
+      </UserRoleProvider>
     </Router>
   );
 }

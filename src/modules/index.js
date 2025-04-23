@@ -1,13 +1,15 @@
-/**
- * Core module initialization
- * This file is responsible for initializing all modules in the application
- */
+import { initialize as initializeAffiliatePrograms } from './affiliatePrograms/internal/services';
+import { initialize as initializeCustomerSupport } from './customerSupport';
 
 export async function initializeModules() {
-  // Currently no initialization needed, but we can add module initialization here as needed
-  console.log('Initializing application modules');
-  
-  return {
-    initialized: true
-  };
+  try {
+    await Promise.all([
+      initializeAffiliatePrograms(),
+      initializeCustomerSupport(),
+    ]);
+    return { success: true };
+  } catch (error) {
+    console.error('Failed to initialize modules:', error);
+    return { success: false, error };
+  }
 }

@@ -5,9 +5,11 @@ import { MarketplaceHero, NoApps, AppCard, AppFilters } from '@/modules/affiliat
 import { LoadingSpinner, ErrorAlert } from '@/shared/components/ui';
 import { useAuth } from '@/shared/hooks/useAuth';
 import { supabase } from '@/shared/services/supabase';
+import { useUserRole, ROLES } from '@/modules/userRole';
 
 export default function Marketplace() {
   const { user, loading: authLoading } = useAuth();
+  const { userRole } = useUserRole();
   const [apps, setApps] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingFavorites, setLoadingFavorites] = useState(false);
@@ -20,6 +22,14 @@ export default function Marketplace() {
     highCommission: false,
     onlyFavorites: false,
   });
+
+  // Redirect to dashboard if in creator mode
+  useEffect(() => {
+    if (user && userRole === ROLES.CREATOR && window.location.pathname === '/marketplace') {
+      window.history.replaceState(null, '', '/dashboard');
+      window.location.reload();
+    }
+  }, [user, userRole]);
   
   // Fetch apps
   useEffect(() => {
@@ -148,6 +158,11 @@ export default function Marketplace() {
       }
     });
   }, [apps, searchTerm, filters, sortOption, favorites, user]);
+
+  // If user is in creator mode, redirect to dashboard
+  if (user && userRole === ROLES.CREATOR) {
+    return <Navigate to="/dashboard" />;
+  }
   
   return (
     <Layout>

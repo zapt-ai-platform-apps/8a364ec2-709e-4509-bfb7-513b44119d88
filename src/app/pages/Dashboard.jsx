@@ -4,9 +4,11 @@ import * as Sentry from "@sentry/browser";
 import Layout from '@/app/components/layout/Layout';
 import { useAuth } from '@/shared/hooks/useAuth';
 import { supabase } from '@/shared/services/supabase';
+import { useUserRole, ROLES } from '@/modules/userRole';
 
 export default function Dashboard() {
   const { user, loading } = useAuth();
+  const { userRole } = useUserRole();
   const [apps, setApps] = useState([]);
   const [loadingApps, setLoadingApps] = useState(true);
   const [error, setError] = useState(null);
@@ -55,6 +57,14 @@ export default function Dashboard() {
     }
   }, [user, notification]);
 
+  // Redirect to marketplace if in affiliate mode
+  useEffect(() => {
+    if (user && userRole === ROLES.AFFILIATE && window.location.pathname === '/dashboard') {
+      window.history.replaceState(null, '', '/marketplace');
+      window.location.reload();
+    }
+  }, [user, userRole]);
+
   if (loading) {
     return (
       <Layout>
@@ -67,6 +77,11 @@ export default function Dashboard() {
 
   if (!loading && !user) {
     return <Navigate to="/login" />;
+  }
+
+  // If user is in affiliate mode, we should redirect them to marketplace
+  if (userRole === ROLES.AFFILIATE) {
+    return <Navigate to="/marketplace" />;
   }
 
   return (

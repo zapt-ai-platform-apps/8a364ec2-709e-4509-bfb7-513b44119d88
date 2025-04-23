@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/shared/hooks/useAuth';
+import { RoleSwitcher, useUserRole, ROLES } from '@/modules/userRole';
 
 export default function Header() {
   const { user, signOut } = useAuth();
+  const { userRole } = useUserRole();
   const navigate = useNavigate();
   const location = useLocation();
   const [showDropdown, setShowDropdown] = useState(false);
@@ -60,43 +62,54 @@ export default function Header() {
             </span>
           </Link>
 
+          {/* Role Switcher for signed in users */}
+          {user && (
+            <div className="hidden md:block">
+              <RoleSwitcher />
+            </div>
+          )}
+
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link 
-              to="/marketplace" 
-              className={`font-medium transition-all duration-300 border-b-2 py-1 ${
-                isActive('/marketplace') 
-                  ? 'text-primary-700 border-primary-600' 
-                  : 'text-secondary-700 border-transparent hover:text-primary-600 hover:border-primary-400'
-              }`}
-            >
-              Browse Marketplace
-            </Link>
-            
-            {user && (
+            {(!user || userRole === ROLES.AFFILIATE) && (
               <Link 
-                to="/dashboard" 
+                to="/marketplace" 
                 className={`font-medium transition-all duration-300 border-b-2 py-1 ${
-                  isActive('/dashboard') 
+                  isActive('/marketplace') 
                     ? 'text-primary-700 border-primary-600' 
                     : 'text-secondary-700 border-transparent hover:text-primary-600 hover:border-primary-400'
                 }`}
               >
-                Dashboard
+                Browse Marketplace
               </Link>
             )}
             
             {user && (
-              <Link 
-                to="/submit-app" 
-                className={`font-medium transition-all duration-300 border-b-2 py-1 ${
-                  isActive('/submit-app') 
-                    ? 'text-primary-700 border-primary-600' 
-                    : 'text-secondary-700 border-transparent hover:text-primary-600 hover:border-primary-400'
-                }`}
-              >
-                Submit App
-              </Link>
+              <>
+                <Link 
+                  to="/dashboard" 
+                  className={`font-medium transition-all duration-300 border-b-2 py-1 ${
+                    isActive('/dashboard') 
+                      ? 'text-primary-700 border-primary-600' 
+                      : 'text-secondary-700 border-transparent hover:text-primary-600 hover:border-primary-400'
+                  }`}
+                >
+                  {userRole === ROLES.CREATOR ? 'My Apps' : 'Dashboard'}
+                </Link>
+                
+                {userRole === ROLES.CREATOR && (
+                  <Link 
+                    to="/submit-app" 
+                    className={`font-medium transition-all duration-300 border-b-2 py-1 ${
+                      isActive('/submit-app') 
+                        ? 'text-primary-700 border-primary-600' 
+                        : 'text-secondary-700 border-transparent hover:text-primary-600 hover:border-primary-400'
+                    }`}
+                  >
+                    Submit App
+                  </Link>
+                )}
+              </>
             )}
           </nav>
 
@@ -154,7 +167,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
-              className="ml-4 md:hidden text-gray-600 hover:text-primary-600 focus:outline-none mobile-menu-button transition-colors duration-300"
+              className="ml-4 md:hidden text-gray-600 hover:text-primary-600 focus:outline-none mobile-menu-button transition-colors duration-300 cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {showMobileMenu ? (
@@ -167,25 +180,36 @@ export default function Header() {
           </div>
         </div>
         
+        {/* Mobile Role Switcher */}
+        {user && showMobileMenu && (
+          <div className="mt-4 md:hidden border-t border-gray-100 pt-4 pb-2">
+            <div className="flex justify-center">
+              <RoleSwitcher />
+            </div>
+          </div>
+        )}
+        
         {/* Mobile Menu */}
         <div
           ref={mobileMenuRef}
           className={`md:hidden overflow-hidden transition-all duration-300 ${
             showMobileMenu 
-              ? 'max-h-64 opacity-100 mt-4 border-t border-gray-100 pt-4' 
+              ? 'max-h-64 opacity-100 border-t border-gray-100 pt-2' 
               : 'max-h-0 opacity-0'
           }`}
         >
-          <nav className="flex flex-col space-y-4">
-            <Link
-              to="/marketplace"
-              className={`text-secondary-700 hover:text-primary-600 font-medium px-2 py-1 ${
-                isActive('/marketplace') ? 'text-primary-700 bg-primary-50 rounded-md' : ''
-              }`}
-              onClick={() => setShowMobileMenu(false)}
-            >
-              Browse Marketplace
-            </Link>
+          <nav className="flex flex-col space-y-4 mt-2">
+            {(!user || userRole === ROLES.AFFILIATE) && (
+              <Link
+                to="/marketplace"
+                className={`text-secondary-700 hover:text-primary-600 font-medium px-2 py-1 ${
+                  isActive('/marketplace') ? 'text-primary-700 bg-primary-50 rounded-md' : ''
+                }`}
+                onClick={() => setShowMobileMenu(false)}
+              >
+                Browse Marketplace
+              </Link>
+            )}
             
             {user && (
               <>
@@ -196,18 +220,20 @@ export default function Header() {
                   }`}
                   onClick={() => setShowMobileMenu(false)}
                 >
-                  Dashboard
+                  {userRole === ROLES.CREATOR ? 'My Apps' : 'Dashboard'}
                 </Link>
                 
-                <Link
-                  to="/submit-app"
-                  className={`text-secondary-700 hover:text-primary-600 font-medium px-2 py-1 ${
-                    isActive('/submit-app') ? 'text-primary-700 bg-primary-50 rounded-md' : ''
-                  }`}
-                  onClick={() => setShowMobileMenu(false)}
-                >
-                  Submit App
-                </Link>
+                {userRole === ROLES.CREATOR && (
+                  <Link
+                    to="/submit-app"
+                    className={`text-secondary-700 hover:text-primary-600 font-medium px-2 py-1 ${
+                      isActive('/submit-app') ? 'text-primary-700 bg-primary-50 rounded-md' : ''
+                    }`}
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    Submit App
+                  </Link>
+                )}
               </>
             )}
           </nav>
