@@ -2,6 +2,20 @@ import * as Sentry from "@sentry/browser";
 import { supabase } from '@/shared/services/supabase';
 
 /**
+ * Initialize the affiliate programs module
+ */
+export const initialize = async () => {
+  try {
+    console.log('Affiliate programs module initialized');
+    return { success: true };
+  } catch (error) {
+    console.error('Error initializing affiliate programs module:', error);
+    Sentry.captureException(error);
+    return { success: false, error };
+  }
+};
+
+/**
  * Get all approved affiliate apps
  */
 export const getAllApps = async () => {
