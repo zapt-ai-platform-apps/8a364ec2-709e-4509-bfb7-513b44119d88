@@ -24,10 +24,10 @@ export default function Marketplace() {
     onlyFavorites: false,
   });
 
-  // Redirect to dashboard if in creator mode
+  // Redirect to submit-app if in creator mode
   useEffect(() => {
     if (user && userRole === ROLES.CREATOR && window.location.pathname === '/marketplace') {
-      window.history.replaceState(null, '', '/dashboard');
+      window.history.replaceState(null, '', '/submit-app');
       window.location.reload();
     }
   }, [user, userRole]);
@@ -160,9 +160,9 @@ export default function Marketplace() {
     });
   }, [apps, searchTerm, filters, sortOption, favorites, user]);
 
-  // If user is in creator mode, redirect to dashboard
+  // If user is in creator mode, redirect to submit-app
   if (user && userRole === ROLES.CREATOR) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/submit-app" />;
   }
   
   return (

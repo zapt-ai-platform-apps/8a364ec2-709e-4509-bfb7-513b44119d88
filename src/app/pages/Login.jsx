@@ -5,22 +5,25 @@ import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { supabase } from '@/shared/services/supabase';
 import Layout from '@/app/components/layout/Layout';
 import { useAuth } from '@/shared/hooks/useAuth';
+import { useUserRole, ROLES } from '@/modules/userRole';
 
 export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, loading } = useAuth();
+  const { userRole } = useUserRole();
   
   // Extract return_to parameter from URL if present
   const searchParams = new URLSearchParams(location.search);
-  const returnTo = searchParams.get('return_to') || '/dashboard';
+  const returnTo = searchParams.get('return_to') || '/marketplace';
   
   // Redirect already logged in users
   useEffect(() => {
     if (!loading && user) {
-      navigate(returnTo, { replace: true });
+      const defaultPath = userRole === ROLES.CREATOR ? '/submit-app' : '/marketplace';
+      navigate(returnTo === '/dashboard' ? defaultPath : returnTo, { replace: true });
     }
-  }, [user, loading, navigate, returnTo]);
+  }, [user, loading, navigate, returnTo, userRole]);
 
   return (
     <Layout>

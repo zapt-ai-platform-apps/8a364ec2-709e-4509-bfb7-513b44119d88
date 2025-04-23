@@ -84,32 +84,17 @@ export default function Header() {
               </Link>
             )}
             
-            {user && (
-              <>
-                <Link 
-                  to="/dashboard" 
-                  className={`font-medium transition-all duration-300 border-b-2 py-1 ${
-                    isActive('/dashboard') 
-                      ? 'text-primary-700 border-primary-600' 
-                      : 'text-secondary-700 border-transparent hover:text-primary-600 hover:border-primary-400'
-                  }`}
-                >
-                  {userRole === ROLES.CREATOR ? 'My Apps' : 'Dashboard'}
-                </Link>
-                
-                {userRole === ROLES.CREATOR && (
-                  <Link 
-                    to="/submit-app" 
-                    className={`font-medium transition-all duration-300 border-b-2 py-1 ${
-                      isActive('/submit-app') 
-                        ? 'text-primary-700 border-primary-600' 
-                        : 'text-secondary-700 border-transparent hover:text-primary-600 hover:border-primary-400'
-                    }`}
-                  >
-                    Submit App
-                  </Link>
-                )}
-              </>
+            {user && userRole === ROLES.CREATOR && (
+              <Link 
+                to="/submit-app" 
+                className={`font-medium transition-all duration-300 border-b-2 py-1 ${
+                  isActive('/submit-app') 
+                    ? 'text-primary-700 border-primary-600' 
+                    : 'text-secondary-700 border-transparent hover:text-primary-600 hover:border-primary-400'
+                }`}
+              >
+                Submit App
+              </Link>
             )}
           </nav>
 
@@ -139,13 +124,24 @@ export default function Header() {
                       <p className="text-sm font-medium text-gray-900 truncate">{user.email}</p>
                       <p className="text-xs text-gray-500 mt-1">Signed in</p>
                     </div>
-                    <Link
-                      to="/dashboard"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors duration-200"
-                      onClick={() => setShowDropdown(false)}
-                    >
-                      Dashboard
-                    </Link>
+                    {userRole === ROLES.CREATOR && (
+                      <Link
+                        to="/submit-app"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors duration-200"
+                        onClick={() => setShowDropdown(false)}
+                      >
+                        Submit App
+                      </Link>
+                    )}
+                    {userRole === ROLES.AFFILIATE && (
+                      <Link
+                        to="/marketplace"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors duration-200"
+                        onClick={() => setShowDropdown(false)}
+                      >
+                        Browse Marketplace
+                      </Link>
+                    )}
                     <button
                       onClick={handleSignOut}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary-600 transition-colors duration-200 cursor-pointer"
@@ -211,30 +207,16 @@ export default function Header() {
               </Link>
             )}
             
-            {user && (
-              <>
-                <Link
-                  to="/dashboard"
-                  className={`text-secondary-700 hover:text-primary-600 font-medium px-2 py-1 ${
-                    isActive('/dashboard') ? 'text-primary-700 bg-primary-50 rounded-md' : ''
-                  }`}
-                  onClick={() => setShowMobileMenu(false)}
-                >
-                  {userRole === ROLES.CREATOR ? 'My Apps' : 'Dashboard'}
-                </Link>
-                
-                {userRole === ROLES.CREATOR && (
-                  <Link
-                    to="/submit-app"
-                    className={`text-secondary-700 hover:text-primary-600 font-medium px-2 py-1 ${
-                      isActive('/submit-app') ? 'text-primary-700 bg-primary-50 rounded-md' : ''
-                    }`}
-                    onClick={() => setShowMobileMenu(false)}
-                  >
-                    Submit App
-                  </Link>
-                )}
-              </>
+            {user && userRole === ROLES.CREATOR && (
+              <Link
+                to="/submit-app"
+                className={`text-secondary-700 hover:text-primary-600 font-medium px-2 py-1 ${
+                  isActive('/submit-app') ? 'text-primary-700 bg-primary-50 rounded-md' : ''
+                }`}
+                onClick={() => setShowMobileMenu(false)}
+              >
+                Submit App
+              </Link>
             )}
           </nav>
         </div>
