@@ -126,15 +126,19 @@ export default function AppCard({ app, user, favorites, onToggleFavorite }) {
           </a>
           
           {user ? (
-            <button 
-              disabled
-              className="bg-secondary-400 text-white px-4 py-2 rounded-md text-sm text-center cursor-not-allowed flex-1 flex items-center justify-center gap-1"
+            <div 
+              className="bg-gray-100 relative overflow-hidden rounded-md text-sm text-center flex-1 flex items-center justify-center gap-1 group"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-              <span>Coming Soon</span>
-            </button>
+              {/* Animated gradient background for the coming soon badge */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 opacity-85 animate-gradient-x"></div>
+              
+              <div className="relative flex items-center justify-center gap-1 px-4 py-2 text-white font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                <span>Coming Soon</span>
+              </div>
+            </div>
           ) : (
             <Link
               to={`/login?return_to=${encodeURIComponent('/marketplace')}`}
@@ -148,6 +152,23 @@ export default function AppCard({ app, user, favorites, onToggleFavorite }) {
           )}
         </div>
       </div>
+      
+      {/* CSS for animations */}
+      <style jsx>{`
+        @keyframes gradient-x {
+          0%, 100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+        
+        .animate-gradient-x {
+          background-size: 200% 200%;
+          animation: gradient-x 3s ease infinite;
+        }
+      `}</style>
     </div>
   );
 }

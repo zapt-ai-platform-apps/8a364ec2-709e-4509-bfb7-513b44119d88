@@ -60,12 +60,19 @@ export default function Home() {
             ZAPT Affiliate<br/><span className="text-4xl md:text-6xl lg:text-7xl">Marketplace</span>
           </h1>
           
-          <div className="hero-animate inline-block bg-yellow-100 border border-yellow-300 text-yellow-800 rounded-md px-4 py-2 mb-6">
-            <div className="flex items-center">
-              <svg className="h-5 w-5 mr-2 text-yellow-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          <div className="hero-animate inline-block relative overflow-hidden rounded-lg mb-6 group">
+            {/* Background with animation */}
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-300 animate-gradient-x"></div>
+            
+            {/* Shimmering overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 animate-shimmer"></div>
+            
+            {/* Badge content with drop shadow for depth */}
+            <div className="relative px-6 py-3 font-bold text-amber-900 shadow-sm flex items-center gap-2">
+              <svg className="h-5 w-5 text-amber-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M11.6803 2.76981C11.4295 2.27776 10.6829 2.27776 10.4321 2.76981L8.5171 6.58284C8.42004 6.77548 8.23777 6.90824 8.0273 6.93857L3.83819 7.51497C3.29508 7.59586 3.07995 8.26661 3.47552 8.66054L6.4977 11.679C6.65182 11.8328 6.72081 12.0458 6.68312 12.2543L6.05552 16.4352C5.9651 16.9764 6.54353 17.3908 7.03225 17.1471L10.8175 15.1775C11.007 15.0779 11.2359 15.0779 11.4255 15.1775L15.2107 17.1471C15.6994 17.3908 16.2779 16.9764 16.1875 16.4352L15.5599 12.2543C15.5222 12.0458 15.5912 11.8328 15.7453 11.679L18.7675 8.66054C19.163 8.26661 18.9479 7.59586 18.4048 7.51497L14.2157 6.93857C14.0052 6.90824 13.823 6.77548 13.7259 6.58284L11.6803 2.76981Z" />
               </svg>
-              <span className="font-medium">Coming Soon</span>
+              <span className="tracking-wide uppercase text-sm">Coming Soon</span>
             </div>
           </div>
           
@@ -490,6 +497,33 @@ export default function Home() {
             opacity: 1;
             transform: translateY(0);
           }
+        }
+        
+        @keyframes gradient-x {
+          0%, 100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+        
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+        
+        .animate-gradient-x {
+          background-size: 200% 200%;
+          animation: gradient-x 3s ease infinite;
+        }
+        
+        .animate-shimmer {
+          animation: shimmer 2s infinite;
         }
       `}</style>
     </Layout>

@@ -9,6 +9,9 @@ export default function WaitlistModal({ isOpen, onClose, userEmail = '' }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
+  
+  // Check if user is already signed in with an email
+  const isUserLoggedIn = !!userEmail;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,21 +91,34 @@ export default function WaitlistModal({ isOpen, onClose, userEmail = '' }) {
           </div>
           
           <div className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-secondary-700 mb-1">
-                Email Address*
-              </label>
-              <input
-                type="email"
-                id="email"
-                required
-                className="w-full p-3 border border-secondary-300 rounded-md focus:ring-primary-500 focus:border-primary-500 box-border"
-                placeholder="your@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={loading}
-              />
-            </div>
+            {/* Only show email field if user is not logged in, otherwise we use their email automatically */}
+            {!isUserLoggedIn ? (
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-secondary-700 mb-1">
+                  Email Address*
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  className="w-full p-3 border border-secondary-300 rounded-md focus:ring-primary-500 focus:border-primary-500 box-border"
+                  placeholder="your@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={loading}
+                />
+              </div>
+            ) : (
+              <div className="flex items-center p-3 bg-secondary-50 rounded-md">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-secondary-600 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                </svg>
+                <span className="text-secondary-700">You'll be notified at: <strong>{userEmail}</strong></span>
+                {/* Hidden input to ensure email is still submitted */}
+                <input type="hidden" name="email" value={email} />
+              </div>
+            )}
             
             <div>
               <label htmlFor="desiredApps" className="block text-sm font-medium text-secondary-700 mb-1">
