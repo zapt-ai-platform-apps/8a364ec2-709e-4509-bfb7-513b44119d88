@@ -345,7 +345,7 @@ export default function Home() {
               <div className="w-16 h-16 rounded-full bg-accent-600 text-white flex items-center justify-center text-xl font-bold mb-8 z-10 shadow-lg">2</div>
               <div className="rounded-xl bg-white p-6 shadow-lg text-center h-full w-full border border-gray-100">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Share With Your Audience</h3>
-                <p className="text-gray-600">Promote apps that align with your content using your authentic voice.</p>
+                <p className="text-gray-600">Promote apps through your content, marketing channels, or advertising campaigns.</p>
               </div>
             </div>
             
