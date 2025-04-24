@@ -2,6 +2,40 @@ import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import { waitlistEntries } from '../drizzle/schema.js';
 import Sentry from "./_sentry.js";
+import { Resend } from 'resend';
+
+/**
+ * Send email notification about a new waitlist entry
+ */
+const sendWaitlistEmail = async (waitlistEntry) => {
+  try {
+    if (process.env.RESEND_API_KEY) {
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      await resend.emails.send({
+        from: 'ZAPT Affiliate Marketplace <notifications@resend.dev>',
+        to: 'david@zapt.ai',
+        subject: 'New Waitlist Submission',
+        html: `
+          <h1>New Waitlist Submission</h1>
+          <p>A new user has joined the waitlist:</p>
+          <ul>
+            <li><strong>Email:</strong> ${waitlistEntry.email}</li>
+            ${waitlistEntry.desiredApps ? `<li><strong>Desired Apps:</strong> ${waitlistEntry.desiredApps}</li>` : ''}
+            ${waitlistEntry.feedback ? `<li><strong>Feedback:</strong> ${waitlistEntry.feedback}</li>` : ''}
+          </ul>
+          <p>Date: ${new Date(waitlistEntry.createdAt).toLocaleString()}</p>
+        `,
+      });
+      console.log('Waitlist email notification sent');
+    } else {
+      console.log('Skipping waitlist email notification: RESEND_API_KEY not configured');
+    }
+  } catch (error) {
+    console.error('Error sending waitlist email notification:', error);
+    Sentry.captureException(error);
+    // Don't throw the error, just log it
+  }
+};
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -30,6 +64,9 @@ export default async function handler(req, res) {
     await client.end();
 
     console.log('Successfully added to waitlist:', email);
+    
+    // Send email notification
+    await sendWaitlistEmail(result[0]);
 
     return res.status(201).json({ 
       message: 'Successfully joined waitlist',
