@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '@/app/components/layout/Layout';
 import { MarketplaceHighlights } from '@/modules/affiliatePrograms/ui';
@@ -7,17 +7,18 @@ import WaitlistModal from '@/modules/affiliatePrograms/ui/marketplace/WaitlistMo
 
 export default function Home() {
   const { user } = useAuth();
-  const heroRef = useRef(null);
   const [isWaitlistModalOpen, setIsWaitlistModalOpen] = useState(false);
+  const heroRef = useRef(null);
   
   useEffect(() => {
+    // Parallax and animation effects on scroll
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const heroElements = document.querySelectorAll('.hero-animate');
       
       heroElements.forEach(el => {
-        el.style.transform = `translateY(${scrollPosition * 0.2}px)`;
-        el.style.opacity = 1 - (scrollPosition * 0.001);
+        el.style.transform = `translateY(${scrollPosition * 0.1}px)`;
+        el.style.opacity = 1 - (scrollPosition * 0.0015);
       });
       
       // Animate in sections as they come into view
@@ -38,210 +39,277 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* Decorative elements that stay fixed in background */}
-      <div className="fixed inset-0 bg-gradient-to-b from-blue-50 to-purple-50 -z-10"></div>
-      <div className="fixed inset-0 -z-10 opacity-30">
-        <div className="absolute -top-24 -left-24 w-64 h-64 rounded-full bg-gradient-to-r from-blue-300 to-purple-400 blur-3xl"></div>
-        <div className="absolute top-1/3 -right-24 w-80 h-80 rounded-full bg-gradient-to-l from-indigo-300 to-blue-200 blur-3xl"></div>
-        <div className="absolute bottom-0 left-1/4 w-72 h-72 rounded-full bg-gradient-to-tr from-pink-200 to-indigo-300 blur-3xl"></div>
+      {/* Background decorative elements */}
+      <div className="fixed inset-0 overflow-hidden -z-10">
+        <div className="absolute top-0 right-0 w-full h-full bg-gradient-radial from-primary-50 to-transparent opacity-70"></div>
+        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-gradient-to-r from-blue-300/30 to-purple-400/30 blur-3xl"></div>
+        <div className="absolute top-1/3 -right-48 w-96 h-96 rounded-full bg-gradient-to-l from-indigo-300/30 to-blue-200/30 blur-3xl"></div>
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-gradient-to-tr from-pink-200/30 to-indigo-300/30 blur-3xl"></div>
       </div>
       
       {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-[90vh] flex flex-col justify-center items-center text-center px-4 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-32 h-32 rounded-full border-2 border-primary-400"></div>
-          <div className="absolute top-40 right-20 w-24 h-24 rounded-full border-2 border-accent-400"></div>
-          <div className="absolute bottom-20 left-1/4 w-40 h-40 rounded-full border-2 border-primary-600"></div>
-          <div className="absolute bottom-40 right-1/3 w-20 h-20 rounded-full border-2 border-accent-600"></div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto mb-16 relative z-10">
-          <h1 className="hero-animate text-5xl md:text-7xl lg:text-8xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-primary-700 via-accent-600 to-primary-800 leading-tight">
-            ZAPT Affiliate<br/><span className="text-4xl md:text-6xl lg:text-7xl">Marketplace</span>
-          </h1>
-          
-          <div className="hero-animate inline-block relative overflow-hidden rounded-lg mb-6 group">
-            {/* Background with animation */}
-            <div className="absolute inset-0 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-300 animate-gradient-x"></div>
+      <section className="relative min-h-[90vh] flex flex-col justify-center py-20 overflow-hidden" ref={heroRef}>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-center gap-8">
+            {/* Hero Content */}
+            <div className="w-full lg:w-1/2 hero-animate">
+              <div className="flex items-center gap-2 mb-6">
+                <div className="bg-gradient-to-r from-amber-400 to-amber-300 text-amber-900 px-4 py-1 rounded-full text-sm font-semibold animate-pulse flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                    <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.003-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                  </svg>
+                  <span>Coming Soon</span>
+                </div>
+              </div>
+              
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight bg-gradient-to-r from-primary-700 via-primary-600 to-accent-600 bg-clip-text text-transparent">
+                Build Recurring Income With Every Referral
+              </h1>
+              
+              <p className="text-xl text-gray-700 mb-8 max-w-lg">
+                The <span className="font-bold">ZAPT Affiliate Marketplace</span> connects you with quality apps offering verified <span className="font-semibold text-primary-600">lifetime commissions</span>. No scams. Just real income opportunities.
+              </p>
+              
+              <div className="flex flex-wrap gap-4 mb-10">
+                <Link to="/marketplace" className="bg-gradient-to-r from-primary-600 to-primary-800 text-white px-8 py-4 rounded-xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer">
+                  Browse Apps
+                </Link>
+                <button
+                  onClick={() => setIsWaitlistModalOpen(true)}
+                  className="bg-white text-primary-700 border-2 border-primary-600 px-8 py-4 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                >
+                  Join Waitlist
+                </button>
+              </div>
+              
+              <div className="flex items-center gap-6 text-sm text-gray-600">
+                <div className="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span>30%+ Commissions</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span>Lifetime Revenue</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span>Quality Vetted Apps</span>
+                </div>
+              </div>
+            </div>
             
-            {/* Shimmering overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 animate-shimmer"></div>
-            
-            {/* Badge content with drop shadow for depth */}
-            <div className="relative px-6 py-3 font-bold text-amber-900 shadow-sm flex items-center gap-2">
-              <svg className="h-5 w-5 text-amber-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11.6803 2.76981C11.4295 2.27776 10.6829 2.27776 10.4321 2.76981L8.5171 6.58284C8.42004 6.77548 8.23777 6.90824 8.0273 6.93857L3.83819 7.51497C3.29508 7.59586 3.07995 8.26661 3.47552 8.66054L6.4977 11.679C6.65182 11.8328 6.72081 12.0458 6.68312 12.2543L6.05552 16.4352C5.9651 16.9764 6.54353 17.3908 7.03225 17.1471L10.8175 15.1775C11.007 15.0779 11.2359 15.0779 11.4255 15.1775L15.2107 17.1471C15.6994 17.3908 16.2779 16.9764 16.1875 16.4352L15.5599 12.2543C15.5222 12.0458 15.5912 11.8328 15.7453 11.679L18.7675 8.66054C19.163 8.26661 18.9479 7.59586 18.4048 7.51497L14.2157 6.93857C14.0052 6.90824 13.823 6.77548 13.7259 6.58284L11.6803 2.76981Z" />
-              </svg>
-              <span className="tracking-wide uppercase text-sm">Coming Soon</span>
+            {/* Hero Image/Illustration */}
+            <div className="w-full lg:w-1/2 hero-animate">
+              <div className="relative mx-auto max-w-md lg:max-w-full">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-200/20 to-accent-200/20 rounded-3xl transform rotate-3"></div>
+                <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+                  <div className="p-6 bg-gradient-to-br from-gray-50 to-white">
+                    <div className="flex justify-between items-center mb-8">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary-600" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <h3 className="font-bold text-gray-800 text-lg">ZAPT App Marketplace</h3>
+                      </div>
+                      <div className="text-sm font-medium text-green-600 bg-green-50 py-1 px-3 rounded-full">
+                        NEW
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                      <div className="bg-gradient-to-br from-primary-50 to-primary-100 p-4 rounded-xl border border-primary-200">
+                        <div className="flex justify-between items-start mb-3">
+                          <div className="w-8 h-8 rounded-lg bg-primary-600 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                              <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                          <div className="text-xs font-semibold text-primary-800 bg-white/60 py-1 px-2 rounded">
+                            Lifetime
+                          </div>
+                        </div>
+                        <h4 className="font-semibold text-gray-800 mb-1">Revenue Share</h4>
+                        <p className="text-sm text-gray-600">30-50% of customer payments for life</p>
+                      </div>
+                      
+                      <div className="bg-gradient-to-br from-accent-50 to-accent-100 p-4 rounded-xl border border-accent-200">
+                        <div className="flex justify-between items-start mb-3">
+                          <div className="w-8 h-8 rounded-lg bg-accent-600 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                              <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                          </div>
+                          <div className="text-xs font-semibold text-accent-800 bg-white/60 py-1 px-2 rounded">
+                            Verified
+                          </div>
+                        </div>
+                        <h4 className="font-semibold text-gray-800 mb-1">Quality Apps</h4>
+                        <p className="text-sm text-gray-600">Personally tested by our team</p>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-gray-50 rounded-xl p-4 mb-6">
+                      <div className="flex items-start gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 flex-shrink-0"></div>
+                        <div>
+                          <h4 className="font-semibold text-gray-900">AI Email Assistant</h4>
+                          <div className="flex items-center gap-2 mb-2">
+                            <div className="text-xs px-2 py-1 bg-green-100 text-green-800 rounded">50% commission</div>
+                            <div className="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded">$49/mo</div>
+                          </div>
+                          <div className="flex items-center">
+                            <span className="text-sm bg-gradient-to-r from-green-500 to-green-700 bg-clip-text text-transparent font-medium">$24.50 monthly per customer</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-center">
+                      <Link 
+                        to="/marketplace" 
+                        className="inline-flex items-center justify-center py-2 px-5 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-sm font-medium transition-all cursor-pointer"
+                      >
+                        View All Apps
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          
-          <p className="hero-animate text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Build Recurring Income With Every Referral
-          </p>
-          
-          <p className="hero-animate text-lg text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-            We connect content creators and traditional marketers with quality apps offering verified <span className="font-semibold">lifetime commissions</span>. No scams. No false promises. Just real income opportunities.
-          </p>
-          
-          <div className="hero-animate flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
-            <Link to="/marketplace" className="transform transition-all duration-300 hover:scale-105 bg-gradient-to-r from-primary-600 to-primary-800 text-white px-8 py-4 rounded-xl text-lg md:text-xl font-bold shadow-xl hover:shadow-2xl cursor-pointer w-64 text-center">
-              Browse Apps
-            </Link>
-            <button
-              onClick={() => setIsWaitlistModalOpen(true)}
-              className="transform transition-all duration-300 hover:scale-105 bg-white text-primary-700 border-2 border-primary-600 px-8 py-4 rounded-xl text-lg md:text-xl font-bold shadow hover:shadow-xl cursor-pointer w-64 text-center"
-            >
-              Join Waitlist
-            </button>
-          </div>
-        </div>
-        
-        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
         </div>
       </section>
       
-      {/* For Content Creators & Traditional Marketers Section */}
+      {/* Features Section */}
       <section className="py-24 relative">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16 animate-on-scroll">
-              <span className="bg-accent-100 text-accent-800 text-sm font-semibold px-4 py-2 rounded-full inline-block mb-4">
-                For Content Creators & Traditional Marketers
-              </span>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-accent-700 to-primary-600">
-                Why Our Marketplace Matters
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                We've built what affiliates have been asking for - reliable income from products worth promoting.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              <div className="relative group overflow-hidden rounded-xl shadow-md transform transition-all duration-500 hover:-translate-y-2 animate-on-scroll">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent-500/20 to-accent-700/20 group-hover:opacity-100 opacity-0 transition-opacity duration-500"></div>
-                <div className="bg-white p-8 relative z-10">
-                  <div className="w-20 h-20 rounded-2xl bg-accent-100 mb-6 relative overflow-hidden group-hover:scale-110 transition-transform duration-500">
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent-200 to-accent-100"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-accent-700 transition-colors duration-300">
-                    Lifetime Commissions
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <p className="text-gray-600">Minimum 30% commission rate</p>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <p className="text-gray-600">Recurring revenue month after month</p>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-accent-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <p className="text-gray-600">Stable income that grows over time</p>
-                    </div>
-                  </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16 animate-on-scroll">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary-700 to-accent-700 bg-clip-text text-transparent">
+              Why Choose ZAPT Affiliate Marketplace
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              We've built a marketplace that solves the real problems affiliates face.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <div className="group rounded-xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition-all duration-300 animate-on-scroll">
+              <div className="h-3 bg-gradient-to-r from-primary-500 to-primary-700"></div>
+              <div className="p-8">
+                <div className="w-16 h-16 rounded-2xl bg-primary-100 mb-6 flex items-center justify-center group-hover:bg-primary-200 transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                 </div>
-              </div>
-              
-              <div className="relative group overflow-hidden rounded-xl shadow-md transform transition-all duration-500 hover:-translate-y-2 animate-on-scroll delay-150">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-primary-700/20 group-hover:opacity-100 opacity-0 transition-opacity duration-500"></div>
-                <div className="bg-white p-8 relative z-10">
-                  <div className="w-20 h-20 rounded-2xl bg-primary-100 mb-6 relative overflow-hidden group-hover:scale-110 transition-transform duration-500">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary-200 to-primary-100"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary-700 transition-colors duration-300">
-                    Verified Quality Apps
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <p className="text-gray-600">Personally tested by our team</p>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <p className="text-gray-600">Solutions with real user value</p>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <p className="text-gray-600">Products you can confidently recommend</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="relative group overflow-hidden rounded-xl shadow-md transform transition-all duration-500 hover:-translate-y-2 animate-on-scroll delay-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-purple-700/20 group-hover:opacity-100 opacity-0 transition-opacity duration-500"></div>
-                <div className="bg-white p-8 relative z-10">
-                  <div className="w-20 h-20 rounded-2xl bg-purple-100 mb-6 relative overflow-hidden group-hover:scale-110 transition-transform duration-500">
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-200 to-purple-100"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-purple-700 transition-colors duration-300">
-                    Secure Payment System
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <p className="text-gray-600">On-time, guaranteed payments</p>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <p className="text-gray-600">Direct payment account control</p>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-purple-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <p className="text-gray-600">Transparent commission tracking</p>
-                    </div>
-                  </div>
-                </div>
+                
+                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary-700 transition-colors duration-300">
+                  Lifetime Commissions
+                </h3>
+                
+                <ul className="space-y-3 text-gray-600">
+                  <li className="flex items-start gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Minimum 30% commission rate</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Recurring revenue monthly</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Growing income over time</span>
+                  </li>
+                </ul>
               </div>
             </div>
             
-            <div className="text-center mt-16 animate-on-scroll delay-200">
-              <div className="bg-white rounded-2xl p-8 shadow-md">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Already Creating Content?</h3>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                  You've built an audience. You make videos, post on social media, or run communities. Now monetize that investment with partnerships that generate predictable monthly income.
-                </p>
-                <Link to="/marketplace" className="inline-block bg-gradient-to-r from-accent-600 to-primary-600 text-white px-8 py-4 rounded-lg text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
-                  Find Affiliate Apps
-                </Link>
+            <div className="group rounded-xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition-all duration-300 animate-on-scroll delay-150">
+              <div className="h-3 bg-gradient-to-r from-accent-500 to-accent-700"></div>
+              <div className="p-8">
+                <div className="w-16 h-16 rounded-2xl bg-accent-100 mb-6 flex items-center justify-center group-hover:bg-accent-200 transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                
+                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-accent-700 transition-colors duration-300">
+                  Verified Quality Apps
+                </h3>
+                
+                <ul className="space-y-3 text-gray-600">
+                  <li className="flex items-start gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Personally tested by our team</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Solutions with real value</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Confidently recommend apps</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="group rounded-xl shadow-lg overflow-hidden bg-white hover:shadow-xl transition-all duration-300 animate-on-scroll delay-300">
+              <div className="h-3 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+              <div className="p-8">
+                <div className="w-16 h-16 rounded-2xl bg-purple-100 mb-6 flex items-center justify-center group-hover:bg-purple-200 transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                
+                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-purple-700 transition-colors duration-300">
+                  Secure Payments
+                </h3>
+                
+                <ul className="space-y-3 text-gray-600">
+                  <li className="flex items-start gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>On-time guaranteed payments</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Direct payment control</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Transparent commission tracking</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -249,170 +317,165 @@ export default function Home() {
       </section>
       
       {/* How It Works Section */}
-      <section className="py-24 relative">
+      <section className="py-24 relative bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col items-center mb-16 animate-on-scroll">
-            <h2 className="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary-700 to-accent-600">
+          <div className="text-center mb-20 animate-on-scroll">
+            <span className="inline-block py-1 px-3 rounded-full bg-primary-100 text-primary-800 text-sm font-medium mb-4">Simple Process</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-gray-900">
               How It Works
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-accent-500 rounded-full mb-8"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-accent-500 rounded-full mx-auto"></div>
           </div>
           
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-10">
-              {/* Step 1 */}
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-2 group animate-on-scroll">
-                <div className="h-3 bg-gradient-to-r from-primary-500 to-primary-700"></div>
-                <div className="p-8">
-                  <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary-200 transition-all duration-300">
-                    <div className="text-2xl font-bold text-primary-700 flex items-center justify-center w-10 h-10 rounded-full bg-white shadow">1</div>
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                    <span>Choose Quality Apps</span>
-                  </h3>
-                  
-                  <p className="text-gray-600 mb-6">
-                    Browse our curated marketplace of proven apps that solve real problems.
-                  </p>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto relative">
+            {/* Connection line for desktop */}
+            <div className="hidden md:block absolute top-24 left-[calc(16.66%+8px)] right-[calc(16.66%+8px)] h-0.5 bg-gradient-to-r from-primary-500 via-accent-500 to-primary-500"></div>
+            
+            {/* Step 1 */}
+            <div className="relative flex flex-col items-center animate-on-scroll">
+              <div className="w-16 h-16 rounded-full bg-primary-600 text-white flex items-center justify-center text-xl font-bold mb-8 z-10 shadow-lg">1</div>
+              <div className="rounded-xl bg-white p-6 shadow-lg text-center h-full w-full border border-gray-100">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Choose Quality Apps</h3>
+                <p className="text-gray-600">Browse our marketplace of personally tested apps that solve real problems.</p>
               </div>
-              
-              {/* Step 2 */}
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-2 group animate-on-scroll delay-150">
-                <div className="h-3 bg-gradient-to-r from-blue-500 to-purple-600"></div>
-                <div className="p-8">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-blue-200 transition-all duration-300">
-                    <div className="text-2xl font-bold text-blue-700 flex items-center justify-center w-10 h-10 rounded-full bg-white shadow">2</div>
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                    <span>Share With Your Audience</span>
-                  </h3>
-                  
-                  <p className="text-gray-600 mb-6">
-                    Promote apps that align with your content using your own authentic voice.
-                  </p>
-                </div>
+            </div>
+            
+            {/* Step 2 */}
+            <div className="relative flex flex-col items-center animate-on-scroll delay-150">
+              <div className="w-16 h-16 rounded-full bg-accent-600 text-white flex items-center justify-center text-xl font-bold mb-8 z-10 shadow-lg">2</div>
+              <div className="rounded-xl bg-white p-6 shadow-lg text-center h-full w-full border border-gray-100">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Share With Your Audience</h3>
+                <p className="text-gray-600">Promote apps that align with your content using your authentic voice.</p>
               </div>
-              
-              {/* Step 3 */}
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:-translate-y-2 group animate-on-scroll delay-300">
-                <div className="h-3 bg-gradient-to-r from-accent-500 to-red-500"></div>
-                <div className="p-8">
-                  <div className="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-accent-200 transition-all duration-300">
-                    <div className="text-2xl font-bold text-accent-700 flex items-center justify-center w-10 h-10 rounded-full bg-white shadow">3</div>
-                  </div>
-                  
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                    <span>Earn Lifetime Commissions</span>
-                  </h3>
-                  
-                  <p className="text-gray-600 mb-6">
-                    Get at least 30% of what your referrals pay, month after month, for as long as they remain customers.
-                  </p>
-                </div>
+            </div>
+            
+            {/* Step 3 */}
+            <div className="relative flex flex-col items-center animate-on-scroll delay-300">
+              <div className="w-16 h-16 rounded-full bg-purple-600 text-white flex items-center justify-center text-xl font-bold mb-8 z-10 shadow-lg">3</div>
+              <div className="rounded-xl bg-white p-6 shadow-lg text-center h-full w-full border border-gray-100">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Earn Lifetime Commissions</h3>
+                <p className="text-gray-600">Get 30-50% of what your referrals pay, month after month, for life.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
       
-      {/* What Makes Our Marketplace Different */}
-      <section className="py-24 relative bg-gradient-to-b from-white via-accent-50 to-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col items-center mb-16 animate-on-scroll">
-              <h2 className="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-accent-700 to-primary-600">
-                What Makes Our Marketplace Different
-              </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-accent-600 to-primary-500 rounded-full mb-8"></div>
-            </div>
-            
-            <MarketplaceHighlights />
+      {/* Marketplace Comparison */}
+      <section className="py-24 relative">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16 animate-on-scroll">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-accent-700 to-primary-700 bg-clip-text text-transparent">
+              What Makes Us Different
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Compare our marketplace to traditional affiliate programs
+            </p>
           </div>
+          
+          <MarketplaceHighlights />
         </div>
       </section>
       
       {/* App Creator Section */}
-      <section className="py-24 relative">
+      <section className="py-24 relative bg-gradient-to-b from-white to-primary-50">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col items-center mb-16 animate-on-scroll">
-            <span className="bg-primary-100 text-primary-800 text-sm font-semibold px-4 py-2 rounded-full inline-block mb-4">
-              For App Developers
-            </span>
-            <h2 className="text-3xl md:text-5xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary-700 to-primary-500">
-              Get Your App Promoted
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl text-center">
-              Connect with motivated content creators ready to recommend your solution to their engaged audiences.
-            </p>
-          </div>
-          
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white rounded-xl shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 animate-on-scroll">
-                <div className="w-16 h-16 bg-primary-100 rounded-lg mb-6 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  Instant Access to Affiliates
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Reach content creators actively seeking quality apps
+            <div className="flex flex-col lg:flex-row bg-white rounded-3xl shadow-xl overflow-hidden">
+              <div className="w-full lg:w-1/2 p-8 lg:p-12 animate-on-scroll">
+                <span className="inline-block py-1 px-3 rounded-full bg-primary-100 text-primary-800 text-sm font-medium mb-6">
+                  For App Creators
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-gray-900">
+                  Get Your App Promoted By Content Creators
+                </h2>
+                <p className="text-gray-600 mb-8">
+                  Connect with motivated affiliates ready to recommend your solution to their engaged audiences.
                 </p>
+                
+                <div className="space-y-6 mb-8">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-primary-100 flex items-center justify-center flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-1">Instant Access to Affiliates</h3>
+                      <p className="text-gray-600">Reach content creators actively seeking quality apps</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-accent-100 flex items-center justify-center flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-1">Quality Partnerships</h3>
+                      <p className="text-gray-600">Build sustainable growth through trusted promoters</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center flex-shrink-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-1">Simple Management</h3>
+                      <p className="text-gray-600">Our platform handles tracking, attribution and payments</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <button
+                  onClick={() => setIsWaitlistModalOpen(true)}
+                  className="bg-gradient-to-r from-primary-600 to-primary-800 text-white px-8 py-4 rounded-xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                >
+                  List Your App
+                </button>
               </div>
               
-              <div className="bg-white rounded-xl shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 animate-on-scroll delay-150">
-                <div className="w-16 h-16 bg-primary-100 rounded-lg mb-6 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
+              <div className="w-full lg:w-1/2 bg-gradient-to-br from-primary-600 to-accent-600 p-8 lg:p-12 text-white flex items-center animate-on-scroll delay-150">
+                <div>
+                  <div className="w-16 h-16 bg-white/20 rounded-xl mb-8 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold mb-4">The ZAPT Platform Advantage</h3>
+                  
+                  <p className="mb-6 text-white/90 text-lg">
+                    All apps in our marketplace are built on the ZAPT platform:
+                  </p>
+                  
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Stripe Connect integration ensures affiliates always receive their earned commissions</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Transparent reporting and real-time analytics</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Direct control over app creators' payment accounts</span>
+                    </li>
+                  </ul>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  Quality Partnerships
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Build sustainable growth through trusted promoters
-                </p>
-              </div>
-              
-              <div className="bg-white rounded-xl shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 animate-on-scroll delay-300">
-                <div className="w-16 h-16 bg-primary-100 rounded-lg mb-6 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  Simple Management
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Our platform handles tracking, attribution and payments
-                </p>
               </div>
             </div>
-            
-            <div className="text-center mt-16 animate-on-scroll delay-200">
-              <button
-                onClick={() => setIsWaitlistModalOpen(true)}
-                className="inline-block bg-gradient-to-r from-primary-600 to-primary-800 text-white px-8 py-4 rounded-lg text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
-              >
-                List Your App
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Platform Details */}
-      <section className="py-12 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="text-gray-600 text-lg italic animate-on-scroll">
-              All apps in our marketplace are built on the ZAPT platform. We maintain direct control over app creators' payment accounts through Stripe Connect integration, ensuring affiliates always receive their earned commissions.
-            </p>
           </div>
         </div>
       </section>
@@ -430,18 +493,19 @@ export default function Home() {
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 animate-on-scroll">
               Start Building Your Affiliate Income
             </h2>
+            <p className="text-xl text-white/80 mb-10 animate-on-scroll delay-100">
+              Join our marketplace today and discover quality apps with lifetime commissions
+            </p>
+            
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-on-scroll delay-200">
               <Link to="/marketplace" className="transform transition-all duration-300 hover:scale-105 bg-white text-primary-700 px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl cursor-pointer">
                 Browse Affiliate Apps
-              </Link>
-              <Link to="/login" className="transform transition-all duration-300 hover:scale-105 bg-transparent text-white border-2 border-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl cursor-pointer">
-                Join Now
               </Link>
               <button
                 onClick={() => setIsWaitlistModalOpen(true)}
                 className="transform transition-all duration-300 hover:scale-105 bg-transparent text-white border-2 border-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl cursor-pointer"
               >
-                Contact Us
+                Join Waitlist
               </button>
             </div>
           </div>
@@ -454,78 +518,6 @@ export default function Home() {
         onClose={() => setIsWaitlistModalOpen(false)}
         userEmail={user?.email || ''}
       />
-      
-      {/* CSS for animations */}
-      <style jsx>{`
-        .animate-fade-in-down {
-          animation: fadeInDown 1s ease forwards;
-        }
-        
-        .animate-on-scroll {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        
-        .animate-on-scroll.animate-in {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        
-        .delay-100 {
-          transition-delay: 0.1s;
-        }
-        
-        .delay-150 {
-          transition-delay: 0.15s;
-        }
-        
-        .delay-200 {
-          transition-delay: 0.2s;
-        }
-        
-        .delay-300 {
-          transition-delay: 0.3s;
-        }
-        
-        @keyframes fadeInDown {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes gradient-x {
-          0%, 100% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-        }
-        
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-        
-        .animate-gradient-x {
-          background-size: 200% 200%;
-          animation: gradient-x 3s ease infinite;
-        }
-        
-        .animate-shimmer {
-          animation: shimmer 2s infinite;
-        }
-      `}</style>
     </Layout>
   );
 }

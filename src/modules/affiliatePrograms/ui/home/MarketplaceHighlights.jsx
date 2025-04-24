@@ -45,20 +45,22 @@ export default function MarketplaceHighlights() {
   ];
 
   return (
-    <div className="animate-on-scroll delay-100">
-      <div className="relative px-4 py-8">
-        {/* Visual connecting lines in background */}
-        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-500/20 to-accent-500/20 hidden lg:block"></div>
-        
-        <h3 className="text-2xl font-bold text-center mb-12 text-gray-800">Direct Comparison</h3>
-        
-        <div className="space-y-12">
-          {comparisonData.map((item, index) => (
-            <div key={index} className="relative">
-              <div className="flex flex-col lg:flex-row items-stretch">
+    <div className="max-w-6xl mx-auto">
+      <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 animate-on-scroll">
+        <div className="p-6 md:p-10">
+          <h3 className="text-2xl font-bold text-center mb-10 text-gray-800">Direct Comparison</h3>
+          
+          <div className="space-y-8 md:space-y-12">
+            {comparisonData.map((item, index) => (
+              <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+                {/* VS badge for desktop */}
+                <div className="hidden md:flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 items-center justify-center w-10 h-10 rounded-full bg-white shadow-xl">
+                  <span className="text-sm font-bold bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">VS</span>
+                </div>
+                
                 {/* Traditional side */}
-                <div className="flex-1 p-6 lg:p-8 bg-gradient-to-br from-gray-800 to-gray-900 text-white rounded-t-2xl lg:rounded-l-2xl lg:rounded-tr-none transform transition-all hover:scale-[1.02] hover:shadow-xl">
-                  <div className="flex items-center mb-2">
+                <div className="bg-gray-800 text-white p-6 rounded-2xl transform transition-all hover:scale-[1.02] hover:shadow-xl">
+                  <div className="flex items-center mb-3">
                     <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center mr-3">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -69,14 +71,14 @@ export default function MarketplaceHighlights() {
                   <p className="text-gray-300 ml-11 text-lg">{item.traditional}</p>
                 </div>
                 
-                {/* VS element */}
-                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 hidden lg:flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-xl">
+                {/* VS badge for mobile */}
+                <div className="flex md:hidden mx-auto items-center justify-center w-10 h-10 rounded-full bg-white shadow-xl">
                   <span className="text-sm font-bold bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">VS</span>
                 </div>
                 
                 {/* Our marketplace side */}
-                <div className="flex-1 p-6 lg:p-8 bg-gradient-to-br from-primary-600 to-accent-600 text-white rounded-b-2xl lg:rounded-r-2xl lg:rounded-bl-none transform transition-all hover:scale-[1.02] hover:shadow-xl">
-                  <div className="flex items-center mb-2">
+                <div className="bg-gradient-to-br from-primary-600 to-accent-600 text-white p-6 rounded-2xl transform transition-all hover:scale-[1.02] hover:shadow-xl">
+                  <div className="flex items-center mb-3">
                     <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center mr-3">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -88,8 +90,8 @@ export default function MarketplaceHighlights() {
                   <div className="flex items-start ml-11">
                     <div className="flex-1">
                       <p className="text-white text-lg font-medium">{item.ourMarketplace}</p>
-                      <div className="mt-1.5">
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/20 text-white">
+                      <div className="mt-2">
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-sm font-medium bg-white/20 text-white">
                           {item.icon}
                           <span className="ml-1">{item.accent}</span>
                         </span>
@@ -98,39 +100,20 @@ export default function MarketplaceHighlights() {
                   </div>
                 </div>
               </div>
-              
-              {/* Connecting arrows on mobile */}
-              {index < comparisonData.length - 1 && (
-                <div className="flex justify-center my-4 lg:hidden">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-accent-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                </div>
-              )}
-              
-              {/* Circle marker for large screens */}
-              {index < comparisonData.length - 1 && (
-                <div className="absolute left-1/2 bottom-0 transform translate-y-6 -translate-x-1/2 z-10 hidden lg:block">
-                  <div className="w-3 h-3 rounded-full bg-accent-500"></div>
-                </div>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
       
-      <div className="text-center mt-20">
-        <div className="inline-block bg-white rounded-xl p-8 shadow-soft relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-50 to-accent-50 opacity-50"></div>
-          <div className="relative z-10">
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">Ready for a Better Affiliate Experience?</h3>
-            <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
-              Our marketplace is designed with your success in mind. Join today and discover the difference that transparent, recurring commissions can make for your income stability.
-            </p>
-            <a href="/marketplace" className="inline-block bg-gradient-to-r from-primary-600 to-accent-600 text-white px-6 py-3 rounded-lg font-semibold shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
-              Explore the Marketplace
-            </a>
-          </div>
+      <div className="text-center mt-12 animate-on-scroll delay-200">
+        <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">Ready for a Better Affiliate Experience?</h3>
+          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+            Our marketplace is designed with your success in mind. Join today and discover the difference that transparent, recurring commissions can make for your income stability.
+          </p>
+          <Link to="/marketplace" className="inline-block bg-gradient-to-r from-primary-600 to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+            Explore the Marketplace
+          </Link>
         </div>
       </div>
     </div>
