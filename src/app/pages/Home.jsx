@@ -1,10 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '@/app/components/layout/Layout';
 import { MarketplaceHighlights } from '@/modules/affiliatePrograms/ui';
+import { useAuth } from '@/shared/hooks/useAuth';
+import WaitlistModal from '@/modules/affiliatePrograms/ui/marketplace/WaitlistModal';
 
 export default function Home() {
+  const { user } = useAuth();
   const heroRef = useRef(null);
+  const [isWaitlistModalOpen, setIsWaitlistModalOpen] = useState(false);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -56,6 +60,15 @@ export default function Home() {
             ZAPT Affiliate<br/><span className="text-4xl md:text-6xl lg:text-7xl">Marketplace</span>
           </h1>
           
+          <div className="hero-animate inline-block bg-yellow-100 border border-yellow-300 text-yellow-800 rounded-md px-4 py-2 mb-6">
+            <div className="flex items-center">
+              <svg className="h-5 w-5 mr-2 text-yellow-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span className="font-medium">Coming Soon</span>
+            </div>
+          </div>
+          
           <p className="hero-animate text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-12 leading-relaxed">
             Build Recurring Income With Every Referral
           </p>
@@ -68,9 +81,12 @@ export default function Home() {
             <Link to="/marketplace" className="transform transition-all duration-300 hover:scale-105 bg-gradient-to-r from-primary-600 to-primary-800 text-white px-8 py-4 rounded-xl text-lg md:text-xl font-bold shadow-xl hover:shadow-2xl cursor-pointer w-64 text-center">
               Browse Apps
             </Link>
-            <Link to="/login" className="transform transition-all duration-300 hover:scale-105 bg-white text-primary-700 border-2 border-primary-600 px-8 py-4 rounded-xl text-lg md:text-xl font-bold shadow hover:shadow-xl cursor-pointer w-64 text-center">
-              Join Now
-            </Link>
+            <button
+              onClick={() => setIsWaitlistModalOpen(true)}
+              className="transform transition-all duration-300 hover:scale-105 bg-white text-primary-700 border-2 border-primary-600 px-8 py-4 rounded-xl text-lg md:text-xl font-bold shadow hover:shadow-xl cursor-pointer w-64 text-center"
+            >
+              Join Waitlist
+            </button>
           </div>
         </div>
         
@@ -372,9 +388,12 @@ export default function Home() {
             </div>
             
             <div className="text-center mt-16 animate-on-scroll delay-200">
-              <Link to="/login" className="inline-block bg-gradient-to-r from-primary-600 to-primary-800 text-white px-8 py-4 rounded-lg text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+              <button
+                onClick={() => setIsWaitlistModalOpen(true)}
+                className="inline-block bg-gradient-to-r from-primary-600 to-primary-800 text-white px-8 py-4 rounded-lg text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+              >
                 List Your App
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -411,13 +430,23 @@ export default function Home() {
               <Link to="/login" className="transform transition-all duration-300 hover:scale-105 bg-transparent text-white border-2 border-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl cursor-pointer">
                 Join Now
               </Link>
-              <Link to="/login" className="transform transition-all duration-300 hover:scale-105 bg-transparent text-white border-2 border-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl cursor-pointer">
+              <button
+                onClick={() => setIsWaitlistModalOpen(true)}
+                className="transform transition-all duration-300 hover:scale-105 bg-transparent text-white border-2 border-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl cursor-pointer"
+              >
                 Contact Us
-              </Link>
+              </button>
             </div>
           </div>
         </div>
       </section>
+      
+      {/* Waitlist Modal */}
+      <WaitlistModal 
+        isOpen={isWaitlistModalOpen} 
+        onClose={() => setIsWaitlistModalOpen(false)}
+        userEmail={user?.email || ''}
+      />
       
       {/* CSS for animations */}
       <style jsx>{`

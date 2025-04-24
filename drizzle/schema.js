@@ -25,3 +25,11 @@ export const appFavorites = pgTable('app_favorites', {
     uniqueUserApp: unique().on(table.userId, table.appId),
   };
 });
+
+export const waitlistEntries = pgTable('waitlist_entries', {
+  id: serial('id').primaryKey(),
+  email: text('email').notNull(),
+  feedback: text('feedback'),
+  desiredApps: text('desired_apps'),
+  createdAt: timestamp('created_at').defaultNow()
+});

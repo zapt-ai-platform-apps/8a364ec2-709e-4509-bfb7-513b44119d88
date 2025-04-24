@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, Link } from 'react-router-dom';
 import * as Sentry from "@sentry/browser";
 import Layout from '@/app/components/layout/Layout';
 import { useAuth } from '@/shared/hooks/useAuth';
@@ -106,7 +106,15 @@ export default function AdminReview() {
       <div className="bg-secondary-50 py-8">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-3xl font-bold text-secondary-900 mb-2">Admin Review</h1>
+            <div className="flex justify-between items-center mb-4">
+              <h1 className="text-3xl font-bold text-secondary-900">Admin Review</h1>
+              <Link 
+                to="/admin/waitlist" 
+                className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-md text-sm font-medium shadow-sm cursor-pointer"
+              >
+                View Waitlist
+              </Link>
+            </div>
             <p className="text-secondary-600 mb-8">Review pending affiliate app submissions for approval.</p>
             
             {error && (
