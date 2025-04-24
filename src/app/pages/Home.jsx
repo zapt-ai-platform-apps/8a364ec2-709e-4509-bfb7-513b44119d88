@@ -51,8 +51,8 @@ export default function Home() {
       <section className="relative min-h-[90vh] flex flex-col justify-center py-20 overflow-hidden" ref={heroRef}>
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center">
-            {/* Hero Content - Now takes full width */}
-            <div className="w-full max-w-3xl mx-auto hero-animate">
+            {/* Hero Content - Now using more width */}
+            <div className="w-full max-w-5xl mx-auto hero-animate">
               <div className="flex items-center gap-2 mb-6">
                 <div className="bg-gradient-to-r from-amber-400 to-amber-300 text-amber-900 px-4 py-1 rounded-full text-sm font-semibold animate-pulse flex items-center gap-2">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
@@ -63,10 +63,10 @@ export default function Home() {
               </div>
               
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight bg-gradient-to-r from-primary-700 via-primary-600 to-accent-600 bg-clip-text text-transparent">
-                Build Recurring Income With Every Referral
+                Earn Lifetime Commissions From Quality Apps
               </h1>
               
-              <p className="text-xl text-gray-700 mb-8 max-w-lg">
+              <p className="text-xl text-gray-700 mb-8 max-w-2xl">
                 The <span className="font-bold">ZAPT Affiliate Marketplace</span> connects you with quality apps offering verified <span className="font-semibold text-primary-600">lifetime commissions</span>. No scams. Just real income opportunities.
               </p>
               

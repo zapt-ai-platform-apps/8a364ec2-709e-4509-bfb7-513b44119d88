@@ -15,7 +15,7 @@ export default function MarketplaceHero({ searchTerm, onSearch, appCount }) {
   return (
     <section className="bg-gradient-to-r from-secondary-100 to-secondary-200 py-12">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center">
           {/* Waitlist Button */}
           <div className="mb-6">
             <button
@@ -46,11 +46,11 @@ export default function MarketplaceHero({ searchTerm, onSearch, appCount }) {
             </div>
           </div>
           
-          <h1 className="text-3xl md:text-4xl font-bold text-secondary-900 mb-4">
-            Affiliate Marketplace
+          <h1 className="text-3xl md:text-5xl font-bold text-secondary-900 mb-4">
+            Discover Quality Affiliate Programs
           </h1>
           <p className="text-xl text-secondary-700 mb-4">
-            Browse our curated collection of quality affiliate apps with favorable commission structures.
+            Find verified apps offering lifetime commissions and real value for your audience.
           </p>
           
           <div className="flex justify-center mb-6">
@@ -60,7 +60,7 @@ export default function MarketplaceHero({ searchTerm, onSearch, appCount }) {
           </div>
 
           {appCount > 0 && (
-            <div className="mt-8 max-w-md mx-auto">
+            <div className="mt-8 max-w-xl mx-auto">
               <form onSubmit={handleSubmit} className="relative">
                 <input
                   type="text"
