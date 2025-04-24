@@ -302,10 +302,10 @@ export default function Home() {
                   For App Creators
                 </span>
                 <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-gray-900">
-                  Get Your App Promoted By Content Creators
+                  Get Your App Promoted By Content Creators & Marketers
                 </h2>
                 <p className="text-gray-600 mb-8">
-                  Connect with motivated affiliates ready to recommend your solution to their engaged audiences.
+                  Connect with motivated affiliates ready to recommend your solution to their engaged audiences, whether through content creation or traditional marketing channels.
                 </p>
                 
                 <div className="space-y-6 mb-8">
@@ -316,8 +316,8 @@ export default function Home() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-1">Instant Access to Affiliates</h3>
-                      <p className="text-gray-600">Reach content creators actively seeking quality apps</p>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-1">Diverse Affiliate Network</h3>
+                      <p className="text-gray-600">Reach content creators and professional marketers seeking quality apps</p>
                     </div>
                   </div>
                   
