@@ -13,6 +13,13 @@ export default function WaitlistModal({ isOpen, onClose, userEmail = '' }) {
   // Check if user is already signed in with an email
   const isUserLoggedIn = !!userEmail;
 
+  // Update email state when userEmail prop changes
+  React.useEffect(() => {
+    if (userEmail) {
+      setEmail(userEmail);
+    }
+  }, [userEmail]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -20,13 +27,23 @@ export default function WaitlistModal({ isOpen, onClose, userEmail = '' }) {
       setLoading(true);
       setError(null);
       
+      // Ensure we have an email - if user is logged in, use their email
+      const submissionEmail = isUserLoggedIn ? userEmail : email;
+      
+      // Log for debugging purposes
+      console.log('Submitting waitlist entry:', { 
+        email: submissionEmail, 
+        isUserLoggedIn,
+        hasEmail: !!submissionEmail
+      });
+      
       const response = await fetch('/api/submitWaitlist', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email,
+          email: submissionEmail,
           feedback,
           desiredApps
         }),
@@ -115,8 +132,6 @@ export default function WaitlistModal({ isOpen, onClose, userEmail = '' }) {
                   <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                 </svg>
                 <span className="text-secondary-700">You'll be notified at: <strong>{userEmail}</strong></span>
-                {/* Hidden input to ensure email is still submitted */}
-                <input type="hidden" name="email" value={email} />
               </div>
             )}
             
