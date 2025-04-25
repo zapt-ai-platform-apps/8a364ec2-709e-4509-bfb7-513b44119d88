@@ -73,9 +73,13 @@ const getUserApps = async (userId) => {
 };
 
 const submitApp = async (userData, appData) => {
+  // Make sure we have a clean object without an id field
+  // Use destructuring to explicitly remove the id field if present
+  const { id, ...cleanAppData } = appData;
+  
   // First, prepare the data with user ID
   const dataWithUser = {
-    ...appData,
+    ...cleanAppData,
     userId: userData.id,
     status: 'pending'
   };

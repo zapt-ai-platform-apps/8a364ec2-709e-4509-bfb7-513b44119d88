@@ -13,8 +13,10 @@ export default async function handler(req, res) {
     const user = await authenticateUser(req);
     console.log('User authenticated:', user.id);
     
-    const appData = req.body;
-    console.log('App data received:', appData);
+    // Create a copy of the request body and explicitly remove the id field
+    const appData = { ...req.body };
+    delete appData.id; // Remove id field if present - it's auto-generated
+    console.log('App data received (cleaned):', appData);
     
     if (!user.id) {
       console.error('Missing user ID after authentication');
