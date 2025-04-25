@@ -118,11 +118,8 @@ export default function Marketplace() {
     setFavorites(prev => 
       isFavorite 
         ? [...prev, appId] 
-        : prev.filter(id => id !== appId)
+        : prev.filter(id => Number(id) !== Number(appId))
     );
-    
-    // Refetch to ensure we have the latest data from the server
-    await fetchFavorites();
   };
   
   const filteredAndSortedApps = useMemo(() => {
@@ -147,8 +144,10 @@ export default function Marketplace() {
       }
       
       // Only show favorites if the filter is active
-      if (filters.onlyFavorites && user && !favorites.includes(app.id)) {
-        return false;
+      if (filters.onlyFavorites && user) {
+        // Use the same type comparison as in AppCard.jsx
+        const isFavorited = favorites.some(favId => Number(favId) === Number(app.id));
+        if (!isFavorited) return false;
       }
       
       return true;

@@ -8,6 +8,7 @@ import { formatDate } from '@/shared/utils/dateUtils';
 export default function AppCard({ app, user, favorites, onToggleFavorite }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isTogglingFavorite, setIsTogglingFavorite] = useState(false);
+  const [localFavorite, setLocalFavorite] = useState(null);
   
   // Extract commission percentage if available
   const commissionPercentage = extractCommissionPercentage(app.commissionStructure);
@@ -16,7 +17,10 @@ export default function AppCard({ app, user, favorites, onToggleFavorite }) {
   const isRecurring = isRecurringCommission(app.commissionStructure);
   
   // Check if this app is in favorites - ensure consistent type comparison
-  const isFavorite = favorites?.some(favId => Number(favId) === Number(app.id)) || false;
+  // Use local state if available, otherwise use prop
+  const isFavorite = localFavorite !== null 
+    ? localFavorite 
+    : favorites?.some(favId => Number(favId) === Number(app.id)) || false;
 
   const handleToggleFavorite = async (e) => {
     e.preventDefault();
@@ -25,11 +29,24 @@ export default function AppCard({ app, user, favorites, onToggleFavorite }) {
     if (!user || isTogglingFavorite) return;
     
     try {
+      // Set loading state
       setIsTogglingFavorite(true);
+      
+      // Optimistically update UI immediately
+      const newFavoriteState = !isFavorite;
+      setLocalFavorite(newFavoriteState);
+      
+      // Notify parent component of the change
+      onToggleFavorite(app.id, newFavoriteState);
+      
+      // Make the API call in the background
       const { data: { session } } = await supabase.auth.getSession();
       
       if (!session?.access_token) {
         console.error('No session access token available');
+        // Revert UI changes if there's an issue
+        setLocalFavorite(!newFavoriteState);
+        onToggleFavorite(app.id, !newFavoriteState);
         return;
       }
       
@@ -48,13 +65,21 @@ export default function AppCard({ app, user, favorites, onToggleFavorite }) {
         throw new Error(data.error || 'Failed to toggle favorite');
       }
       
-      // Pass the new favorite state to the parent component
-      onToggleFavorite(app.id, data.isFavorite);
-      
       console.log(`App ${app.id} favorite toggled to ${data.isFavorite}`);
+      
+      // Update local state with server response
+      // Only do this if the server returns a different state than what we expected
+      if (data.isFavorite !== newFavoriteState) {
+        setLocalFavorite(data.isFavorite);
+        onToggleFavorite(app.id, data.isFavorite);
+      }
     } catch (error) {
       console.error('Error toggling favorite:', error);
       Sentry.captureException(error);
+      
+      // Revert to original state on error
+      setLocalFavorite(!localFavorite);
+      onToggleFavorite(app.id, !localFavorite);
     } finally {
       setIsTogglingFavorite(false);
     }
@@ -70,7 +95,7 @@ export default function AppCard({ app, user, favorites, onToggleFavorite }) {
               <button 
                 onClick={handleToggleFavorite}
                 disabled={isTogglingFavorite}
-                className="text-secondary-500 hover:text-primary-600 focus:outline-none transition-colors cursor-pointer"
+                className={`transition-all duration-150 transform ${isTogglingFavorite ? 'opacity-50' : 'opacity-100'} text-secondary-500 hover:text-primary-600 focus:outline-none cursor-pointer`}
                 aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
               >
                 {isFavorite ? (
