@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 
-export default function Modal({ onClose, title, children }) {
+export default function Modal({ isOpen, onClose, title, children }) {
   // Close modal on escape key
   useEffect(() => {
+    if (!isOpen) return;
+    
     const handleEsc = (event) => {
       if (event.key === 'Escape') {
         onClose();
@@ -18,7 +20,9 @@ export default function Modal({ onClose, title, children }) {
       document.removeEventListener('keydown', handleEsc);
       document.body.style.overflow = 'auto';
     };
-  }, [onClose]);
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
