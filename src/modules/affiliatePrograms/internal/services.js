@@ -1,6 +1,11 @@
 import * as Sentry from "@sentry/browser";
 import { supabase } from '@/shared/services/supabase';
 
+export async function initialize() {
+  console.log('Affiliate programs module initialized');
+  return { success: true };
+}
+
 export async function getAllApps() {
   try {
     const response = await fetch('/api/getApps');
