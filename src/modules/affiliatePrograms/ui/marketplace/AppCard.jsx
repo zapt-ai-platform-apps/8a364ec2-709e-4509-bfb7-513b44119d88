@@ -162,8 +162,9 @@ export default function AppCard({ app, user, favorites, onToggleFavorite }) {
           </a>
           
           {user ? (
-            <div 
-              className="bg-gray-100 relative overflow-hidden rounded-md text-sm text-center flex-1 flex items-center justify-center gap-1 group"
+            <button 
+              onClick={() => setIsWaitlistModalOpen(true)} 
+              className="relative overflow-hidden rounded-md text-sm text-center flex-1 group cursor-pointer"
             >
               {/* Animated gradient background for the coming soon badge */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 opacity-85 animate-gradient-x"></div>
@@ -173,8 +174,9 @@ export default function AppCard({ app, user, favorites, onToggleFavorite }) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
                 <span>Coming Soon</span>
+                <span className="ml-1 hidden group-hover:inline">- Join Waitlist</span>
               </div>
-            </div>
+            </button>
           ) : (
             <Link
               to={`/login?return_to=${encodeURIComponent('/marketplace')}`}
