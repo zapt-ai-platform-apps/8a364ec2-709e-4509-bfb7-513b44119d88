@@ -16,6 +16,11 @@ export default async function handler(req, res) {
     const appData = req.body;
     console.log('App data received:', appData);
     
+    if (!user.id) {
+      console.error('Missing user ID after authentication');
+      return res.status(400).json({ error: 'User ID is required but not available' });
+    }
+    
     const result = await api.submitApp(user, appData);
     console.log('App submitted successfully:', result.app);
     

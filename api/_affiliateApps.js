@@ -73,18 +73,18 @@ const getUserApps = async (userId) => {
 };
 
 const submitApp = async (userData, appData) => {
-  // Validate the input data
-  const validatedData = validateCreateApp(appData);
-
-  // Prepare the app data with user ID
+  // First, prepare the data with user ID
   const dataWithUser = {
-    ...validatedData,
+    ...appData,
     userId: userData.id,
     status: 'pending'
   };
 
+  // Then validate the complete data with userId included
+  const validatedData = validateCreateApp(dataWithUser);
+
   // Insert into database
-  const result = await createApp(dataWithUser);
+  const result = await createApp(validatedData);
   const createdApp = result[0];
 
   // Publish event
