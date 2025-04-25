@@ -1,5 +1,5 @@
 import { initializeZapt } from '@zapt/zapt-js';
-import Sentry from './_sentry.js';
+import Sentry from "./utils/sentry.js";
 
 const APP_ID = process.env.VITE_PUBLIC_APP_ID;
 if (!APP_ID) {

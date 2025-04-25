@@ -2,19 +2,19 @@ import {
   validateApp, 
   validateCreateApp, 
   validateUpdateAppStatus 
-} from './_validators.js';
+} from './validation.js';
 import { 
   getAppsByStatus,
   getAppsByUser,
   createApp,
   updateAppStatus
-} from './_affiliateAppsDb.js';
-import { eventBus } from './_eventBus.js';
+} from './database.js';
+import { eventBus } from '../../utils/eventBus.js';
 import { Resend } from 'resend';
-import Sentry from './_sentry.js';
+import Sentry from '../../utils/sentry.js';
 
 // Events
-const events = {
+export const events = {
   APP_SUBMITTED: 'affiliateApps/appSubmitted',
   APP_UPDATED: 'affiliateApps/appUpdated',
   APP_STATUS_CHANGED: 'affiliateApps/appStatusChanged',
@@ -136,7 +136,7 @@ const reviewApp = async (userData, appId, status) => {
 };
 
 // Public API
-export const api = {
+export const affiliateAppsService = {
   /**
    * Get all approved apps for the marketplace
    */

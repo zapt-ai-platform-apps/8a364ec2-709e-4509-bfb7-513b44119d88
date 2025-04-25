@@ -1,5 +1,5 @@
-import { api } from './_affiliateApps.js';
-import Sentry from "./_sentry.js";
+import { affiliateAppsService } from './services/affiliateApps/index.js';
+import Sentry from "./utils/sentry.js";
 
 export default async function handler(req, res) {
   console.log('Get apps request received');
@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   }
   
   try {
-    const result = await api.getApprovedApps();
+    const result = await affiliateAppsService.getApprovedApps();
     console.log(`Retrieved ${result.apps.length} approved apps`);
     
     return res.status(200).json(result);

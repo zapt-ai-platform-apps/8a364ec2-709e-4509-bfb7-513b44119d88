@@ -1,6 +1,6 @@
-import { api } from './_affiliateApps.js';
-import { authenticateUser } from "./_apiUtils.js";
-import Sentry from "./_sentry.js";
+import { affiliateAppsService } from './services/affiliateApps/index.js';
+import { authenticateUser } from "./utils/auth.js";
+import Sentry from "./utils/sentry.js";
 
 export default async function handler(req, res) {
   console.log('Review app request received');
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Status must be approved or rejected' });
     }
     
-    const result = await api.reviewApp(user, appId, status);
+    const result = await affiliateAppsService.reviewApp(user, appId, status);
     console.log(`App ${appId} reviewed with status: ${status}`);
     
     return res.status(200).json(result);

@@ -1,12 +1,6 @@
-import * as Sentry from "@sentry/node";
-import { appFavorites } from '../drizzle/schema.js';
-import { authenticateUser } from "./_apiUtils.js";
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
-import { eq } from 'drizzle-orm';
-
-// Initialize Sentry
-import "./_sentry.js";
+import { favoritesService } from './services/favorites/index.js';
+import { authenticateUser } from "./utils/auth.js";
+import Sentry from "./utils/sentry.js";
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -15,21 +9,10 @@ export default async function handler(req, res) {
 
   try {
     const user = await authenticateUser(req);
-
     console.log(`Getting favorites for user ${user.id}`);
 
-    const client = postgres(process.env.COCKROACH_DB_URL);
-    const db = drizzle(client);
-
-    const favorites = await db.select()
-      .from(appFavorites)
-      .where(eq(appFavorites.userId, user.id));
-
-    await client.end();
-
-    // Return just the app IDs for simplicity
-    const favoriteAppIds = favorites.map(fav => fav.appId);
-    return res.status(200).json({ favorites: favoriteAppIds });
+    const result = await favoritesService.getUserFavorites(user.id);
+    return res.status(200).json(result);
   } catch (error) {
     console.error('Error getting favorites:', error);
     Sentry.captureException(error);

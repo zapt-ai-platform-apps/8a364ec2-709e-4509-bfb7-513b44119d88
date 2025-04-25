@@ -1,8 +1,8 @@
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import { eq } from 'drizzle-orm';
-import { affiliatePrograms } from '../drizzle/schema.js';
-import Sentry from './_sentry.js';
+import { affiliatePrograms } from '../../../drizzle/schema.js';
+import Sentry from '../../utils/sentry.js';
 
 /**
  * Get a Drizzle DB client

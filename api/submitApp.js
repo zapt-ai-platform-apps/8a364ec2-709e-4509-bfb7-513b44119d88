@@ -1,6 +1,6 @@
-import { api } from './_affiliateApps.js';
-import { authenticateUser } from "./_apiUtils.js";
-import Sentry from "./_sentry.js";
+import { affiliateAppsService } from './services/affiliateApps/index.js';
+import { authenticateUser } from "./utils/auth.js";
+import Sentry from "./utils/sentry.js";
 
 export default async function handler(req, res) {
   console.log('Submit app request received:', req.method);
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'User ID is required but not available' });
     }
     
-    const result = await api.submitApp(user, appData);
+    const result = await affiliateAppsService.submitApp(user, appData);
     console.log('App submitted successfully:', result.app);
     
     return res.status(201).json(result);

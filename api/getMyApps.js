@@ -1,6 +1,6 @@
-import { api } from './_affiliateApps.js';
-import { authenticateUser } from "./_apiUtils.js";
-import Sentry from "./_sentry.js";
+import { affiliateAppsService } from './services/affiliateApps/index.js';
+import { authenticateUser } from "./utils/auth.js";
+import Sentry from "./utils/sentry.js";
 
 export default async function handler(req, res) {
   console.log('Get my apps request received');
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     const user = await authenticateUser(req);
     console.log('User authenticated:', user.id);
     
-    const result = await api.getUserApps(user);
+    const result = await affiliateAppsService.getUserApps(user);
     console.log(`Retrieved ${result.apps.length} apps for user ${user.id}`);
     
     return res.status(200).json(result);
