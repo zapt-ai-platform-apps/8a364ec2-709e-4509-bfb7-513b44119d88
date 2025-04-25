@@ -69,7 +69,7 @@ export default function Header() {
           {/* Central Navigation */}
           <nav className="hidden md:flex items-center">
             <div className="bg-gray-100 rounded-full py-1 px-1 shadow-inner flex gap-1">
-              {(!user || userRole === ROLES.AFFILIATE) && (
+              {!user && (
                 <Link 
                   to="/marketplace" 
                   className={`relative px-5 py-1.5 rounded-full transition-all duration-200 text-sm font-medium ${
@@ -243,7 +243,7 @@ export default function Header() {
           )}
           
           <nav className="flex flex-col space-y-1 mt-3 bg-white rounded-lg overflow-hidden border border-gray-100">
-            {(!user || userRole === ROLES.AFFILIATE) && (
+            {!user && (
               <Link
                 to="/marketplace"
                 className={`flex items-center gap-2 px-4 py-3 ${
