@@ -6,7 +6,8 @@ import {
   submitApp,
   reviewApp,
   getFavorites,
-  toggleFavorite
+  toggleFavorite,
+  deleteApp
 } from './internal/services';
 
 // Public API for the affiliate programs module
@@ -18,5 +19,6 @@ export const api = {
   submitApp,
   reviewApp,
   getFavorites,
-  toggleFavorite
+  toggleFavorite,
+  deleteApp
 };

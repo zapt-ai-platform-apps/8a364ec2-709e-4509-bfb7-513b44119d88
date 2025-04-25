@@ -60,7 +60,7 @@ export default function SubmitApp() {
         throw new Error(data.error || 'Failed to submit app');
       }
       
-      navigate('/dashboard', { 
+      navigate('/my-apps', { 
         state: { notification: 'App submitted successfully! It will be reviewed soon.' } 
       });
       

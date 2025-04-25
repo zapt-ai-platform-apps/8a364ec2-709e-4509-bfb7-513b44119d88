@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import * as Sentry from "@sentry/browser";
 import Layout from '@/app/components/layout/Layout';
 import { useAuth } from '@/shared/hooks/useAuth';
 import { api } from '@/modules/affiliatePrograms/api';
 import { useUserRole, ROLES } from '@/modules/userRole';
-import { LoadingSpinner, ErrorAlert } from '@/shared/components/ui';
+import { LoadingSpinner, ErrorAlert, Modal } from '@/shared/components/ui';
 import { formatDate } from '@/shared/utils/dateUtils';
 
 export default function MyApps() {
@@ -14,6 +14,19 @@ export default function MyApps() {
   const [apps, setApps] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [notification, setNotification] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [appToDelete, setAppToDelete] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.notification) {
+      setNotification(location.state.notification);
+      // Clear the notification from location state
+      window.history.replaceState({}, document.title);
+    }
+  }, [location]);
 
   useEffect(() => {
     if (user && userRole === ROLES.CREATOR) {
@@ -33,6 +46,34 @@ export default function MyApps() {
       setError('Failed to load your submitted apps. Please try again later.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const openDeleteModal = (app) => {
+    setAppToDelete(app);
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setAppToDelete(null);
+  };
+
+  const handleDeleteApp = async () => {
+    if (!appToDelete) return;
+    
+    try {
+      setIsDeleting(true);
+      await api.deleteApp(appToDelete.id);
+      setApps(apps.filter(app => app.id !== appToDelete.id));
+      setNotification(`Successfully deleted "${appToDelete.appName}"`);
+      closeDeleteModal();
+    } catch (error) {
+      console.error('Error deleting app:', error);
+      Sentry.captureException(error);
+      setError(`Failed to delete app: ${error.message}`);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -90,6 +131,17 @@ export default function MyApps() {
       <div className="py-8">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
+            {notification && (
+              <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-md">
+                <div className="flex">
+                  <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>{notification}</span>
+                </div>
+              </div>
+            )}
+
             {error && <ErrorAlert message={error} />}
 
             {loading ? (
@@ -128,6 +180,9 @@ export default function MyApps() {
                           <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Last Updated
                           </th>
+                          <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Actions
+                          </th>
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
@@ -150,6 +205,14 @@ export default function MyApps() {
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                               {formatDate(app.updatedAt)}
                             </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                              <button 
+                                onClick={() => openDeleteModal(app)}
+                                className="text-red-600 hover:text-red-900 transition-colors cursor-pointer"
+                              >
+                                Delete
+                              </button>
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -161,6 +224,41 @@ export default function MyApps() {
           </div>
         </div>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {isDeleteModalOpen && (
+        <Modal onClose={closeDeleteModal} title="Delete App">
+          <div className="p-4">
+            <p className="mb-4">
+              Are you sure you want to delete "{appToDelete?.appName}"? This action cannot be undone.
+            </p>
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={closeDeleteModal}
+                className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded cursor-pointer transition-colors"
+                disabled={isDeleting}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteApp}
+                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded cursor-pointer transition-colors"
+                disabled={isDeleting}
+              >
+                {isDeleting ? (
+                  <span className="flex items-center">
+                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Deleting...
+                  </span>
+                ) : 'Delete App'}
+              </button>
+            </div>
+          </div>
+        </Modal>
+      )}
     </Layout>
   );
 }

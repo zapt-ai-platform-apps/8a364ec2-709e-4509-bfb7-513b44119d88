@@ -1,233 +1,231 @@
-import * as Sentry from "@sentry/browser";
 import { supabase } from '@/shared/services/supabase';
+import * as Sentry from '@sentry/browser';
 
-/**
- * Initialize the affiliate programs module
- */
-export const initialize = async () => {
-  try {
-    console.log('Affiliate programs module initialized');
-    return { success: true };
-  } catch (error) {
-    console.error('Error initializing affiliate programs module:', error);
-    Sentry.captureException(error);
-    return { success: false, error };
-  }
-};
-
-/**
- * Get all approved affiliate apps
- */
-export const getAllApps = async () => {
+export async function getAllApps() {
   try {
     const { data: { session } } = await supabase.auth.getSession();
-    
     const response = await fetch('/api/getApps', {
+      method: 'GET',
       headers: {
-        Authorization: `Bearer ${session?.access_token}`
-      }
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.access_token}`,
+      },
     });
+
+    const data = await response.json();
     
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(`Failed to fetch apps: ${errorData.error || response.statusText}`);
+      throw new Error(data.error || 'Failed to fetch apps');
     }
     
-    return await response.json();
+    return data;
   } catch (error) {
     console.error('Error fetching apps:', error);
     Sentry.captureException(error);
     throw error;
   }
-};
+}
 
-/**
- * Get apps by status
- */
-export const getAppsByStatus = async (status) => {
+export async function getAppsByStatus(status) {
   try {
     const { data: { session } } = await supabase.auth.getSession();
-    
     const response = await fetch(`/api/getApps?status=${status}`, {
+      method: 'GET',
       headers: {
-        Authorization: `Bearer ${session?.access_token}`
-      }
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.access_token}`,
+      },
     });
+
+    const data = await response.json();
     
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(`Failed to fetch apps with status ${status}: ${errorData.error || response.statusText}`);
+      throw new Error(data.error || `Failed to fetch ${status} apps`);
     }
     
-    return await response.json();
+    return data;
   } catch (error) {
-    console.error(`Error fetching apps with status ${status}:`, error);
+    console.error(`Error fetching ${status} apps:`, error);
     Sentry.captureException(error);
     throw error;
   }
-};
+}
 
-/**
- * Get current user's apps
- */
-export const getMyApps = async () => {
+export async function getMyApps() {
   try {
     const { data: { session } } = await supabase.auth.getSession();
-    
     const response = await fetch('/api/getMyApps', {
+      method: 'GET',
       headers: {
-        Authorization: `Bearer ${session?.access_token}`
-      }
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.access_token}`,
+      },
     });
+
+    const data = await response.json();
     
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(`Failed to fetch user apps: ${errorData.error || response.statusText}`);
+      throw new Error(data.error || 'Failed to fetch your apps');
     }
     
-    return await response.json();
+    return data;
   } catch (error) {
-    console.error('Error fetching user apps:', error);
+    console.error('Error fetching your apps:', error);
     Sentry.captureException(error);
     throw error;
   }
-};
+}
 
-/**
- * Get pending apps (for admins)
- */
-export const getPendingApps = async () => {
+export async function getPendingApps() {
   try {
     const { data: { session } } = await supabase.auth.getSession();
-    
     const response = await fetch('/api/getPendingApps', {
+      method: 'GET',
       headers: {
-        Authorization: `Bearer ${session?.access_token}`
-      }
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.access_token}`,
+      },
     });
+
+    const data = await response.json();
     
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(`Failed to fetch pending apps: ${errorData.error || response.statusText}`);
+      throw new Error(data.error || 'Failed to fetch pending apps');
     }
     
-    return await response.json();
+    return data;
   } catch (error) {
     console.error('Error fetching pending apps:', error);
     Sentry.captureException(error);
     throw error;
   }
-};
+}
 
-/**
- * Submit a new affiliate app
- */
-export const submitApp = async (appData) => {
+export async function submitApp(appData) {
   try {
     const { data: { session } } = await supabase.auth.getSession();
-    
     const response = await fetch('/api/submitApp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${session?.access_token}`
+        Authorization: `Bearer ${session?.access_token}`,
       },
-      body: JSON.stringify(appData)
+      body: JSON.stringify(appData),
     });
+
+    const data = await response.json();
     
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(`Failed to submit app: ${errorData.error || response.statusText}`);
+      throw new Error(data.error || 'Failed to submit app');
     }
     
-    return await response.json();
+    return data;
   } catch (error) {
     console.error('Error submitting app:', error);
     Sentry.captureException(error);
     throw error;
   }
-};
+}
 
-/**
- * Review an app (approve/reject)
- */
-export const reviewApp = async (appId, approved) => {
+export async function reviewApp(appId, status, feedback) {
   try {
     const { data: { session } } = await supabase.auth.getSession();
-    
     const response = await fetch('/api/reviewApp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${session?.access_token}`
+        Authorization: `Bearer ${session?.access_token}`,
       },
-      body: JSON.stringify({ appId, approved })
+      body: JSON.stringify({ appId, status, feedback }),
     });
+
+    const data = await response.json();
     
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(`Failed to review app: ${errorData.error || response.statusText}`);
+      throw new Error(data.error || 'Failed to review app');
     }
     
-    return await response.json();
+    return data;
   } catch (error) {
     console.error('Error reviewing app:', error);
     Sentry.captureException(error);
     throw error;
   }
-};
+}
 
-/**
- * Get user's favorite apps
- */
-export const getFavorites = async () => {
+export async function getFavorites() {
   try {
     const { data: { session } } = await supabase.auth.getSession();
-    
     const response = await fetch('/api/getFavorites', {
+      method: 'GET',
       headers: {
-        Authorization: `Bearer ${session?.access_token}`
-      }
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.access_token}`,
+      },
     });
+
+    const data = await response.json();
     
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(`Failed to fetch favorites: ${errorData.error || response.statusText}`);
+      throw new Error(data.error || 'Failed to fetch favorites');
     }
     
-    return await response.json();
+    return data;
   } catch (error) {
     console.error('Error fetching favorites:', error);
     Sentry.captureException(error);
     throw error;
   }
-};
+}
 
-/**
- * Toggle favorite status for an app
- */
-export const toggleFavorite = async (appId) => {
+export async function toggleFavorite(appId) {
   try {
     const { data: { session } } = await supabase.auth.getSession();
-    
     const response = await fetch('/api/toggleFavorite', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${session?.access_token}`
+        Authorization: `Bearer ${session?.access_token}`,
       },
-      body: JSON.stringify({ appId })
+      body: JSON.stringify({ appId }),
     });
+
+    const data = await response.json();
     
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(`Failed to toggle favorite: ${errorData.error || response.statusText}`);
+      throw new Error(data.error || 'Failed to toggle favorite');
     }
     
-    return await response.json();
+    return data;
   } catch (error) {
     console.error('Error toggling favorite:', error);
     Sentry.captureException(error);
     throw error;
   }
-};
+}
+
+export async function deleteApp(appId) {
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    const response = await fetch('/api/deleteApp', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session?.access_token}`,
+      },
+      body: JSON.stringify({ appId }),
+    });
+
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.error || 'Failed to delete app');
+    }
+    
+    return data;
+  } catch (error) {
+    console.error('Error deleting app:', error);
+    Sentry.captureException(error);
+    throw error;
+  }
+}
