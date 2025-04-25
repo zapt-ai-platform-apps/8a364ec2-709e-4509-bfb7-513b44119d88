@@ -32,8 +32,12 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: 'Authentication required' });
     }
 
-    // Parse request body
-    const { appId } = req.body;
+    // Get appId from query parameter instead of body
+    const appId = req.query.appId;
+    
+    console.log('Request query:', req.query);
+    console.log('Request body:', req.body);
+    
     if (!appId) {
       return res.status(400).json({ error: 'App ID is required' });
     }

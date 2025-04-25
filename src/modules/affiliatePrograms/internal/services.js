@@ -211,22 +211,26 @@ export async function toggleFavorite(appId) {
 
 export async function deleteApp(appId) {
   try {
+    console.log('Attempting to delete app with ID:', appId);
     const { data: { session } } = await supabase.auth.getSession();
-    const response = await fetch('/api/deleteApp', {
+    
+    // Changed to POST method to ensure body is properly processed
+    const response = await fetch(`/api/deleteApp?appId=${appId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${session?.access_token}`,
       },
-      body: JSON.stringify({ appId }),
     });
 
-    const data = await response.json();
-    
     if (!response.ok) {
+      const data = await response.json();
+      console.error('Server returned error:', data);
       throw new Error(data.error || 'Failed to delete app');
     }
     
+    const data = await response.json();
+    console.log('Delete app response:', data);
     return data;
   } catch (error) {
     console.error('Error deleting app:', error);
