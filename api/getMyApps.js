@@ -1,4 +1,7 @@
-import { affiliateAppsService } from './affiliateApps/service.js';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
+import { eq } from 'drizzle-orm';
+import { affiliatePrograms } from '../drizzle/schema.js';
 import { authenticateUser } from "./shared/auth.js";
 import Sentry from "./shared/sentry.js";
 
@@ -13,10 +16,19 @@ export default async function handler(req, res) {
     const user = await authenticateUser(req);
     console.log('User authenticated:', user.id);
     
-    const result = await affiliateAppsService.getUserApps(user);
-    console.log(`Retrieved ${result.apps.length} apps for user ${user.id}`);
+    const client = postgres(process.env.COCKROACH_DB_URL);
+    const db = drizzle(client);
     
-    return res.status(200).json(result);
+    const apps = await db.select()
+      .from(affiliatePrograms)
+      .where(eq(affiliatePrograms.userId, user.id))
+      .orderBy(affiliatePrograms.createdAt);
+      
+    await client.end();
+    
+    console.log(`Retrieved ${apps.length} apps for user ${user.id}`);
+    
+    return res.status(200).json({ apps });
     
   } catch (error) {
     console.error('Error fetching user apps:', error);

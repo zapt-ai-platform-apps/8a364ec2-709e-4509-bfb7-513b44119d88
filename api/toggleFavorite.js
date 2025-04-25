@@ -1,4 +1,7 @@
-import { favoritesService } from './favorites/service.js';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
+import { appFavorites } from '../drizzle/schema.js';
+import { eq, and } from 'drizzle-orm';
 import { authenticateUser } from "./shared/auth.js";
 import Sentry from "./shared/sentry.js";
 
@@ -17,8 +20,44 @@ export default async function handler(req, res) {
 
     console.log(`Toggling favorite for user ${user.id} and app ${appId}`);
 
-    const result = await favoritesService.toggleFavorite(user.id, appId);
-    return res.status(200).json(result);
+    const appIdNum = parseInt(appId);
+    const client = postgres(process.env.COCKROACH_DB_URL);
+    const db = drizzle(client);
+
+    // Check if the favorite already exists
+    const existingFavorite = await db.select()
+      .from(appFavorites)
+      .where(
+        and(
+          eq(appFavorites.userId, user.id),
+          eq(appFavorites.appId, appIdNum)
+        )
+      );
+    
+    let isFavorite;
+    
+    if (existingFavorite.length > 0) {
+      // If it exists, remove it
+      await db.delete(appFavorites)
+        .where(
+          and(
+            eq(appFavorites.userId, user.id),
+            eq(appFavorites.appId, appIdNum)
+          )
+        );
+      isFavorite = false;
+    } else {
+      // If it doesn't exist, add it
+      await db.insert(appFavorites)
+        .values({
+          userId: user.id,
+          appId: appIdNum
+        });
+      isFavorite = true;
+    }
+    
+    await client.end();
+    return res.status(200).json({ isFavorite });
   } catch (error) {
     console.error('Error toggling favorite:', error);
     Sentry.captureException(error);
