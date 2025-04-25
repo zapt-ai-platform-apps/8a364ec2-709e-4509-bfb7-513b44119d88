@@ -9,7 +9,7 @@ import { createValidator } from "./shared/validators.js";
 
 // Schema for app status update
 const updateAppStatusSchema = z.object({
-  appId: z.number(),
+  appId: z.string(), // Changed to string to maintain precision with large IDs
   status: z.enum(['approved', 'rejected']),
 });
 
@@ -38,22 +38,13 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Status must be approved or rejected' });
     }
     
-    // Ensure appId is a valid number
-    let parsedAppId;
-    try {
-      parsedAppId = Number(appId);
-      if (isNaN(parsedAppId)) {
-        throw new Error('Invalid app ID format');
-      }
-      console.log('Parsed appId:', parsedAppId);
-    } catch (e) {
-      console.error('Error parsing appId:', e);
-      return res.status(400).json({ error: 'Invalid appId format' });
-    }
+    // Ensure appId is a valid string and can be converted to BigInt for precision
+    let stringAppId = String(appId);
+    console.log('String appId:', stringAppId);
     
-    // Validate the input data
+    // Validate the input data (keeping the ID as a string)
     const validatedData = validateUpdateAppStatus({
-      appId: parsedAppId,
+      appId: stringAppId,
       status
     });
     
@@ -66,20 +57,20 @@ export default async function handler(req, res) {
     const client = postgres(process.env.COCKROACH_DB_URL);
     const db = drizzle(client);
     
-    console.log('Executing database query with appId:', parsedAppId);
+    console.log('Executing database query with appId:', stringAppId);
     
-    // First check if the app exists
+    // First check if the app exists - convert to number only at query time
     const existingApp = await db.select()
       .from(affiliatePrograms)
-      .where(eq(affiliatePrograms.id, parsedAppId))
+      .where(eq(affiliatePrograms.id, parseInt(stringAppId, 10)))
       .limit(1);
       
     console.log('Existing app check result:', existingApp);
     
     if (existingApp.length === 0) {
       await client.end();
-      console.error(`No app found with ID: ${parsedAppId}`);
-      return res.status(404).json({ error: `App not found with ID: ${parsedAppId}` });
+      console.error(`No app found with ID: ${stringAppId}`);
+      return res.status(404).json({ error: `App not found with ID: ${stringAppId}` });
     }
     
     // Now update the app
@@ -88,7 +79,7 @@ export default async function handler(req, res) {
         status: validatedData.status,
         updatedAt: new Date()
       })
-      .where(eq(affiliatePrograms.id, parsedAppId))
+      .where(eq(affiliatePrograms.id, parseInt(stringAppId, 10)))
       .returning();
     
     await client.end();
@@ -96,12 +87,12 @@ export default async function handler(req, res) {
     console.log(`Update result:`, result);
     
     if (result.length === 0) {
-      console.error(`Update operation didn't return any results for app ID: ${parsedAppId}`);
-      throw new Error(`Update failed for app ID: ${parsedAppId}`);
+      console.error(`Update operation didn't return any results for app ID: ${stringAppId}`);
+      throw new Error(`Update failed for app ID: ${stringAppId}`);
     }
     
     const updatedApp = result[0];
-    console.log(`App ${parsedAppId} reviewed with status: ${status}`);
+    console.log(`App ${stringAppId} reviewed with status: ${status}`);
     
     return res.status(200).json({ 
       message: `App ${status} successfully`,
