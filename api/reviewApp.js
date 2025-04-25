@@ -56,8 +56,7 @@ export default async function handler(req, res) {
     }
     
     // Initialize database connection
-    const client = postgres(process.env.COCKROACH_DB_URL);
-    const db = drizzle(client);
+    const sql = postgres(process.env.COCKROACH_DB_URL);
     
     // Log the numeric conversion for debugging
     const numericId = Number(stringAppId);
@@ -67,33 +66,31 @@ export default async function handler(req, res) {
       isSafeInteger: Number.isSafeInteger(numericId)
     });
     
-    // Instead of parseInt, use the raw string in a raw SQL query to avoid precision issues
-    // First check if the app exists
-    const queryText = `SELECT * FROM "affiliate_programs" WHERE "id" = $1 LIMIT 1`;
-    const queryResult = await client.query(queryText, [stringAppId]);
-    const existingApp = queryResult.length > 0 ? queryResult[0] : null;
+    // Check if the app exists using tagged template literal syntax
+    const existingApps = await sql`
+      SELECT * FROM "affiliate_programs" 
+      WHERE "id" = ${stringAppId} 
+      LIMIT 1
+    `;
+    const existingApp = existingApps.length > 0 ? existingApps[0] : null;
     
     console.log('Existing app check result:', existingApp);
     
     if (!existingApp) {
-      await client.end();
+      await sql.end();
       console.error(`No app found with ID: ${stringAppId}`);
       return res.status(404).json({ error: `App not found with ID: ${stringAppId}` });
     }
     
-    // Now update the app using raw SQL to maintain ID precision
-    const updateText = `
+    // Now update the app using tagged template literal syntax
+    const updateResult = await sql`
       UPDATE "affiliate_programs" 
-      SET "status" = $1, "updated_at" = $2 
-      WHERE "id" = $3 
+      SET "status" = ${validatedData.status}, "updated_at" = ${new Date()} 
+      WHERE "id" = ${stringAppId} 
       RETURNING *
     `;
-    const updateResult = await client.query(
-      updateText, 
-      [validatedData.status, new Date(), stringAppId]
-    );
     
-    await client.end();
+    await sql.end();
     
     console.log(`Update result:`, updateResult);
     

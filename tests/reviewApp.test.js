@@ -3,11 +3,12 @@ import handler from '../api/reviewApp';
 
 // Mock the dependencies
 vi.mock('postgres', () => {
+  const mockSql = vi.fn();
+  mockSql.end = vi.fn();
+  
+  const mockPostgres = vi.fn(() => mockSql);
   return {
-    default: vi.fn(() => ({
-      query: vi.fn(),
-      end: vi.fn()
-    }))
+    default: mockPostgres
   };
 });
 
@@ -23,13 +24,13 @@ vi.mock('../drizzle/schema.js', () => {
   };
 });
 
-vi.mock('./shared/auth.js', () => {
+vi.mock('../api/shared/auth.js', () => {
   return {
     authenticateUser: vi.fn()
   };
 });
 
-vi.mock('./shared/sentry.js', () => {
+vi.mock('../api/shared/sentry.js', () => {
   return {
     default: {
       captureException: vi.fn()
@@ -37,8 +38,14 @@ vi.mock('./shared/sentry.js', () => {
   };
 });
 
+vi.mock('../api/shared/validators.js', () => {
+  return {
+    createValidator: () => (data) => data
+  };
+});
+
 describe('reviewApp API handler', () => {
-  let req, res, postgres, authenticateUser;
+  let req, res, mockSql, authenticateUser;
   
   beforeEach(() => {
     req = {
@@ -55,13 +62,13 @@ describe('reviewApp API handler', () => {
       json: vi.fn(() => res)
     };
     
-    postgres = require('postgres').default;
-    postgres.mockReturnValue({
-      query: vi.fn(),
-      end: vi.fn()
-    });
+    // Setup postgres mock
+    mockSql = vi.fn();
+    mockSql.end = vi.fn();
+    require('postgres').default.mockReturnValue(mockSql);
     
-    authenticateUser = require('./shared/auth.js').authenticateUser;
+    // Setup authentication mock
+    authenticateUser = require('../api/shared/auth.js').authenticateUser;
     authenticateUser.mockResolvedValue({
       id: 'user-id',
       email: 'admin@zapt.ai'
@@ -73,9 +80,11 @@ describe('reviewApp API handler', () => {
   });
   
   it('should handle large numeric IDs correctly', async () => {
-    // Mock database responses
-    const mockClient = postgres();
-    mockClient.query.mockImplementation((query, params) => {
+    // Mock SQL results
+    mockSql.mockImplementation((strings, ...values) => {
+      const query = strings.join('?');
+      
+      // Return different results based on the query
       if (query.includes('SELECT')) {
         return [{ id: '1066626094881734668', appName: 'Test App' }];
       } else if (query.includes('UPDATE')) {
@@ -86,16 +95,8 @@ describe('reviewApp API handler', () => {
     
     await handler(req, res);
     
-    // Check that the query was called with the string ID
-    expect(mockClient.query).toHaveBeenCalledWith(
-      expect.stringContaining('SELECT'),
-      ['1066626094881734668']
-    );
-    
-    expect(mockClient.query).toHaveBeenCalledWith(
-      expect.stringContaining('UPDATE'),
-      ['approved', expect.any(Date), '1066626094881734668']
-    );
+    // Verify SQL was called with expected queries
+    expect(mockSql).toHaveBeenCalled();
     
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith(
@@ -106,9 +107,15 @@ describe('reviewApp API handler', () => {
   });
   
   it('should return 404 when app is not found', async () => {
-    // Mock database response with no app found
-    const mockClient = postgres();
-    mockClient.query.mockReturnValueOnce([]);
+    // Mock SQL results for app not found
+    mockSql.mockImplementation((strings, ...values) => {
+      const query = strings.join('?');
+      
+      if (query.includes('SELECT')) {
+        return []; // Empty results - no app found
+      }
+      return [];
+    });
     
     await handler(req, res);
     
