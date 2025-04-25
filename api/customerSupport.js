@@ -1,11 +1,5 @@
-import { initializeZapt } from '@zapt/zapt-js';
-import Sentry from "./utils/sentry.js";
-
-const APP_ID = process.env.VITE_PUBLIC_APP_ID;
-if (!APP_ID) {
-  throw new Error('Missing VITE_PUBLIC_APP_ID environment variable');
-}
-const { customerSupport } = initializeZapt(APP_ID);
+import { customerSupportService } from './customerSupport/service.js';
+import Sentry from "./shared/sentry.js";
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -14,14 +8,7 @@ export default async function handler(req, res) {
   
   try {
     const { email } = req.body;
-    if (!email) {
-      return res.status(400).json({ error: 'Missing email' });
-    }
-    const zaptSecretKey = process.env.ZAPT_SECRET_KEY;
-    if (!zaptSecretKey) {
-      throw new Error('Missing ZAPT_SECRET_KEY environment variable');
-    }
-    const supportResponse = await customerSupport(email, zaptSecretKey);
+    const supportResponse = await customerSupportService.getChatCredentials(email);
     console.log('Customer support response:', supportResponse);
     return res.status(200).json(supportResponse);
   } catch (error) {

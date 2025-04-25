@@ -1,6 +1,6 @@
-import { affiliateAppsService } from './services/affiliateApps/index.js';
-import { authenticateUser } from "./utils/auth.js";
-import Sentry from "./utils/sentry.js";
+import { affiliateAppsService } from './affiliateApps/service.js';
+import { authenticateUser } from "./shared/auth.js";
+import Sentry from "./shared/sentry.js";
 
 export default async function handler(req, res) {
   console.log('Submit app request received:', req.method);

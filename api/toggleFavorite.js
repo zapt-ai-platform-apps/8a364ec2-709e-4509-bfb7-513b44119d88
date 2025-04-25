@@ -1,6 +1,6 @@
-import { favoritesService } from './services/favorites/index.js';
-import { authenticateUser } from "./utils/auth.js";
-import Sentry from "./utils/sentry.js";
+import { favoritesService } from './favorites/service.js';
+import { authenticateUser } from "./shared/auth.js";
+import Sentry from "./shared/sentry.js";
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

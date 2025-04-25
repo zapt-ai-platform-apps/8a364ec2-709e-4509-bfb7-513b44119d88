@@ -1,5 +1,5 @@
-import { affiliateAppsService } from './services/affiliateApps/index.js';
-import Sentry from "./utils/sentry.js";
+import { affiliateAppsService } from './affiliateApps/service.js';
+import Sentry from "./shared/sentry.js";
 
 export default async function handler(req, res) {
   console.log('Get apps request received');

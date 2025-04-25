@@ -1,5 +1,5 @@
-import { waitlistService } from './services/waitlist/index.js';
-import Sentry from "./utils/sentry.js";
+import { waitlistService } from './waitlist/service.js';
+import Sentry from "./shared/sentry.js";
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
