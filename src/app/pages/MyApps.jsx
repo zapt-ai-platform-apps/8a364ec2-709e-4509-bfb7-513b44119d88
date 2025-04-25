@@ -50,6 +50,7 @@ export default function MyApps() {
   };
 
   const openDeleteModal = (app) => {
+    console.log('Opening delete modal for app:', app);
     setAppToDelete(app);
     setIsDeleteModalOpen(true);
   };
@@ -62,9 +63,13 @@ export default function MyApps() {
   const handleDeleteApp = async () => {
     if (!appToDelete) return;
     
+    console.log('Delete button clicked for app:', appToDelete);
+    
     try {
       setIsDeleting(true);
+      console.log('Calling api.deleteApp with ID:', appToDelete.id);
       await api.deleteApp(appToDelete.id);
+      console.log('App deleted successfully, updating UI');
       setApps(apps.filter(app => app.id !== appToDelete.id));
       setNotification(`Successfully deleted "${appToDelete.appName}"`);
       closeDeleteModal();
@@ -209,6 +214,7 @@ export default function MyApps() {
                               <button 
                                 onClick={() => openDeleteModal(app)}
                                 className="text-red-600 hover:text-red-900 transition-colors cursor-pointer"
+                                data-app-id={app.id}
                               >
                                 Delete
                               </button>

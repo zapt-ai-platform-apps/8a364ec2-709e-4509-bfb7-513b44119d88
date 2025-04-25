@@ -1,24 +1,13 @@
-import {
-  getAllApps,
-  getAppsByStatus,
-  getMyApps,
-  getPendingApps,
-  submitApp,
-  reviewApp,
-  getFavorites,
-  toggleFavorite,
-  deleteApp
-} from './internal/services';
+import * as services from './internal/services';
 
-// Public API for the affiliate programs module
 export const api = {
-  getAllApps,
-  getAppsByStatus,
-  getMyApps,
-  getPendingApps,
-  submitApp,
-  reviewApp,
-  getFavorites,
-  toggleFavorite,
-  deleteApp
+  getAllApps: services.getAllApps,
+  getAppsByStatus: services.getAppsByStatus,
+  getMyApps: services.getMyApps,
+  getPendingApps: services.getPendingApps,
+  submitApp: services.submitApp,
+  reviewApp: services.reviewApp,
+  getFavorites: services.getFavorites,
+  toggleFavorite: services.toggleFavorite,
+  deleteApp: services.deleteApp
 };

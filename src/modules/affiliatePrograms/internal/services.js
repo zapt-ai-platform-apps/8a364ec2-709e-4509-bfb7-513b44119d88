@@ -214,6 +214,11 @@ export async function deleteApp(appId) {
     console.log('Attempting to delete app with ID:', appId);
     const { data: { session } } = await supabase.auth.getSession();
     
+    if (!session?.access_token) {
+      console.error('No auth session found when trying to delete app');
+      throw new Error('Authentication required to delete app');
+    }
+    
     // Fix: use proper URL structure for DELETE request with query parameters
     const url = `/api/deleteApp?appId=${encodeURIComponent(appId)}`;
     console.log('Sending delete request to:', url);
@@ -222,10 +227,12 @@ export async function deleteApp(appId) {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${session?.access_token}`,
+        Authorization: `Bearer ${session.access_token}`,
       },
     });
 
+    console.log('Delete request response status:', response.status);
+    
     // Fix: Only parse the response once and then check status
     const data = await response.json();
     console.log('Delete app response:', data);
