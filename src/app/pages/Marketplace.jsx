@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import * as Sentry from "@sentry/browser";
 import { Navigate } from 'react-router-dom';
 import Layout from '@/app/components/layout/Layout';
@@ -60,41 +60,46 @@ export default function Marketplace() {
   }, []);
 
   // Fetch user favorites
-  useEffect(() => {
-    const fetchFavorites = async () => {
-      if (!user) {
-        setFavorites([]);
+  const fetchFavorites = useCallback(async () => {
+    if (!user) {
+      setFavorites([]);
+      return;
+    }
+    
+    try {
+      setLoadingFavorites(true);
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session?.access_token) {
+        console.error('No session access token available');
         return;
       }
       
-      try {
-        setLoadingFavorites(true);
-        const { data: { session } } = await supabase.auth.getSession();
-        
-        const response = await fetch('/api/getFavorites', {
-          headers: {
-            Authorization: `Bearer ${session?.access_token}`,
-          },
-        });
-        
-        const data = await response.json();
-        
-        if (!response.ok) {
-          throw new Error(data.error || 'Failed to fetch favorites');
-        }
-        
-        setFavorites(data.favorites);
-        console.log('Fetched favorites:', data.favorites);
-      } catch (error) {
-        console.error('Error fetching favorites:', error);
-        Sentry.captureException(error);
-      } finally {
-        setLoadingFavorites(false);
+      const response = await fetch('/api/getFavorites', {
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+        },
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to fetch favorites');
       }
-    };
-    
-    fetchFavorites();
+      
+      setFavorites(data.favorites);
+      console.log('Fetched favorites:', data.favorites);
+    } catch (error) {
+      console.error('Error fetching favorites:', error);
+      Sentry.captureException(error);
+    } finally {
+      setLoadingFavorites(false);
+    }
   }, [user]);
+
+  useEffect(() => {
+    fetchFavorites();
+  }, [fetchFavorites]);
 
   const handleSearch = (term) => {
     setSearchTerm(term);
@@ -108,12 +113,16 @@ export default function Marketplace() {
     setSortOption(option);
   };
   
-  const handleToggleFavorite = (appId, isFavorite) => {
+  const handleToggleFavorite = async (appId, isFavorite) => {
+    // Update local state immediately for UI responsiveness
     setFavorites(prev => 
       isFavorite 
         ? [...prev, appId] 
         : prev.filter(id => id !== appId)
     );
+    
+    // Refetch to ensure we have the latest data from the server
+    await fetchFavorites();
   };
   
   const filteredAndSortedApps = useMemo(() => {

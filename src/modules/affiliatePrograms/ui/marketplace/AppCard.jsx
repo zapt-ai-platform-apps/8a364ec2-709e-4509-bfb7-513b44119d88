@@ -15,21 +15,29 @@ export default function AppCard({ app, user, favorites, onToggleFavorite }) {
   // Determine if it's a recurring commission
   const isRecurring = isRecurringCommission(app.commissionStructure);
   
-  // Check if this app is in favorites
-  const isFavorite = favorites?.includes(app.id) || false;
+  // Check if this app is in favorites - ensure consistent type comparison
+  const isFavorite = favorites?.some(favId => Number(favId) === Number(app.id)) || false;
 
-  const handleToggleFavorite = async () => {
-    if (!user) return;
+  const handleToggleFavorite = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (!user || isTogglingFavorite) return;
     
     try {
       setIsTogglingFavorite(true);
       const { data: { session } } = await supabase.auth.getSession();
       
+      if (!session?.access_token) {
+        console.error('No session access token available');
+        return;
+      }
+      
       const response = await fetch('/api/toggleFavorite', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${session?.access_token}`,
+          Authorization: `Bearer ${session.access_token}`,
         },
         body: JSON.stringify({ appId: app.id }),
       });
@@ -40,7 +48,10 @@ export default function AppCard({ app, user, favorites, onToggleFavorite }) {
         throw new Error(data.error || 'Failed to toggle favorite');
       }
       
+      // Pass the new favorite state to the parent component
       onToggleFavorite(app.id, data.isFavorite);
+      
+      console.log(`App ${app.id} favorite toggled to ${data.isFavorite}`);
     } catch (error) {
       console.error('Error toggling favorite:', error);
       Sentry.captureException(error);

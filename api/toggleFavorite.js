@@ -20,7 +20,14 @@ export default async function handler(req, res) {
 
     console.log(`Toggling favorite for user ${user.id} and app ${appId}`);
 
-    const appIdNum = parseInt(appId);
+    // Convert to number while preserving precision for large numbers
+    const appIdNum = Number(appId);
+    
+    // Handle if conversion failed
+    if (isNaN(appIdNum)) {
+      return res.status(400).json({ error: 'Invalid app ID format' });
+    }
+    
     const client = postgres(process.env.COCKROACH_DB_URL);
     const db = drizzle(client);
 
