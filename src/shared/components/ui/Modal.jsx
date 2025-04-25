@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-export default function Modal({ isOpen, onClose, title, children }) {
+export default function Modal({ onClose, title, children }) {
   // Close modal on escape key
   useEffect(() => {
     const handleEsc = (event) => {
@@ -9,19 +9,16 @@ export default function Modal({ isOpen, onClose, title, children }) {
       }
     };
     
-    if (isOpen) {
-      document.addEventListener('keydown', handleEsc);
-      // Prevent body scrolling when modal is open
-      document.body.style.overflow = 'hidden';
-    }
+    // Add event listener for escape key
+    document.addEventListener('keydown', handleEsc);
+    // Prevent body scrolling when modal is open
+    document.body.style.overflow = 'hidden';
     
     return () => {
       document.removeEventListener('keydown', handleEsc);
       document.body.style.overflow = 'auto';
     };
-  }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
+  }, [onClose]);
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
