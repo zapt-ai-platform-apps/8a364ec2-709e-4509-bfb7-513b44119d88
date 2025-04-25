@@ -181,7 +181,7 @@ export default function Marketplace() {
         appCount={apps.length}
       />
       
-      <section className="py-12">
+      <section className="py-8">
         <div className="container mx-auto px-4">
           {error && <ErrorAlert message={error} />}
           
