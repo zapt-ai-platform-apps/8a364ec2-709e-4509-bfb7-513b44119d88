@@ -52,7 +52,11 @@ export default function AdminReview() {
   const handleReviewAction = async (appId, status) => {
     try {
       setActionInProgress(appId);
+      setError(null); // Clear any previous errors
+      
       const { data: { session } } = await supabase.auth.getSession();
+      
+      console.log(`Sending review request for app ID: ${appId}, status: ${status}`);
       
       const response = await fetch('/api/reviewApp', {
         method: 'POST',
@@ -66,15 +70,23 @@ export default function AdminReview() {
       const data = await response.json();
       
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to review app');
+        console.error('Review app error response:', data);
+        throw new Error(data.error || data.details || 'Failed to review app');
       }
+      
+      console.log('Review successful:', data);
       
       // Update the apps list
       setApps(apps.filter(app => app.id !== appId));
       
     } catch (error) {
       console.error('Error reviewing app:', error);
-      Sentry.captureException(error);
+      Sentry.captureException(error, {
+        extra: {
+          appId,
+          status
+        }
+      });
       setError(error.message);
     } finally {
       setActionInProgress(null);
