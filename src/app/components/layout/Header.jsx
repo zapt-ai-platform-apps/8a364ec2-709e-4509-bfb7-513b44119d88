@@ -69,21 +69,7 @@ export default function Header() {
           {/* Central Navigation */}
           <nav className="hidden md:flex items-center">
             <div className="bg-gray-100 rounded-full py-1 px-1 shadow-inner flex gap-1">
-              {!user && (
-                <Link 
-                  to="/marketplace" 
-                  className={`relative px-5 py-1.5 rounded-full transition-all duration-200 text-sm font-medium ${
-                    isActive('/marketplace') 
-                      ? 'text-primary-700 bg-white shadow-sm' 
-                      : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
-                  }`}
-                >
-                  Browse Marketplace
-                  {isActive('/marketplace') && (
-                    <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary-600 rounded-full"></span>
-                  )}
-                </Link>
-              )}
+              {/* Browse Marketplace link removed from here */}
               
               {user && userRole === ROLES.CREATOR && (
                 <>
@@ -243,22 +229,7 @@ export default function Header() {
           )}
           
           <nav className="flex flex-col space-y-1 mt-3 bg-white rounded-lg overflow-hidden border border-gray-100">
-            {!user && (
-              <Link
-                to="/marketplace"
-                className={`flex items-center gap-2 px-4 py-3 ${
-                  isActive('/marketplace') 
-                    ? 'bg-primary-50 text-primary-700 border-l-4 border-primary-600' 
-                    : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
-                }`}
-                onClick={() => setShowMobileMenu(false)}
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-                Browse Marketplace
-              </Link>
-            )}
+            {/* Browse Marketplace link removed from here */}
             
             {user && userRole === ROLES.CREATOR && (
               <>
