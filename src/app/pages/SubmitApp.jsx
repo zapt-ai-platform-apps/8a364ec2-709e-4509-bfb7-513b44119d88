@@ -17,7 +17,7 @@ export default function SubmitApp() {
     appUrl: '',
     commissionStructure: '',
     paymentTerms: '',
-    affiliateSignupUrl: '',
+    affiliateSignupUrl: 'https://zapt.ai/affiliate-program-url-coming-soon', // Pre-populated with placeholder
     promotionalMaterials: ''
   });
   
@@ -202,7 +202,7 @@ export default function SubmitApp() {
                   
                   <div>
                     <label htmlFor="affiliateSignupUrl" className="block text-sm font-medium text-secondary-700 mb-1">
-                      Affiliate Signup URL *
+                      Affiliate Signup URL * <span className="text-primary-600 text-xs font-normal">(Coming soon)</span>
                     </label>
                     <input
                       type="url"
@@ -211,9 +211,11 @@ export default function SubmitApp() {
                       value={formData.affiliateSignupUrl}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all box-border"
-                      placeholder="https://yourapp.com/affiliate"
+                      disabled
+                      className="w-full px-4 py-3 border border-secondary-300 rounded-lg bg-secondary-100 text-secondary-500 cursor-not-allowed box-border"
+                      placeholder="Coming soon - we'll handle this for you"
                     />
+                    <p className="mt-1 text-xs text-secondary-500">We're building a centralized affiliate system. No need to provide a URL yet.</p>
                   </div>
                   
                   <div>
