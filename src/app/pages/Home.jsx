@@ -16,9 +16,18 @@ export default function Home() {
       const scrollPosition = window.scrollY;
       const heroElements = document.querySelectorAll('.hero-animate');
       
+      // Calculate a fade rate based on viewport size - smaller screens get a slower fade rate
+      const isMobile = window.innerWidth < 768;
+      const fadeRateMultiplier = isMobile ? 0.0005 : 0.001;
+      
       heroElements.forEach(el => {
-        el.style.transform = `translateY(${scrollPosition * 0.1}px)`;
-        el.style.opacity = 1 - (scrollPosition * 0.0015);
+        // Reduced parallax effect
+        el.style.transform = `translateY(${scrollPosition * 0.05}px)`;
+        
+        // Calculate opacity with a minimum threshold to ensure buttons remain visible
+        const minOpacity = isMobile ? 0.8 : 0.6;
+        const newOpacity = Math.max(minOpacity, 1 - (scrollPosition * fadeRateMultiplier));
+        el.style.opacity = newOpacity;
       });
       
       // Animate in sections as they come into view
