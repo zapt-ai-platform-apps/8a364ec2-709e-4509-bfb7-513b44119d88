@@ -31,7 +31,7 @@ const sendNewAppEmail = async (app) => {
     if (process.env.RESEND_API_KEY) {
       const resend = new Resend(process.env.RESEND_API_KEY);
       await resend.emails.send({
-        from: 'ZAPT Affiliate Marketplace <notifications@resend.dev>',
+        from: 'ZAPT Affiliate Marketplace <noreply@zapt.ai>',
         to: 'david@zapt.ai',
         subject: 'New Affiliate App Submission',
         html: `
