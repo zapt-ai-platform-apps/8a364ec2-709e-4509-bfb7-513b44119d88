@@ -25,6 +25,8 @@ export default async function handler(req, res) {
 
   try {
     console.log('Received request to delete app');
+    console.log('Request URL:', req.url);
+    console.log('Request method:', req.method);
     
     // Authenticate the user
     const user = await authenticateUser(req);
@@ -32,11 +34,13 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: 'Authentication required' });
     }
 
-    // Get appId from query parameter instead of body
-    const appId = req.query.appId;
+    // Fix: Parse the URL to ensure we get the query parameters correctly
+    const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+    const appId = url.searchParams.get('appId');
     
-    console.log('Request query:', req.query);
-    console.log('Request body:', req.body);
+    console.log('Parsed URL:', url.toString());
+    console.log('Request query parameters:', Object.fromEntries(url.searchParams));
+    console.log('App ID from URL:', appId);
     
     if (!appId) {
       return res.status(400).json({ error: 'App ID is required' });

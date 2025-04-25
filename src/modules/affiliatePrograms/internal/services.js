@@ -214,8 +214,11 @@ export async function deleteApp(appId) {
     console.log('Attempting to delete app with ID:', appId);
     const { data: { session } } = await supabase.auth.getSession();
     
-    // Changed to POST method to ensure body is properly processed
-    const response = await fetch(`/api/deleteApp?appId=${appId}`, {
+    // Fix: use proper URL structure for DELETE request with query parameters
+    const url = `/api/deleteApp?appId=${encodeURIComponent(appId)}`;
+    console.log('Sending delete request to:', url);
+    
+    const response = await fetch(url, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -223,14 +226,15 @@ export async function deleteApp(appId) {
       },
     });
 
+    // Fix: Only parse the response once and then check status
+    const data = await response.json();
+    console.log('Delete app response:', data);
+    
     if (!response.ok) {
-      const data = await response.json();
       console.error('Server returned error:', data);
       throw new Error(data.error || 'Failed to delete app');
     }
     
-    const data = await response.json();
-    console.log('Delete app response:', data);
     return data;
   } catch (error) {
     console.error('Error deleting app:', error);
