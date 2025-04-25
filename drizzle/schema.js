@@ -3,6 +3,7 @@ import { pgTable, serial, text, timestamp, integer, unique } from 'drizzle-orm/p
 export const affiliatePrograms = pgTable('affiliate_programs', {
   id: serial('id').primaryKey(),
   userId: text('user_id').notNull(),
+  userEmail: text('user_email'),
   appName: text('app_name').notNull(),
   appDescription: text('app_description').notNull(),
   appUrl: text('app_url').notNull(),

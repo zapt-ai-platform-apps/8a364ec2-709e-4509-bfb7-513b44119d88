@@ -10,6 +10,7 @@ import { Resend } from 'resend';
 // Define schemas for affiliate apps
 export const createAppSchema = z.object({
   userId: z.string(),
+  userEmail: z.string().email().optional(),
   appName: z.string().min(1, 'App name is required'),
   appDescription: z.string().min(1, 'App description is required'),
   appUrl: z.string().url('Valid URL is required'),
@@ -80,10 +81,11 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'User ID is required but not available' });
     }
     
-    // First, prepare the data with user ID
+    // First, prepare the data with user ID and email
     const dataWithUser = {
       ...appData,
       userId: user.id,
+      userEmail: user.email, // Store the user's email for notifications
       status: 'pending'
     };
 

@@ -1,0 +1,1 @@
+ALTER TABLE "affiliate_programs" ADD COLUMN IF NOT EXISTS "user_email" TEXT;
