@@ -96,13 +96,13 @@ export default function Home() {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span>30%+ Commissions</span>
+                  <span>Competitive Commissions</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span>Recurring Revenue</span>
+                  <span>Flexible Revenue Models</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
@@ -147,19 +147,19 @@ export default function Home() {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>Minimum 30% commission rate</span>
+                    <span>Attractive commission rates</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>Recurring revenue monthly</span>
+                    <span>Various payment structures</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>Growing income over time</span>
+                    <span>Potential for growing income</span>
                   </li>
                 </ul>
               </div>
@@ -277,8 +277,8 @@ export default function Home() {
             <div className="relative flex flex-col items-center animate-on-scroll delay-300">
               <div className="w-16 h-16 rounded-full bg-purple-600 text-white flex items-center justify-center text-xl font-bold mb-8 z-10 shadow-lg">3</div>
               <div className="rounded-xl bg-white p-6 shadow-lg text-center h-full w-full border border-gray-100">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Earn Recurring Commissions</h3>
-                <p className="text-gray-600">Get 30-50% of what your referrals pay, with various commission structures.</p>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Earn Commissions</h3>
+                <p className="text-gray-600">Get paid through various commission structures based on the apps you promote.</p>
               </div>
             </div>
           </div>

@@ -8,7 +8,7 @@ export default function MarketplaceHighlights() {
       category: "Commission Structure",
       others: "App Stores",
       othersDescription: "Low commission rates",
-      us: "High-paying 30% commission structure"
+      us: "Competitive commission structures"
     },
     {
       number: "2",
@@ -22,7 +22,7 @@ export default function MarketplaceHighlights() {
       category: "Revenue Duration",
       others: "Traditional Programs",
       othersDescription: "One-time or short-term commissions",
-      us: "Various commission structures including recurring and lifetime options"
+      us: "Various commission models including one-time, recurring, and lifetime options"
     },
     {
       number: "4",
