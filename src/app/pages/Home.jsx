@@ -404,6 +404,30 @@ export default function Home() {
         </div>
       </section>
       
+      {/* PWA Information Section */}
+      <section className="py-16 relative bg-gradient-to-b from-primary-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-sm p-6 border border-gray-100 animate-on-scroll">
+            <div className="flex flex-col md:flex-row gap-6 items-center">
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-3 text-gray-900">Progressive Web Apps (PWAs)</h3>
+                <p className="text-gray-600 mb-3">
+                  All apps in our marketplace are Progressive Web Apps, which combine the best of web and mobile apps. PWAs offer fast-loading, offline capabilities, and app-like experiences without requiring downloads from app stores.
+                </p>
+                <p className="text-gray-600">
+                  This means users can install these apps directly from the browser, access them from their home screen, and enjoy seamless experiences across all devices—giving affiliates wider audience reach and higher conversion potential.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       {/* CTA Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary-700 to-accent-700 opacity-95"></div>
