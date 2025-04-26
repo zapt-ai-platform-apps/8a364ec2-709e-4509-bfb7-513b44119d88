@@ -72,11 +72,11 @@ export default function Home() {
               </div>
               
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight bg-gradient-to-r from-primary-700 via-primary-600 to-accent-600 bg-clip-text text-transparent">
-                Earn Lifetime Commissions From Quality Apps
+                Earn Commissions From Quality Apps
               </h1>
               
               <p className="text-xl text-gray-700 mb-8 max-w-2xl">
-                The <span className="font-bold">ZAPT Affiliate Marketplace</span> connects you with quality apps offering verified <span className="font-semibold text-primary-600">lifetime commissions</span>. No scams. Just real income opportunities.
+                The <span className="font-bold">ZAPT Affiliate Marketplace</span> connects you with quality apps offering verified <span className="font-semibold text-primary-600">competitive commissions</span>. No scams. Just real income opportunities.
               </p>
               
               <div className="flex flex-wrap gap-4 mb-10">
@@ -102,7 +102,7 @@ export default function Home() {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span>Lifetime Revenue</span>
+                  <span>Recurring Revenue</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
@@ -139,7 +139,7 @@ export default function Home() {
                 </div>
                 
                 <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary-700 transition-colors duration-300">
-                  Lifetime Commissions
+                  Competitive Commissions
                 </h3>
                 
                 <ul className="space-y-3 text-gray-600">
@@ -277,8 +277,8 @@ export default function Home() {
             <div className="relative flex flex-col items-center animate-on-scroll delay-300">
               <div className="w-16 h-16 rounded-full bg-purple-600 text-white flex items-center justify-center text-xl font-bold mb-8 z-10 shadow-lg">3</div>
               <div className="rounded-xl bg-white p-6 shadow-lg text-center h-full w-full border border-gray-100">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Earn Lifetime Commissions</h3>
-                <p className="text-gray-600">Get 30-50% of what your referrals pay, month after month, for life.</p>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Earn Recurring Commissions</h3>
+                <p className="text-gray-600">Get 30-50% of what your referrals pay, with various commission structures.</p>
               </div>
             </div>
           </div>
@@ -371,10 +371,10 @@ export default function Home() {
                     </svg>
                   </div>
                   
-                  <h3 className="text-2xl font-bold mb-4">The ZAPT Platform Advantage</h3>
+                  <h3 className="text-2xl font-bold mb-4">The Marketplace Advantage</h3>
                   
                   <p className="mb-6 text-white/90 text-lg">
-                    All apps in our marketplace are built on the ZAPT platform:
+                    Our marketplace provides several key benefits for app affiliates:
                   </p>
                   
                   <ul className="space-y-4">
@@ -382,7 +382,7 @@ export default function Home() {
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span>Stripe Connect integration ensures affiliates always receive their earned commissions</span>
+                      <span>Secure payment processing ensures affiliates always receive their earned commissions</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -394,7 +394,7 @@ export default function Home() {
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span>Direct control over app creators' payment accounts</span>
+                      <span>Variety of apps from different creators and platforms</span>
                     </li>
                   </ul>
                 </div>
@@ -418,7 +418,7 @@ export default function Home() {
               Start Building Your Affiliate Income
             </h2>
             <p className="text-xl text-white/80 mb-10 animate-on-scroll delay-100">
-              Join our marketplace today and discover quality apps with lifetime commissions
+              Join our marketplace today and discover quality apps with competitive commissions
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-on-scroll delay-200">

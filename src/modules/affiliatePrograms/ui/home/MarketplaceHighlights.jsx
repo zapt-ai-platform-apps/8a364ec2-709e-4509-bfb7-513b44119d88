@@ -22,14 +22,14 @@ export default function MarketplaceHighlights() {
       category: "Revenue Duration",
       others: "Traditional Programs",
       othersDescription: "One-time or short-term commissions",
-      us: "Lifetime commission on all user purchases"
+      us: "Various commission structures including recurring and lifetime options"
     },
     {
       number: "4",
       category: "Product Ecosystem",
       others: "Competitors",
       othersDescription: "Limited product selection or mixed categories",
-      us: "Diverse collection of quality Progressive Web Apps on a unified platform"
+      us: "Diverse collection of quality apps from various platforms and developers"
     }
   ];
 
@@ -93,7 +93,7 @@ export default function MarketplaceHighlights() {
         <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
           <h3 className="text-2xl font-bold text-gray-800 mb-4">Ready for a Better Affiliate Experience?</h3>
           <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Our marketplace is designed with your success in mind. Join today and discover the difference that transparent, recurring commissions can make for your income stability.
+            Our marketplace is designed with your success in mind. Join today and discover the difference that transparent, competitive commissions can make for your income stability.
           </p>
           <Link to="/marketplace" className="inline-block bg-gradient-to-r from-primary-600 to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer">
             Explore the Marketplace
